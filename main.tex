@@ -1,0 +1,108 @@
+%
+% Exemplo LaTeX de artigo UNISINOS
+%
+% Elaborado com base nas orientações dadas no documento
+% ``GUIA PARA ELABORAÇÃO DE TRABALHOS ACADÊMICOS''
+% disponível no site da biblioteca da Unisinos.
+% http://www.unisinos.br/biblioteca
+%
+% Os elementos textuais abaixo são apresentados na ordem em que devem
+% aparecer no documento.  Repare que nem todos são obrigatórios - isso
+% é devidamente indicado em cada caso.
+%
+% Comentários abaixo colocados entre aspas (`` '') foram
+% extraídos diretamente do documento da biblioteca.
+%
+% Este documento é de domínio público.
+%
+
+%=======================================================================
+% Declarações iniciais identificando a classe de documento e
+% selecionando alguns pacotes adicionais.
+%
+% As opções disponíveis (separe-as com vírgulas, sem espaço) são:
+% - twoside: Formata o documento para impressão frente-e-verso
+%   (o default é somente-frente)
+% - english,brazilian,french,german,etc.: idiomas usados no documento.
+%   Deve ser colocado por último o idioma principal.
+%=======================================================================
+\documentclass[twoside,brazilian,english]{UNISINOSartigo}
+\usepackage[utf8]{inputenc} % charset do texto (utf8, latin1, etc.)
+\usepackage[T1]{fontenc} % encoding da fonte (afeta a sep. de sílabas)
+\usepackage{graphicx} % comandos para gráficos e inclusão de figuras
+\usepackage{bibentry} % para inserir refs. bib. no meio do texto
+
+%=======================================================================
+% Escolha do sistema para geração de referências bibliográficas.
+%
+% O default é usar o estilo unisinos.bst.  Comente a definição abaixo
+% e descomente a linha seguinte para usar o estilo do ABNTeX (é
+% necessário ter esse pacote instalado).
+%
+% A vantagem do unisinos.bst é que ele permite o uso de um arquivo .bib
+% seguindo as orientações tradicionais do BibTeX (veja essas orientações
+% em http://ctan.tug.org/tex-archive/biblio/bibtex/contrib/doc/btxdoc.pdf).
+% Entretanto, o estilo não suporta algumas citações mais exóticas como
+% apud.  Para isso, use o ABNTeX, mas esteja ciente de que muitas de
+% suas referências serão incompatíveis com os estilos tradicionais do
+% BibTeX como plain, alpha, ieeetr, entre outros.
+%=======================================================================
+\unisinosbst
+%\usepackage[alf]{abntcite}
+\usepackage{hyperref} 
+
+%=======================================================================
+% Informações Pessoais
+%=======================================================================
+\title{Semantic model for word similarity}
+
+\author{Eduardo Eidelwein Berlitz}
+\authorinfo{Aluno do curso de Ciência da Computação. Email: eberlitz@gmail.com}
+\degree{Bacharel em Ciência da Computação}
+\course{Curso de Ciência da Computação}
+\address{São Leopoldo}
+\date{2018}
+
+\advisor[Prof. Dr.]{Sandro José Rigo}
+\advisorinfo{Orientador, professor da Unisinos, doutor em Ciência da Computação pela Universidade de Stanford (1995), Mestre em Ciência da Computação pela Universidade de Calcutá (1983). Email: professor@unisinos.br}
+
+\coadvisor[Prof.~Dr.]{Lamport Leslie}
+\coadvisorinfo{Coorientador, professor da Unisinos, doutor em Ciência da Computação pela Universidade de Stanford (1995), Mestre em Ciência da Computação pela Universidade de Calcutá (1983). Email: professor@unisinos.br}
+%=======================================================================
+% Início do documento.
+%=======================================================================
+\begin{document}
+
+\maketitle
+
+%=======================================================================
+% Resumo em Português.
+%
+% A recomendação é para 150 a 250 palavras.
+%=======================================================================
+\input{abstract}
+
+%=======================================================================
+% Introdução
+%=======================================================================
+
+\input{1_introduction}
+\input{2_background}
+\input{3_relatedwork}
+\input{4_methodsandmaterials}
+% \input{5_results}
+\input{6_conclusions}
+
+% \input{ref}
+
+
+\input{resumo}
+
+%=======================================================================
+% Referências
+%=======================================================================
+\bibliography{z_exemplo}
+
+% \input{apendeanex.tex}
+
+\end{document}

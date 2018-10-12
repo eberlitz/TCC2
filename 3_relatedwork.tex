@@ -1,0 +1,92 @@
+\section{Related work}\label{chap:relatedwork}
+
+% Resumo das partes relevantes de cada um dos trabalhos relacionados focando no que foi feito, como, e quais os resultados obtidos, e fazendo uma breve descrição do porque é relevante para o meu trabalho.
+
+
+In this chapter, will be presented works encountered while doing the bibliographic research. Where, to find the state of the art regarding word similarity, a search with Google Scholar and Semantic Scholar was used. The terms used to find the related work in the field was "word similarity", "semantic similarity", "synonym", "Synonym extraction", "semantic embedding" and "morphological embedding". Also, some search through the Association for Computational Linguistics website revealed some events regarding Semantic Textual Similarity, like the SemEval where I look through the best ranking algorithms used.
+
+% TODO?: \subsection{trabalho denis}
+
+\subsection{Dependency-Based Word Embeddings}
+% https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/
+% TODO: Add cohyponym to the background chapter
+% TODO: Falta o como foi feito técnicamente
+% TODO: breve descrição do porque é relevante para o meu trabalho
+In this work, \citetexto{Levy2014} presents a generalized skip-gram model with negative sampling introduced by \citetexto{Mikolov2013DistributedRO}, from a linear context of bag-of-words to arbitrary word contexts, specifically syntactic contexts. An interesting fact of this approach in comparison with the original work is that the concept of induced similarity represents a nature of \textit{cohyponym}. They also describe a way of performing an analysis of the representation learned in the vector space by exploring the contexts of specific words or a group of words.
+They used the English Wikipedia as a corpus to train the embeddings. This corpus was tagged with parts-of-speech (POS) using the Stanford tagger. 
+
+For the evaluation they manually inspected the 5 most similar words to a hand picked set of words. One remarkable example is the word "Hogwarts" that in the BoW model the most similar words are from the respective domain of Harry Potter and in the developed model it was a list of famous schools, that is, was able to capture the semantic type of the word.
+The model was also evaluated against the WordSim353 dataset from \citetexto{Finkelstein:2001:PSC:371920.372094}, which is a dataset regarding word similarity versus relatedness. They draw a precision-recall curve that describes the embeddings affinity, proving that the results obtained by the developed model were slightly better than the BoW model.
+
+\subsection{Morphological Word Embeddings}
+
+% TODO: Falta o como foi feito técnicamente
+% TODO: breve descrição do porque é relevante para o meu trabalho
+
+In this work, \citetexto{Cotterell2015MorphologicalW} propose a new model, Morph-LBL, for the semi-supervised induction of morphologically guided embedding. The raw text was annotated with morphological data with the intent to create word embeddings that preserve the morphological relations of the words. The motivation for doing this is the hypothesis that languages with a high morpheme per word ratio would have improved results if we take into account the morphological information of the words.
+
+They extend the log-bilinear model (LBL) by training with a corpus annotated with morphological tags. A very interesting point is that only a part of the corpus was annotated with the tags, only to initially guide the embeddings with the intention that they maintain their morphological characteristics during the rest of the training.
+Qualitative evaluation was performed by attempting to determine if a word close in the vector space model is also morphological close to another and in fact, they were.
+They also introduced a new metric for quantitative evaluation of the model, named MorphoDist, that they used to compare with other models, and the Morph-LBL surpassed the original Skip-Gram model and Log-Bilinear Model.
+
+\subsection{A study on similarity and relatedness using distributional and WordNet-based approaches}
+
+% TODO: Describe personalized PageRank algorithm
+% TODO: Falta o como foi feito técnicamente
+% TODO: breve descrição do porque é relevante para o meu trabalho
+
+In this paper, \citetexto{Agirre2009} compares the two main categories of techniques used to measure semantic similarity. Using graph-based algorithms to Word-Net and distributional similarities collected from a 1.6 Terabyte Web corpus. A joint of the two techniques are also explored.
+
+For the graph-based algorithm they represent WordNet version 3.0 as a graph, where the relations among synsets are undirected edges, and for this graph, the PageRank is computed for each of the words in the corpus producing a probability distribution over synsets. Then, this is encoded as vectors by computing the cosine between them. In this word two WordNet versions were used, the WordNet 3.0 and the Multilingual Central Repository (MCR) aiming to link words between multiple WordNet languages. For cross-linguality, they exchange each non-English word in the dataset with its 5 best translations into English and then create the vector with the calculated similarities.
+
+For the distributional approach of calculating similarities between words the explore the use of a vector space model using three variations as bag-of-words, context-window and syntactic-dependency over a corpus of four billion documents crawled from the web in August 2008.
+
+They evaluate all the approaches over two standard datasets (RG65 and WordSim353) and also test a combination of both approaches (WordNet and Distributional) by training an SVM classifier to select the best result of the tree distributional variations for each pair. Thus, achieving state-of-the-art distributional and WordNet-based similarity measures over this datasets.
+
+\subsection{A Minimally Supervised Approach for Synonym Extraction with Word Embeddings}
+
+% TODO: Falta o como foi feito técnicamente
+% TODO: breve descrição do porque é relevante para o meu trabalho
+
+In this work, \citetexto{Leeuwenberga2016} investigates the use of word embeddings for automatic extraction of synonyms from a corpus. Their initial motivation came from machine translation evaluation where hypothesis translations are automatically compared with reference translations using a system that do this kind of evaluation named Meteor. Meteor is composed of four modules and one of them is synonym matching that currently uses WordNet for such a task. One problem with WordNet is that it is not available to all languages. So, the idea here is to use Word Embeddings a synonym matcher and in that case, it could be available to multiple languages as the training of word embeddings is unsupervised.
+They trained the word embeddings using three different approaches, CBoW, SG, and GloVe over English and German.  Also, they used a part-of-speech (POS) tagger to improve the synonym extraction. For evaluation, synonyms were obtained from WordNet 3.0 for English and GermaNet 10.0 for German.
+They excluded the results for the GloVe vectors, as they showed lower precision than SG and CBOW, and they did not use them in further experiments.
+From these experiments, they conclude that POS tags can help to slightly improve synonym extraction.
+
+
+% \subsection{A Minimally Supervised Approach for Synonym Extraction with Word Embeddings}
+
+% They use word embeddings aiming to be extensible to various languages. 
+
+% They came up with a new similarity metric, relative cosine similarity, and show that this metric improves the extraction of synonyms from raw text. They also employ the extracted synonyms in the synonymy module of Meteor and use human evaluation to judge the quality of synonyms extracted.
+
+% . Approaches like Meteor (Denkowski and Lavie, 2014; Banerjee and Lavie, 2005) computes an alignment between the hypothesis and reference to
+% determine to what extent they convey the same meaning. Finding possible matches is done by means of four modules. One of them is synonym matching, that uses a synonym database resource to match words which may not be string identical. The module uses synonyms from the lexical database WordNet (Miller, 1995) and for this reason, not available for all languages. 
+% Manual construction of lexical resources such as WordNet is time-consuming and expensive and needs to be done for each different language.
+
+% Different experiments over the use of word embedding were carried out. First, they analyze the effect of contextual window size, the number of dimensions, and the type of word vectors on the precision of extraction, for English and German. Secondly, they look closely at the word categories that are (cosine) similar in the vector space. Then, they look at cosine similarity and introduce relative cosine similarity. Lastly, they examine the overlap of the most similar words in different vector spaces.
+
+% They trained the word embeddings using three different approaches, CBoW, SG, and Global Vectors (GloVe) (Pennington et al., 2014) using different parameters with a 150 million word subset of the NewsCrawl corpus for English and German. Lowercasing, tokenization, and digit conflation were applied as preprocessing for both languages. Also, they used a part-of-speech (POS) tagger to improve the synonym extraction. For evaluation, synonyms were obtained from WordNet 3.0 for English and GermaNet 10.0 for German.
+
+% They excluded the results for the GloVe vectors, as they showed lower precision than SG and CBOW, and they did not use them in further experiments. The general trends of the GloVe vectors were that they had higher precision for larger window sizes. The vectors with highest precision of 0.067 for English were of dimension 300, with a window size of 32. For German, the highest precision was 0.055, and the vectors were of dimension 1200, with a window size of 32 as well.
+
+% For evaluation, they use the synonyms from WordNet 3.0 for English, and GermaNet 10.0 for German. In both WordNet and GermaNet words carry a corresponding part-of-speech. InWordNet these are nouns, verbs, adjectives, and adverbs. In GermaNet, synonyms are given for nouns, verbs, and adjectives. Because a given word’s part of speech is unknown here, we consider the synonyms of each word to be those of all the parts of speech it can potentially have inWordNet or GermaNet.
+% 3.2.
+
+% They develop a different measure to calculate similarity relative to the top n most similar words between word wi and wj as:
+
+% \begin{equation}
+%   rcs_n(w_i,w_j) = \frac{cosine_similarity(w_i,w_j)}{
+%   \sum_{w_c\epsilon TOP_n} cosine_similarity(w_i,w_c)
+%   }
+% \end{equation}
+
+% In order to separate some word senses we preprocessed both the English and German corpora from the previous chapter with the Stanford POS tagger (Toutanova et al., 2003), using the fastest tag-models. To compare using the simplified POS tags with the previous approaches we also calculated precision, recall and f-measure on Stest. Compared to the baseline of looking only at the most-similar word,we found that recall in English increased from 3\% to 4\%, precision did not change (11\%), and f-measure from 5\% to 6\%. Notably, German precision increased with 8\% to 12\%, recall from 5\% to 7\%, and f-measure from 6\% to 9\%. From these experiments we conclude that POS tags can help to improve synonym extraction in three ways. Firstly, they can separate some of the word senses, however this effect is minor. Secondly, they can filter words that are not grammatically similar enough, such as plurals. And thirdly, they can exclude synonyms in categories for which there no, or very few, synonyms, such as names.
+
+% \subsection{UMBC EBIQUITY-CORE: Semantic Textual Similarity Systems}
+
+% In this paper, \citetexto{Han2013} presents a hybrid word similarity model that was used in semantic text similarity systems developep for the *SEM 2013 STS shared task were they achieved first place of the 89 submitted runs.
+
+% Their model was originally developed for the Graph of Relations project which maps informal queries with English words and phrases for an RDF linked data collection into a SPARQL query. The model combines LSA word similarity and WordNet knowledge.
+
+
