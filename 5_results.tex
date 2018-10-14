@@ -1,66 +1,78 @@
 \section{Results}\label{chap:results}
 
+\subsection{Quantitative Evaluation}\label{chap:results:quantitative}
+
+
+
 \begin{table}[]
-\centering
+\caption{Word embeddings evaluation on PT65}
+\label{tab:estacoes}
+\centering%
+\begin{minipage}{.5\textwidth}
 \begin{tabular}{@{}lllll@{}}
-\cmidrule(r){1-5}
-\textbf{Embedding Models} &               & \textbf{Size} & \textbf{Pearson}          & \textbf{Out of vocabulary ratio} \\ \cmidrule(r){1-5}
-GloVe            &               & 50   & 0.63             & 0.00                    \\
-                 &               & 100  & 0.69             & 0.00                    \\
-                 &               & 300  & 0.69             & 0.00                    \\
-                 &               & 600  & 0.67             & 0.00                    \\
-                 &               & 1000 & 0.65             & 0.00                    \\ \cmidrule(r){1-5}
-FastText         & CBOW          & 50   & 0.67             & 0.00                    \\
-                 &               & 100  & 0.72             & 0.00                    \\
-                 &               & 300  & \textbf{0.75}    & 0.00                    \\
-                 &               & 600  & 0.73             & 0.00                    \\
-                 &               & 1000 & 0.71             & 0.00                    \\ \cmidrule(lr){2-5}
-                 & Skip-Gram     & 50   & 0.74             & 0.00                    \\
-                 &               & 100  & \textbf{0.77}    & 0.00                    \\
-                 &               & 300  & \textbf{0.79}    & 0.00                    \\
-                 &               & 600  & \textbf{0.77}    & 0.00                    \\
-                 &               & 1000 & 0.72             & 0.00                    \\ \cmidrule(r){1-5}
-Wang2vec         & CBOW          & 50   & 0.57             & 0.00                    \\
-                 &               & 100  & 0.61             & 0.00                    \\
-                 &               & 300  & 0.69             & 0.00                    \\
-                 &               & 600  & 0.69             & 0.00                    \\
-                 &               & 1000 & 0.68             & 0.00                    \\ \cmidrule(lr){2-5}
-                 & Skip-Gram     & 50   & 0.65             & 0.00                    \\
-                 &               & 100  & \textbf{0.74}    & 0.00                    \\
-                 &               & 300  & \textbf{0.75}    & 0.00                    \\
-                 &               & 600  & 0.72             & 0.00                    \\
-                 &               & 1000 & 0.69             & 0.00                    \\ \cmidrule(r){1-5}
-Word2vec         & CBOW          & 50   & 0.58             & 0.00                    \\
-                 &               & 100  & 0.63             & 0.00                    \\
-                 &               & 300  & 0.68             & 0.00                    \\
-                 &               & 600  & 0.69             & 0.00                    \\
-                 &               & 1000 & 0.68             & 0.00                    \\ \cmidrule(lr){2-5}
-                 & Skip-Gram     & 50   & 0.65             & 0.00                    \\
-                 &               & 100  & \textbf{0.75}    & 0.00                    \\
-                 &               & 300  & \textbf{0.76}    & 0.00                    \\
-                 &               & 600  & 0.74             & 0.00                    \\
-                 &               & 1000 & 0.69             & 0.00                    \\ \cmidrule(r){1-5}
-Word2vecf        &               & 50   & 0.47             & 0.00                    \\
-                 &               & 100  & 0.44             & 0.00                    \\
-                 &               & 300  & 0.43             & 0.00                    \\
-                 &               & 600  & 0.45             & 0.00                    \\
-                 &               & 1000 & 0.44             & 0.00                    \\ \cmidrule(r){1-5}
-OMW              & Path Distance &      & \textbf{0.76}    & 15.38                   \\
-                 & Wu-Palmer     &      & 0.62             & 15.38                   \\ \cmidrule(r){1-5}
+\cmidrule(r){1-4}
+\textbf{Embedding Models} &      & \textbf{Size} & \textbf{Pearson} \\ \cmidrule(r){1-4}
+GloVe            &               & 50   & 0.63             \\
+                 &               & 100  & 0.69             \\
+                 &               & 300  & 0.69             \\
+                 &               & 600  & 0.67             \\
+                 &               & 1000 & 0.65             \\ \cmidrule(r){1-4}
+FastText         & CBOW          & 50   & 0.67             \\
+                 &               & 100  & 0.72             \\
+                 &               & 300  & \textbf{0.75}    \\
+                 &               & 600  & 0.73             \\
+                 &               & 1000 & 0.71             \\ \cmidrule(lr){2-4}
+                 & Skip-Gram     & 50   & 0.74             \\
+                 &               & 100  & \textbf{0.77}    \\
+                 &               & 300  & \textbf{0.79}    \\
+                 &               & 600  & \textbf{0.77}    \\
+                 &               & 1000 & 0.72             \\ \cmidrule(r){1-4}
+Wang2vec         & CBOW          & 50   & 0.57             \\
+                 &               & 100  & 0.61             \\
+                 &               & 300  & 0.69             \\
+                 &               & 600  & 0.69             \\
+                 &               & 1000 & 0.68             \\ \cmidrule(lr){2-4}
+                 & Skip-Gram     & 50   & 0.65             \\
+                 &               & 100  & \textbf{0.74}    \\
+                 &               & 300  & \textbf{0.75}    \\
+                 &               & 600  & 0.72             \\
+                 &               & 1000 & 0.69             \\ \cmidrule(r){1-4}
+Word2vec         & CBOW          & 50   & 0.58             \\
+                 &               & 100  & 0.63             \\
+                 &               & 300  & 0.68             \\
+                 &               & 600  & 0.69             \\
+                 &               & 1000 & 0.68             \\ \cmidrule(lr){2-4}
+                 & Skip-Gram     & 50   & 0.65             \\
+                 &               & 100  & \textbf{0.75}    \\
+                 &               & 300  & \textbf{0.76}    \\
+                 &               & 600  & 0.74             \\
+                 &               & 1000 & 0.69             \\ \cmidrule(r){1-4}
+Word2vecf        &               & 50   & 0.47             \\
+                 &               & 100  & 0.44             \\
+                 &               & 300  & 0.43             \\
+                 &               & 600  & 0.45             \\
+                 &               & 1000 & 0.44             \\ \cmidrule(r){1-4}
 \end{tabular}
-\caption{My caption}
-\label{my-label}
+\fonte{Made by the author.}
+\end{minipage}
 \end{table}
 
 
 
-     
-     
-     
-     
-     
-     
-     
-      
+\begin{table}[]
+\caption{WordNet}
+\label{tab:worneteval}
+\centering%
+\begin{minipage}{.6\textwidth}
+\begin{tabular}{@{}lllll@{}}
+\cmidrule(r){1-5}
+\textbf{Embedding Models} & \textbf{Pearson}          & \textbf{Out of vocabulary ratio} \\ 
+\cmidrule(r){1-3}
+Path Distance & \textbf{0.76}    & 15.38                   \\
+Wu-Palmer     & 0.62             & 15.38                   \\ \cmidrule(r){1-3}
+\end{tabular}
+\fonte{Made by the author.}
+\end{minipage}
+\end{table}
 
-
+\subsection{Qualitative Evaluation}\label{chap:results:quantitative}
