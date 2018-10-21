@@ -1,7 +1,25 @@
+% As this work, aims to compare techniques of word similarity based on two approaches,  lexical bases and distributional, we did some evaluation on 
+% use a common portuguese dataset for evaluation called PT65 and 
+% In order to be able to generate the word embeddings using multiple algorithms, it is required a corpus. For this, we got a portuguese Wikipedia dump and did some pre-processing to generate a corpus suitable for the given task.
+% This work aims to compare techniques based on lexical bases with the distributional based ones.
+
+% - Explore the existing techniques regarding word similarity, using a distributional approach called word embeddings, adapting existing works to Brazilian Portuguese.
+% - Compare the word embeddings approach to other techniques that are solely based on a lexical database such as WordNet.
+% - Adapt existing studies regarding the addition of syntactic context in the training process of word embeddings to a Brazilian Portuguese corpus, to check if the results will be, similar or not. 
+% - Evaluate the different techniques over a common \textit{dataset}.
+
+% \subsubsection{WordSimilarity-353 Test Collection}
+% The WordSimilarity-353 is a test collection for measuring word similarity developed by \citetexto{Finkelstein:2001:PSC:371920.372094}. This dataset contains two sets of English word pairs along with human-assigned similarity judgements.
+% http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/
+% \subsubsection{ENSEPRO Word Similarity}
+% Aiming to prove an improvement in the accuracy of information extraction systems, a specific dataset will be assembled using the questions and answers of short sentences used in the ENSEPRO system. This system evaluation was made using the dataset for the challenge Question Answering over Linked Data (QALD-7) of 2017, which also had the addition of the Portuguese language. For each sentence of the Portuguese questions of this dataset, we will assemble a new dataset with only the keywords necessary to carry out queries via the ENSEPRO search engine. A pair of this keyword must be generated with the one that is currently in the linked data. For words that the system currently cannot find answers due to lack of a word in the expansion of related terms, it will be investigated manually which would be the word that should be found and added to the dataset. Also, the dataset will include the syntactic information for each keyword.
+
+
+
 \section{Methods and materials}\label{chap:methodsandmaterials}
 
-This chapter will present a description of what and how this work was done, as well as the tools and methods used. First ~\autoref{chap:methodsandmaterials:architecture} presents an overview of the architecture and how the proposed experiment was realized. Then, the ~\autoref{chap:methodsandmaterials:datasets} presents the datasets used in the evaluation process. Finally in the 
-~\autoref{chap:methodsandmaterials:evaluation}, is shown how the evaluation was performed.
+This chapter will present a description of what and how this work was done, as well as the tools and methods used. First ~\autoref{chap:methodsandmaterials:architecture} presents an overview of the architecture and how the proposed experiment was realized. Then, the ~\autoref{chap:methodsandmaterials:dataset} presents the dataset used in the evaluation process. After that we start with a detailed explanation of the Corpus generation in ~\autoref{chap:methodsandmaterials:corpus}.
+% Finally in the ~\autoref{chap:methodsandmaterials:evaluation}, is shown how the evaluation was performed.
 
 \subsection{Architecture overview}\label{chap:methodsandmaterials:architecture}
 
@@ -17,46 +35,28 @@ The proposed work basically consists of comparing different word similarity tech
 	\end{minipage}
 \end{figure}
 
-% As this work, aims to compare techniques of word similarity based on two approaches,  lexical bases and distributional, we did some evaluation on 
-% use a common portuguese dataset for evaluation called PT65 and 
-% In order to be able to generate the word embeddings using multiple algorithms, it is required a corpus. For this, we got a portuguese Wikipedia dump and did some pre-processing to generate a corpus suitable for the given task.
-% This work aims to compare techniques based on lexical bases with the distributional based ones.
 
-% - Explore the existing techniques regarding word similarity, using a distributional approach called word embeddings, adapting existing works to Brazilian Portuguese.
-% - Compare the word embeddings approach to other techniques that are solely based on a lexical database such as WordNet.
-% - Adapt existing studies regarding the addition of syntactic context in the training process of word embeddings to a Brazilian Portuguese corpus, to check if the results will be, similar or not. 
-% - Evaluate the different techniques over a common \textit{dataset}.
+In this work we compared techniques based on the two main approaches to word similarity, the knowledge-based and the distributional-based. 
+
+Regarding the knowledge-based approach we utilized a lexical base, in this case, \textbf{Open Multilingual Wordnet} (OMW) wore used with \textbf{Path Distance} and \textbf{Wu-Palmer} similarity techniques. It was decided to use OMW due to its ease of use through the \textbf{Natural Language Toolkit} (NLTK) library available for the \textbf{Python version 3.6} programming language as well as the availability of the Portuguese language for querying the synsets.
+
+For the distributional approach we \textbf{generated word embedding models} with a corpus obtained from the \textbf{brazilian portuguese Wikipedia dump} of articles. The word embeddings wore generated using several diferent model implementations for learning word representations. In this case, \textbf{FastText}, \textbf{Wang2vec}, \textbf{Word2vec} and \textbf{GloVe}. Also, we compare our word embedding models with a set of pre-trained models available by \textbf{Núcleo Interinstitucional de Linguística Computacional} (NILC) in all different implementations (FastText, Wang2vec, Word2vec and GloVe). One thing to note is that, the metric used for the comparison of similarity between one word and another for all word embedding models was the \textbf{cosine distance}. The \textbf{CBOW} and \textbf{Skip-gram} were used for the models that has this option.
+
+We also generated one more model in order to take into account the syntactic tree information of the sentences from the Portuguese corpus using the algorithm implementation by \citetext{Levy2014} wich generates the \textbf{DEPS} (Word2vecf) model. In order to do this, we used the \textbf{PALAVRAS syntactic parser} to annotate the corpus with syntactic information.
+
+In the end we do a quantitative evaluation of all models and techniques using the \textbf{PT65} dataset, which consists in a pair of words and a similarity value given by persons.
+
+All the experiments were done using the \textit{Semantics} computer (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM) granted by the \textit{Unisinos Programa de Pós-graduação em Computação Aplicada} (PPGCA) by running \textbf{Docker} containers.
 
 
+\subsection{PT65 Dataset}\label{chap:methodsandmaterials:dataset}
 
-In this model will be compared techniques based on lexical bases, in this case, Open Multilingual Wordnet (OMW) will be used with Path Distance and Wu-Palmer similarity techniques. It was decided to use OMW due to its ease of use through the Natural Language Toolkit (NLTK) library available for the Python programming language as well as the availability of the Portuguese language for querying the synsets.
+This dataset is composed by 65 word pairs, initialy generated by \citetexto{Rubenstein1965ContextualCO} on the name of \textit{RG65}. This word pairs wore translated to portuguese by \citetexto{GranadaSV14} and evaluated with 50 persons. 
 
-In the distributional approach it will be used pre-trained models of word embeddings available by Núcleo Interinstitucional de Linguística Computacional (NILC) in different implementations, being CBOW, SG, and GloVe. Also available, there are pre-trained models with different dimensions being 50, 100, 300, 600 and 1000. But initially I will use the models of 300 dimensions and if it is necessary, I will experiment with different values. The metric to be used for the comparison of similarity between one word and another will be the cosine distance.
+The initial idea was to use the WordSimilarity-353 Test Collection developed by \citetexto{Finkelstein:2001:PSC:371920.372094} which consists of two sets of English word pairs along with human-assigned similarity judgements. But we would have to translate to portuguese and then the human-assigned similarity judgements would not fit entirelly regarding the semantic changes involved in the translation proccess. So the PT65 dataset was used in the evaluation process.
 
-One of the main tasks in this work is to take into account the syntactic tree information of the sentences in a Portuguese corpus to train the word embeddings. And for this, the algorithm implementation by \citetext{Levy2014} will be used. This will result in a new word embedding model in which the evaluation will be performed in the same way that the NILC word embeddings were covered. PALAVRAS syntactic parser is intended to be used for the annotation of the corpus with syntactic information.
+\input{4_corpus}
 
-\subsection{Datasets}\label{chap:methodsandmaterials:datasets}
-
-\subsubsection{PT65}
-
-% The WordSimilarity-353 is a test collection for measuring word similarity developed by \citetexto{Finkelstein:2001:PSC:371920.372094}. This dataset contains two sets of English word pairs along with human-assigned similarity judgements.
-
-% \subsubsection{WordSimilarity-353 Test Collection}
-
-% The WordSimilarity-353 is a test collection for measuring word similarity developed by \citetexto{Finkelstein:2001:PSC:371920.372094}. This dataset contains two sets of English word pairs along with human-assigned similarity judgements.
-
-% http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/
-
-% \subsubsection{ENSEPRO Word Similarity}
-
-% Aiming to prove an improvement in the accuracy of information extraction systems, a specific dataset will be assembled using the questions and answers of short sentences used in the ENSEPRO system. This system evaluation was made using the dataset for the challenge Question Answering over Linked Data (QALD-7) of 2017, which also had the addition of the Portuguese language. For each sentence of the Portuguese questions of this dataset, we will assemble a new dataset with only the keywords necessary to carry out queries via the ENSEPRO search engine. A pair of this keyword must be generated with the one that is currently in the linked data. For words that the system currently cannot find answers due to lack of a word in the expansion of related terms, it will be investigated manually which would be the word that should be found and added to the dataset. Also, the dataset will include the syntactic information for each keyword.
-
-\subsection{Evaluation}\label{chap:methodsandmaterials:evaluation}
-
-For the evaluation, we propose to do qualitative measure based on a manual inspection of the most similar words to a hand picked set of words and see if they are in fact similar or not to the other words regarding similarity, relatedness and also the syntactic similarity.
-Also a quantitative analyses is proposed by using the WordSim353 dataset from \citetexto{Finkelstein:2001:PSC:371920.372094}, which is a dataset regarding word similarity versus relatedness. As all the pairs in this dataset are in English, they will be manually translated to Portuguese to be able to compare the results with all the techniques.
-To better visualize the performance of each technique the precision-recall curve draws will be used to describes the embeddings affinity.
-Another quantitative analysis will be done to see if the recall increase using the ENSEPRO dataset. If it increases it will improve the quality of the ENSEPRO system. 
 
 
 

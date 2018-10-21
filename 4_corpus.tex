@@ -1,0 +1,116 @@
+\subsection{Corpus generation}\label{chap:methodsandmaterials:corpus}
+
+In this section, I will present the process involved in generating a corpus that can be used on NLP tasks from a Wikipedia dump. I’ve used this process to generate the Word Embeddings for evaluation in this thesis. While I focus on the Portuguese language, you could easily do the same thing for the other available languages in Wikipedia.
+
+\subsubsection{Getting the Wikipedia PT-BR dump}
+
+First, we downloaded the latest Portuguese Wikipedia articles dump\footnote{\url{https://dumps.wikimedia.org/ptwiki/latest/ptwiki-latest-pages-articles-multistream.xml.bz2}}. The file is a big, compressed XML file that contains all articles in the wiki text format, just like markdown but with some special tokens that deal with some specific Wikipedia features. For example:
+
+\begin{lstlisting}
+    @[[Imagem:Starsinthesky.jpg|thumb|[[Estrela|Formação estrelar]] na [[Grande Nuvem de Magalhães]], uma [[galáxia irregular]].]]@
+\end{lstlisting}
+
+You can find more detailed information about the dump formats and different languages in their website\footnote{\url{https://en.wikipedia.org/wiki/Wikipedia:Database_download}}.
+
+\subsubsection{Preprocessing with Wikiextractor}
+
+As described in the previous step, the format of the dump is not suitable for most of NLP tasks. That’s why we need to parse the wiki text format to raw text. In order to do this, we have a few options. We could use the python \textbf{gensim.corpora.WikiCorpus} class but its tokenizer is not so good for Portuguese (In our case we need to have words separated by ‘-’ like ‘guarda-chuva’ which is very common in Portuguese). So, we ended up using the \textbf{wikiextractor} project that just reads the XML file and outputs all the documents in parsed text. We chose to cleanup and tokenize the corpus in a later stage. So, we just cloned the repository and executed the \textbf{wikiextractor}:
+
+\begin{lstlisting}[language=sh]
+git clone https://github.com/attardi/wikiextractor.git
+cd ./wikiextractor
+python ./WikiExtractor.py --no-templates -o ../data/ptwiki-articles-text/ -b 10M -c ../data/ptwiki-latest-pages-articles-multistream.xml.bz2
+cd ..
+\end{lstlisting}
+
+Wikipedia has a concept of Templates, which consists of using other documents inside of a given one. For the objective of this corpus, it is not desired that the tool expands these templates, because it will just add duplicated sentences to the content. So, it is really important to use the \textit{–no-templates} flag.
+This tool generated multiple compressed 10MB files of wiki articles sentences in the following format:
+
+\begin{lstlisting}[language=XML]
+<doc id="220" url="https://pt.wikipedia.org/wiki?curid=220" title="Astronomia">
+Astronomia 
+@Astronomia é uma ciência natural que estuda corpos celestes (como estrelas, planetas, cometas, nebulosas, aglomerados de estrelas, galáxias) e fenômenos que se originam fora da atmosfera da Terra (como a radiação cósmica de fundo em micro-ondas). Preocupada com a evolução, a física, a química e o movimento de objetos celestes, bem como a formação e o desenvolvimento do universo.@
+...
+</doc>
+\end{lstlisting}
+
+It is also possible to save this as only one text file just by changing the tool arguments.
+At the time of writing, there were 1,000,400 documents in the ptwiki-dump.
+
+\subsubsection{Custom preprocessing}
+
+In order to cleanup the sentences for generating the Word embedding models we did some custom pre-processing\footnote{\url{https://github.com/eberlitz/pt-br-word-embeddings/blob/master/scripts/preprocess.py}} based on \citetexto{Hartmann2017} preprocessing scripts. Some changes were made to do the some cleaning as follows:
+
+\begin{itemize}
+    \item Breaks an entire document into multiple sentences using the 
+    \textbf{nltk.data.load ('tokenizers/punkt/portuguese.pickle')}. (Natural Language Toolkit - NLTK is a leading platform for building Python programs to work with human language data, and it has a sentence segmentation tool called \textbf{punkt}.)
+    \item Does not change the current letter case. (Later I'll use a Syntactic parser that has better accuracy if I maintain this)
+    \item Remove sentences with less than 4 tokens (as it does not add meaningful value to the corpus we can remove very short sentences).
+    \item Allow abbreviations, like 'Dr.'.
+    \item Keep words with '-', like 'guarda-chuva' (which means umbrella in English).
+    \item All emails are mapped to EMAIL token.
+    \item All numbers are mapped to 0 token.
+    \item All URLs are mapped to URL token.
+    \item Different quotes are standardized.
+    \item Different kinds of hyphenation are standardized.
+    \item HTML strings are removed.
+    \item All text between brackets is removed.
+\end{itemize}
+
+With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.896.520 sentences, 251.193.592 tokens and 3.137.040 unique tokens.
+
+\subsection{PALAVRAS annotaded corpus generation}
+
+TODO
+
+\subsubsection{converted sentences to a sqlite to be able to recover progress of palavras parser in case of errors}
+
+TODO
+
+\subsubsection{python code to run the PALAVRAS Parser in multiple cores to reduce from 14 days to 24 hours}
+
+TODO
+
+\subsection{Common Word Embeddings generation}
+
+TODO
+
+\subsubsection{GloVe,FastText,word2vec,wang2vec model generations}
+
+TODO
+
+\subsection{DEPS Word Embedding generation}
+
+TODO
+
+\subsubsection{script to generate word2vecf(DEPS) input files from the palavras anotated sentences}
+
+TODO
+
+\subsubsection{deps model generation}
+
+TODO
+
+\subsection{WordNet evaluation}
+
+TODO
+
+\subsubsection{script to quantitative evaluate two WordNet similarity metrics (Wu-Palmer and Path-distance) against the PT65 dataset}
+
+TODO
+
+\subsection{Word embeddings Evaluation}
+
+TODO
+
+\subsubsection{script to quantitative evaluate all models against the PT65 dataset}
+
+TODO
+
+\subsubsection{script to query the top most similar words to a given set of target words for manual qualitative evaluation.}
+
+TODO
+
+\subsubsection{script to download all NILC pre-trained word embeddings and quantitative evaluate all models against the PT65 dataset}
+
+TODO
