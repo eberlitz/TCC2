@@ -1,31 +1,116 @@
 \section{Results}\label{chap:results}
 
 
+We separate the evaluation in three steps. In \autoref{chap:results:wn} we do a quantitative evaluating of the Open Multilingual WordNet. In \autoref{chap:results:we} we do the same evaluation but with the word embeddings models. At last, we do a qualitative evaluation regarding the DEPS model in \autoref{chap:results:qualitative}
+
+% For the evaluation, we propose to do qualitative measure based on a manual inspection of the most similar words to a hand picked set of words and see if they are in fact similar or not to the other words regarding similarity, relatedness and also the syntactic similarity.
+% Also a quantitative analyses is proposed by using the WordSim353 dataset from \citetexto{Finkelstein:2001:PSC:371920.372094}, which is a dataset regarding word similarity versus relatedness. As all the pairs in this dataset are in English, they will be manually translated to Portuguese to be able to compare the results with all the techniques.
+% To better visualize the performance of each technique the precision-recall curve draws will be used to describes the embeddings affinity.
+% Another quantitative analysis will be done to see if the recall increase using the ENSEPRO dataset. If it increases it will improve the quality of the ENSEPRO system. 
 
 
-For the evaluation, we propose to do qualitative measure based on a manual inspection of the most similar words to a hand picked set of words and see if they are in fact similar or not to the other words regarding similarity, relatedness and also the syntactic similarity.
-Also a quantitative analyses is proposed by using the WordSim353 dataset from \citetexto{Finkelstein:2001:PSC:371920.372094}, which is a dataset regarding word similarity versus relatedness. As all the pairs in this dataset are in English, they will be manually translated to Portuguese to be able to compare the results with all the techniques.
-To better visualize the performance of each technique the precision-recall curve draws will be used to describes the embeddings affinity.
-Another quantitative analysis will be done to see if the recall increase using the ENSEPRO dataset. If it increases it will improve the quality of the ENSEPRO system. 
+\subsection{Open Multilingual WordNet evaluation}\label{chap:results:wn}
+
+In order to do a quantitative evaluation of the knowledge-based approach for word similarity. We used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two algorithms, Path Distance and Wu-Palmer. With this we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
+
+\autoref{tab:worneteval} shows the results, and as we can see, the Path Distance algorithm gave a relative high score, but as stated by \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} we indeed have out of vocabulary words, in this case 15.38\% of the words.
 
 
-\subsection{WordNet evaluation}
+\begin{table}[h]
+    \caption{OMW evaluation on PT65.\textbf{$\rho1$} is the Pearson’s Correlation considering only the words in vocabulary; \textbf{$\rho2$} is the Pearson’s Correlation considering all the words, given a similarity value of zero for words out of vocabulary. }
+    \label{tab:worneteval}
+    \centering%
+    \begin{minipage}{.8\textwidth}
+    \begin{tabular}{@{}lllll@{}}
+    \cmidrule(r){1-5}
+    \textbf{Algorithms} & \textbf{$\rho1$} & \textbf{$\rho2$}         & \textbf{Out of vocabulary ratio} \\ 
+    \cmidrule(r){1-4}
+    Path Distance & \textbf{0.76} & 0.67   & 15.38                   \\
+    Wu-Palmer     & 0.62    & 0.51         & 15.38                   \\ \cmidrule(r){1-4}
+    \end{tabular}
+    \fonte{Made by the author.}
+    \end{minipage}
+\end{table}
 
-In order to do a quantitative evaluation of the knowledge-based approach for word similarity. We used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two techniques, Path Distance and Wu-Palmer. With this we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
 
-\subsection{Word embeddings Evaluation}
+
+
+
+% OWM, path, 0.7629920696961829, 1.2781571648596962e-11, 0.638215045981246, 1.5911706121638655e-07, 15.384615384615385
+% OWM, wup, 0.6224196059044503, 3.9086124786740125e-07, 0.5993354805660435, 1.3336702025718145e-06, 15.384615384615385
+% OWM, path, 0.6755297783884997, 6.699886211511832e-10, 0.537623366025965, 3.8731549459381025e-06, 13.333333333333334
+% OWM, wup, 0.5130904887818083, 1.2406652833034867e-05, 0.5101121482658979, 1.4203800232966779e-05, 13.333333333333334
+
+
+
+
+\subsection{Word embeddings Evaluation}\label{chap:results:we}
 
 To do a quantitative evaluation of the distributional approach for word similarity we did the same experiement as the WordNet evaluation but with our word embeddings models.
 We loaded the PT65 dataset and for each pair of word we compared the expected result with the Cosine similarity given by the model. With this we calculated the Pearson’s Correlation ($\rho$).
 
+\autoref{tab:evaluation:we} shows the results for all the 40 generated models. There was no out of vocabulary words in this approach which in comparison with the wordnet approach is better, just like mentioned by \citetexto{Agirre2009} we can use word embeddings to cover out-of-vocabulary words. Also we can see that the better word embedding model for this task is the FastText Skip-Gram. And in all of them Skip-gram was slighty better than the others. And in overall the models with 300-600 dimensions got higher values. We can also note that the DEPS model have a very poor performance in this particular task, maybe because the dataset do not differentiate between relatedness and similarity.
+
 We also repeated the same experiement with the pre-trained models by \citetexto{Hartmann2017} from Núcleo Interinstitucional de Linguística Computacional (NILC).
 
+
+\begin{table}[]
+    \caption{Word embeddings evaluation on PT65. \textbf{$\rho(ours)$} is the Pearson’s Correlation value from our trained models. \textbf{$\rho(nilc)$} is the Pearson’s Correlation values from the NILC pre-trained models.}
+    \label{tab:evaluation:we}
+    \centering%
+    \begin{minipage}{.65\textwidth}
+    \begin{tabular}{@{}lllll@{}}
+    \cmidrule(r){1-5}
+    \textbf{Embedding Models} &      & \textbf{Size} & \textbf{$\rho(ours)$} & \textbf{$\rho(nilc)$} \\ \cmidrule(r){1-5}
+    FastText            & CBOW          & 50   & 0.67             & 0.63            \\
+                        &               & 100  & 0.72             & 0.67            \\
+                        &               & 300  & \textbf{0.75}    & 0.73            \\
+                        &               & 600  & 0.73             & 0.74            \\
+                        &               & 1000 & 0.71             & 0.74            \\ \cmidrule(lr){2-5}
+                        & Skip-Gram     & 50   & 0.74             & 0.64            \\
+                        &               & 100  & \textbf{0.77}    & 0.73            \\
+                        &               & 300  & \textbf{0.79}    & \textbf{0.78}   \\
+                        &               & 600  & \textbf{0.77}    & \textbf{0.76}   \\
+                        &               & 1000 & 0.72             & 0.74            \\ \cmidrule(r){1-5}
+    Wang2vec            & CBOW          & 50   & 0.57             & 0.59            \\
+                        &               & 100  & 0.61             & 0.69            \\
+                        &               & 300  & 0.69             & 0.74            \\
+                        &               & 600  & 0.69             & 0.66            \\
+                        &               & 1000 & 0.68             & 0.65            \\ \cmidrule(lr){2-5}
+                        & Skip-Gram     & 50   & 0.65             & 0.60            \\
+                        &               & 100  & \textbf{0.74}    & 0.70            \\
+                        &               & 300  & \textbf{0.75}    & \textbf{0.77}   \\
+                        &               & 600  & 0.72             & \textbf{0.76}   \\
+                        &               & 1000 & 0.69             & x.xx            \\ \cmidrule(r){1-5}
+    Word2vec            & CBOW          & 50   & 0.58             & 0.34            \\
+                        &               & 100  & 0.63             & 0.43            \\
+                        &               & 300  & 0.68             & 0.58            \\
+                        &               & 600  & 0.69             & 0.62            \\
+                        &               & 1000 & 0.68             & 0.61            \\ \cmidrule(lr){2-5}
+                        & Skip-Gram     & 50   & 0.65             & 0.48            \\
+                        &               & 100  & \textbf{0.75}    & 0.54            \\
+                        &               & 300  & \textbf{0.76}    & 0.64            \\
+                        &               & 600  & 0.74             & 0.68            \\
+                        &               & 1000 & 0.69             & 0.67            \\ \cmidrule(r){1-5}
+    GloVe               &               & 50   & 0.63             & 0.63            \\
+                        &               & 100  & 0.69             & 0.71            \\
+                        &               & 300  & 0.69             & 0.72            \\
+                        &               & 600  & 0.67             & 0.71            \\
+                        &               & 1000 & 0.65             & x.xx            \\ \cmidrule(r){1-5}
+    DEPS                &               & 50   & 0.47             \\
+                        &               & 100  & 0.44             \\
+                        &               & 300  & 0.43             \\
+                        &               & 600  & 0.45             \\
+                        &               & 1000 & 0.44             \\ \cmidrule(r){1-5}
+    \end{tabular}
+    \fonte{Made by the author.}
+    \end{minipage}
+    \end{table}
+
+
+\subsection{Qualitative Evaluation of DEPS model}\label{chap:results:qualitative}
+
 For evaluating our DEPS model we did a qualitative evaluation were we manually inspect the 5 most similar words (by cosine similarity) to a given set of target words (\autoref{tab:qualitative}) and we compared it with other models, just like \citetexto{Levy2014} did in their experiement.
-
-
-
-\subsection{Quantitative Evaluation}\label{chap:results:quantitative}
-
 
 
 
@@ -73,80 +158,41 @@ For evaluating our DEPS model we did a qualitative evaluation were we manually i
 
 
 
-\begin{table}[]
-\caption{Word embeddings evaluation on PT65}
-\label{tab:estacoes}
-\centering%
-\begin{minipage}{.5\textwidth}
-\begin{tabular}{@{}lllll@{}}
-\cmidrule(r){1-4}
-\textbf{Embedding Models} &      & \textbf{Size} & \textbf{$\rho$} \\ \cmidrule(r){1-4}
-FastText         & CBOW          & 50   & 0.67             \\
-                 &               & 100  & 0.72             \\
-                 &               & 300  & \textbf{0.75}    \\
-                 &               & 600  & 0.73             \\
-                 &               & 1000 & 0.71             \\ \cmidrule(lr){2-4}
-                 & Skip-Gram     & 50   & 0.74             \\
-                 &               & 100  & \textbf{0.77}    \\
-                 &               & 300  & \textbf{0.79}    \\
-                 &               & 600  & \textbf{0.77}    \\
-                 &               & 1000 & 0.72             \\ \cmidrule(r){1-4}
-Wang2vec         & CBOW          & 50   & 0.57             \\
-                 &               & 100  & 0.61             \\
-                 &               & 300  & 0.69             \\
-                 &               & 600  & 0.69             \\
-                 &               & 1000 & 0.68             \\ \cmidrule(lr){2-4}
-                 & Skip-Gram     & 50   & 0.65             \\
-                 &               & 100  & \textbf{0.74}    \\
-                 &               & 300  & \textbf{0.75}    \\
-                 &               & 600  & 0.72             \\
-                 &               & 1000 & 0.69             \\ \cmidrule(r){1-4}
-Word2vec         & CBOW          & 50   & 0.58             \\
-                 &               & 100  & 0.63             \\
-                 &               & 300  & 0.68             \\
-                 &               & 600  & 0.69             \\
-                 &               & 1000 & 0.68             \\ \cmidrule(lr){2-4}
-                 & Skip-Gram     & 50   & 0.65             \\
-                 &               & 100  & \textbf{0.75}    \\
-                 &               & 300  & \textbf{0.76}    \\
-                 &               & 600  & 0.74             \\
-                 &               & 1000 & 0.69             \\ \cmidrule(r){1-4}
-DEPS             &               & 50   & 0.47             \\
-                 &               & 100  & 0.44             \\
-                 &               & 300  & 0.43             \\
-                 &               & 600  & 0.45             \\
-                 &               & 1000 & 0.44             \\ \cmidrule(r){1-4}
-GloVe            &               & 50   & 0.63             \\
-                 &               & 100  & 0.69             \\
-                 &               & 300  & 0.69             \\
-                 &               & 600  & 0.67             \\
-                 &               & 1000 & 0.65             \\ \cmidrule(r){1-4}
-\end{tabular}
-\fonte{Made by the author.}
-\end{minipage}
-\end{table}
+
+% NILC
 
 
-% OWM, path, 0.7629920696961829, 1.2781571648596962e-11, 0.638215045981246, 1.5911706121638655e-07, 15.384615384615385
-% OWM, wup, 0.6224196059044503, 3.9086124786740125e-07, 0.5993354805660435, 1.3336702025718145e-06, 15.384615384615385
-% OWM, path, 0.6755297783884997, 6.699886211511832e-10, 0.537623366025965, 3.8731549459381025e-06, 13.333333333333334
-% OWM, wup, 0.5130904887818083, 1.2406652833034867e-05, 0.5101121482658979, 1.4203800232966779e-05, 13.333333333333334
+% fasttext cbow_s50  & 0.63 0.6338761672226488, 1.4447009094932253e-08, 0.6587906285129924, 2.4381863256307673e-09
+% fasttext cbow_s100  & 0.67 0.6754933593788378, 6.719352719821255e-10, 0.6881454995844241, 2.3912345552169664e-10
+% fasttext cbow_s300  & 0.73 0.7300855475033413, 5.179055598431222e-12, 0.7082185929387456, 4.15338223243581e-11
+% fasttext cbow_s600  & 0.74 0.7397309269890123, 1.93687150946956e-12, 0.7267024560773543, 7.240733424238181e-12
+% fasttext cbow_s1000  & 0.74 0.7438158749107852, 1.2603857138794636e-12, 0.7418360799280296, 1.553726657864514e-12
+% fasttext skip_s50  & 0.64 0.6487813553667635, 5.081762925159795e-09, 0.6361242090780895, 1.2385082155239607e-08
+% fasttext skip_s100  & 0.73 0.7324984748175022, 4.065513959517724e-12, 0.714680729279672, 2.2906069726112865e-11
+% fasttext skip_s300  & 0.78 0.7796458092835843, 1.9873132291448965e-14, 0.7801748784840791, 1.8585171609698677e-14
+% fasttext skip_s600  & 0.76 0.7605087812755228, 1.9949050610824965e-13, 0.769267774447894, 7.134765733781644e-14
+% fasttext skip_s1000  & 0.74 0.7367259204837948, 2.643436121127919e-12, 0.7670080273772202, 9.342006420547932e-14
+% wang2vec cbow_s50  & 0.59 0.5894721463959935, 2.388202061648693e-07, 0.5677970854970804, 8.110757619545197e-07
+% wang2vec cbow_s100  & 0.69 0.6933731491226184, 1.5366047864128663e-10, 0.654725099086867, 3.296459461630978e-09
+% wang2vec cbow_s300  & 0.74 0.7449075984678443, 1.122119358314948e-12, 0.726287160060707, 7.542215808305927e-12
+% wang2vec cbow_s600  & 0.66 0.6640590372923889, 1.6380767605990016e-09, 0.6402553115594749, 9.302014050390408e-09
 
+% wang2vec skip_s50  & 0.60 0.5995317846192033, 1.3127989479350132e-07, 0.5981574100825, 1.4263582012097752e-07
+% wang2vec skip_s100  & 0.70 0.7053678530943365, 5.3729519180846535e-11, 0.6889836198889602, 2.2289473626926627e-10
+% wang2vec skip_s300  & 0.77 0.7664794654147072, 9.945613535590525e-14, 0.744153019863572, 1.2160353560060093e-12
+% wang2vec skip_s600  & 0.76 0.7582438112742316, 2.5841193929960106e-13, 0.7644506782220769, 1.2628246595652982e-13
 
-\begin{table}[]
-\caption{OMW evaluation on PT65.}
-\label{tab:worneteval}
-\centering%
-\begin{minipage}{.6\textwidth}
-\begin{tabular}{@{}lllll@{}}
-\cmidrule(r){1-5}
-\textbf{Embedding Models} & \textbf{$\rho$}          & \textbf{Out of vocabulary ratio} \\ 
-\cmidrule(r){1-3}
-Path Distance & \textbf{0.76}    & 15.38                   \\
-Wu-Palmer     & 0.62             & 15.38                   \\ \cmidrule(r){1-3}
-\end{tabular}
-\fonte{Made by the author.}
-\end{minipage}
-\end{table}
-
-\subsection{Qualitative Evaluation}\label{chap:results:quantitative}
+% word2vec cbow_s50  & 0.34 0.3412499140241518, 0.005404207648538719, 0.32535519755233566, 0.008179374816760999
+% word2vec cbow_s100  & 0.43 0.43271925006309137, 0.0003181958630936426, 0.3803715920595059, 0.001774797692132821
+% word2vec cbow_s300  & 0.58 0.5831426423590182, 3.444423852844756e-07, 0.5354258538836848, 4.314988182876463e-06
+% word2vec cbow_s600  & 0.62 0.6221965235212725, 3.153104602947503e-08, 0.6019825049726717, 1.1311740779773308e-07
+% word2vec cbow_s1000  & 0.61 0.6149899680407978, 5.023602602000029e-08, 0.6307253608616759, 1.7890044824313225e-08
+% word2vec skip_s50  & 0.48 0.4823291113764084, 4.729631604162891e-05, 0.4726120310027949, 7.03287078648823e-05
+% word2vec skip_s100  & 0.54 0.5450693802469123, 2.6706587265282607e-06, 0.5165845293389537, 1.056879740672958e-05
+% word2vec skip_s300  & 0.64 0.6456079299581727, 6.378201801116051e-09, 0.6022010818235386, 1.1161828301678457e-07
+% word2vec skip_s600  & 0.68 0.6822171515630556, 3.9052290590770745e-10, 0.6664626759784225, 1.3626297110861136e-09
+% word2vec skip_s1000  & 0.67 0.6750103355277071, 6.982679946550078e-10, 0.6706885375677438, 9.817912038766733e-10
+% glove glove_s50  & 0.63 0.6323097346166009, 1.6071677971731602e-08, 0.6304630686406355, 1.8209264535759638e-08
+% glove glove_s100  & 0.71 0.7152689276050334, 2.1680726703222204e-11, 0.717544086026029, 1.750465938132881e-11
+% glove glove_s300  & 0.72 0.7221916204992048, 1.123325497577738e-11, 0.7364291259409337, 2.7252715238742018e-12
+% glove glove_s600  & 0.71 0.7118409361799463, 2.981216354824047e-11, 0.754833296783931, 3.7953445278146003e-13
