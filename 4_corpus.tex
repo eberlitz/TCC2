@@ -73,11 +73,11 @@ With this solution implemented, we created a docker image and started running in
 
 \subsection{Common Word Embeddings generation}
 
-TODO
+In order to have a base for comparison, we generated all models that were used by \citetexto{Hartmann2017}. In this case, FastText, Wang2vec, Word2vec and GloVe using different dimensions values as 50, 100, 300, 600 and 1000. \cite{bojanowski2016enriching, Ling:2015:naacl, Mikolov2013DistributedRO, Pennington2014}. Also the CBOW and Skip-gram were used for the models that has this option.
 
-\subsubsection{GloVe,FastText,word2vec,wang2vec model generations}
+For this, we downloaded all those model generation tools from GitHub, compiled into a docker image, and use as input our corpus text file. We only created some script to run this several times with different dimension sizes as it took several hours to complete.
 
-TODO
+% --------------------------------------------------------
 
 \subsection{DEPS Word Embedding generation}
 
@@ -87,7 +87,6 @@ TODO
 
 TODO
 
-% Ontem demanha terminou de rodar o palavras sobre todas as sentenças. O arquivo está com 15GB não zipado (contendo as sentenças e parseadas pelo palavras). Eu escrevi um programa pra gerar os arquivos de entrada pro word2vecf, e mandei rodar ontem, mas não ficou bom, acabou consumindo muita memoria, e ta só usando 1 core da máquina. Aparentemente o multithreading do python n usa todos os cores. Pro PALAVRAS havia funcionado porque era iniciado um processo externo o qual acabava sendo distribuido pelo SO entre os multiplos cores. 
 % Como o corpus é muito grande e o word2vecf recebe como entrada 2 arquivos de vocabularios ( palavras e contexto com sua contagem de ocorrencias) é preciso percorrer todo o corpus pra montar isso e então vai usar muita memoria. Também tem um arquivo que é o dos contextos (palavra + contexto) que é um arquivo de texto que deve ser gerado. Nos exemplos que eu vi eles ignoram palavras que nao aparecem no vocabulario de palavras um numero minimo de vezes (tipo 100). 
 
 % Acho que não vai ser tão trivial rodar esse experiemento quanto eu achava antes. Se alguêm tiver uma ideia de como ajustar o programa pra conseguir rodar. Eu vi que no python daria pra usar Queue e Process e fazer um programa no estilo map-reduce, mas vai tomar um tempo. Daria pra usar outra linguagem tb.
@@ -110,13 +109,11 @@ TODO
 
 \subsection{WordNet evaluation}
 
-TODO
-
-\subsubsection{script to quantitative evaluate two WordNet similarity metrics (Wu-Palmer and Path-distance) against the PT65 dataset}
-
-TODO
+In order to do a qualitative evaluation of the knowledge-based approach for word similarity. We used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two techniques, Path Distance and Wu-Palmer. With this we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
 
 \subsection{Word embeddings Evaluation}
+
+
 
 TODO
 
