@@ -4,35 +4,47 @@ In this section, I will present the process involved in generating a corpus that
 
 \subsubsection{Getting the Wikipedia PT-BR dump}
 
-First, we downloaded the latest Portuguese Wikipedia articles dump\footnote{\url{https://dumps.wikimedia.org/ptwiki/latest/ptwiki-latest-pages-articles-multistream.xml.bz2}}. The file is a big, compressed XML file that contains all articles in the wiki text format, just like markdown but with some special tokens that deal with some specific Wikipedia features. For example:
+First, we downloaded the latest Portuguese Wikipedia articles dump\footnote{\url{https://dumps.wikimedia.org/ptwiki/latest/ptwiki-latest-pages-articles-multistream.xml.bz2}}. The file is a big, compressed XML file that contains all articles in the wiki text format, just like markdown but with some special tokens that deal with some specific Wikipedia features. For example: "\textit{[[Imagem:Starsinthesky.jpg|thumb|[[Estrela|Formação estrelar]] na [[Grande Nuvem de Magalhães]], uma [[galáxia irregular]].]]}"
 
-\begin{lstlisting}
-    @[[Imagem:Starsinthesky.jpg|thumb|[[Estrela|Formação estrelar]] na [[Grande Nuvem de Magalhães]], uma [[galáxia irregular]].]]@
-\end{lstlisting}
+% \begin{lstlisting}
+%     @[[Imagem:Starsinthesky.jpg|thumb|[[Estrela|Formação estrelar]] na [[Grande Nuvem de Magalhães]], uma [[galáxia irregular]].]]@
+% \end{lstlisting}
 
 You can find more detailed information about the dump formats and different languages in their website\footnote{\url{https://en.wikipedia.org/wiki/Wikipedia:Database_download}}.
 
 \subsubsection{Preprocessing with Wikiextractor}
 
-As described in the previous step, the format of the dump is not suitable for most of NLP tasks. That’s why we need to parse the wiki text format to raw text. In order to do this, we have a few options. We could use the python \textbf{gensim.corpora.WikiCorpus} class but its tokenizer is not so good for Portuguese (In our case we need to have words separated by ‘-’ like ‘guarda-chuva’ which is very common in Portuguese). So, we ended up using the \textbf{wikiextractor} project that just reads the XML file and outputs all the documents in parsed text. We chose to cleanup and tokenize the corpus in a later stage. So, we just cloned the repository and executed the \textbf{wikiextractor}:
+As described in the previous step, the format of the dump is not suitable for most of NLP tasks. That’s why we need to parse the wiki text format to raw text. In order to do this, we have a few options. We could use the python \textbf{gensim.corpora.WikiCorpus} class but its tokenizer is not so good for Portuguese (In our case we need to have words separated by ‘-’ like ‘guarda-chuva’ which is very common in Portuguese). So, we ended up using the \textbf{wikiextractor} project that just reads the XML file and outputs all the documents in parsed text. We chose to cleanup and tokenize the corpus in a later stage. So, we just cloned the repository and executed the \textbf{wikiextractor}.
 
-\begin{lstlisting}[language=sh]
-git clone https://github.com/attardi/wikiextractor.git
-cd ./wikiextractor
-python ./WikiExtractor.py --no-templates -o ../data/ptwiki-articles-text/ -b 10M -c ../data/ptwiki-latest-pages-articles-multistream.xml.bz2
-cd ..
-\end{lstlisting}
+% \begin{lstlisting}[language=sh]
+% git clone https://github.com/attardi/wikiextractor.git
+% cd ./wikiextractor
+% python ./WikiExtractor.py --no-templates -o ../data/ptwiki-articles-text/ -b 10M -c ../data/ptwiki-latest-pages-articles-multistream.xml.bz2
+% cd ..
+% \end{lstlisting}
 
 Wikipedia has a concept of Templates, which consists of using other documents inside of a given one. For the objective of this corpus, it is not desired that the tool expands these templates, because it will just add duplicated sentences to the content. So, it is really important to use the \textit{–no-templates} flag.
-This tool generated multiple compressed 10MB files of wiki articles sentences in the following format:
+This tool generated multiple compressed 10MB files of wiki articles sentences as seen in ~\autoref{fig:wikiextractor}.
 
-\begin{lstlisting}[language=XML]
-<doc id="220" url="https://pt.wikipedia.org/wiki?curid=220" title="Astronomia">
-Astronomia 
-@Astronomia é uma ciência natural que estuda corpos celestes (como estrelas, planetas, cometas, nebulosas, aglomerados de estrelas, galáxias) e fenômenos que se originam fora da atmosfera da Terra (como a radiação cósmica de fundo em micro-ondas). Preocupada com a evolução, a física, a química e o movimento de objetos celestes, bem como a formação e o desenvolvimento do universo.@
-...
-</doc>
-\end{lstlisting}
+\begin{figure}[h]
+	\caption{WikiExtractor output sample.}
+	\label{fig:wikiextractor}
+	\centering%
+	\begin{minipage}{.9\textwidth}
+		\includegraphics[width=\textwidth]{wikiextractor.png}
+		\fonte{Made by the author.}
+	\end{minipage}
+\end{figure}
+
+
+
+% \begin{lstlisting}[language=XML]
+% <doc id="220" url="https://pt.wikipedia.org/wiki?curid=220" title="Astronomia">
+% Astronomia 
+% @Astronomia é uma ciência natural que estuda corpos celestes (como estrelas, planetas, cometas, nebulosas, aglomerados de estrelas, galáxias) e fenômenos que se originam fora da atmosfera da Terra (como a radiação cósmica de fundo em micro-ondas). Preocupada com a evolução, a física, a química e o movimento de objetos celestes, bem como a formação e o desenvolvimento do universo.@
+% ...
+% </doc>
+% \end{lstlisting}
 
 It is also possible to save this as only one text file just by changing the tool arguments.
 At the time of writing, there were 1,000,400 documents in the ptwiki-dump.
