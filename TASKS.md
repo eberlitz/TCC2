@@ -16,10 +16,10 @@
     - Texto do artigo
         + atualizar metodologia
             + Atualizar do WordSimilarity para RG65/PT65, Talvez escrever o pq da mudança
-        - experimentos 
+        + experimentos 
             + Pegar meu artigo de como peguei os dados da Wikipedia
-            - Descrever etapa de pre-processamento realizada no SEMANTICS 
-            - Descrever a geração dos modelos, especialmente word2vecf
+            + Descrever etapa de pre-processamento realizada no SEMANTICS 
+            + Descrever a geração dos modelos, especialmente word2vecf
         - resultados
             - explicar em duas etapas os resultados obtidos ( quantitatico, qualitativo )
             - Explicar que o coeficiente pearson para WN é em relacao somente as palavras encontradas.

@@ -59,7 +59,7 @@ In order to cleanup the sentences for generating the Word embedding models we di
 
 With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.896.520 sentences, 251.193.592 tokens and 3.137.040 unique tokens.
 
-\subsection{PALAVRAS annotaded corpus generation}
+\subsection{PALAVRAS annotated corpus generation}
 
 To annotate all sentences of the corpus with syntactic tags, we used the software PALAVRAS developed by \citetexto{bick2000palavras}, which is an automatic parser for Portuguese.
 
@@ -81,31 +81,25 @@ For this, we downloaded all those model generation tools from GitHub, compiled i
 
 \subsection{DEPS Word Embedding generation}
 
-TODO
+In order to generate the DEPS (dependency-based syntactic contexts) word embedding model proposed by \citetexto{Levy2014}, we got the source code called \textit{word2vecf} from their website. The input required by this model is three files, a word and context vocabulary, and a contexts file. 
 
-\subsubsection{script to generate word2vecf(DEPS) input files from the palavras anotated sentences}
+The vocabulary files are just a list of words or contexts with the total number of occurrences. The contexts file is a multiline context per word, where one word can have multiple contexts. In the form of "<\textit{word}> <\textit{dependency-relation}>\_<\textit{referred-word}>".
 
-TODO
+In order to generate this file from our corpus we got the annotated output from the PALAVRAS parser and extracted the syntactic tags. This process is shown by in ~\autoref{fig:deps-context}.
 
-% Como o corpus é muito grande e o word2vecf recebe como entrada 2 arquivos de vocabularios ( palavras e contexto com sua contagem de ocorrencias) é preciso percorrer todo o corpus pra montar isso e então vai usar muita memoria. Também tem um arquivo que é o dos contextos (palavra + contexto) que é um arquivo de texto que deve ser gerado. Nos exemplos que eu vi eles ignoram palavras que nao aparecem no vocabulario de palavras um numero minimo de vezes (tipo 100). 
+\begin{figure}[h]
+	\caption{DEPS contexts generation from parsed sentence. \textbf{Left}: Sample output from the PALAVRAS parser for the sentence "A astronomia é uma das mais antigas ciências.". \textbf{Right}: Sample of our generated contexts file for an annotated sentence.}
+	\label{fig:deps-context}
+	\centering%
+	\begin{minipage}{.95\textwidth}
+		\includegraphics[width=\textwidth]{deps-context.png}
+		\fonte{Made by the author.}
+	\end{minipage}
+\end{figure}
 
-% Acho que não vai ser tão trivial rodar esse experiemento quanto eu achava antes. Se alguêm tiver uma ideia de como ajustar o programa pra conseguir rodar. Eu vi que no python daria pra usar Queue e Process e fazer um programa no estilo map-reduce, mas vai tomar um tempo. Daria pra usar outra linguagem tb.
+The generation of this three files was not trivial and the implemented code to do so had to use a map-reduce approach in order to use all computation resources available. It took 14 hours to process all 9896000 parsed sentences with an average speed of 196.2 sentences per second.
 
-% Eu no fim implementei uma versão map-reduce no python com Queue e Process. Ficou mais eficiente, mas a escrita do arquivo de texto ta sequencial (um arquivo de texto de saída), então vai levar umas horas pra terminar, mas mandei gerar os 3 arquivos necessarios pelo word2vecf de uma vez. Acho que vai dar certo. Está rodando lá no semantics.
-
-% PALAVRAS2WORD2VECF
-% Finished 31-process of 9,896,000 sentences in 50444.5s (196.2 sentences/s) - 14 horas
-
-% WORD2VECF - Alguns minutos
-% Vocab size: 3,771,298
-% Word count: 258,321,572
-% Vocab size: 6,916,434
-% Word count: 258,321,795
-% Alpha: 0.000459  Progress: 98.17%  Words/thread/sec: 81.86k
-
-\subsubsection{deps model generation}
-
-TODO
+After we had the input files, we just run the \textit{word2vecf} tool which took some hours to complete. We generated models with different dimensions values as 50, 100, 300, 600 and 1000.
 
 \subsection{WordNet evaluation}
 
@@ -114,10 +108,13 @@ In order to do a qualitative evaluation of the knowledge-based approach for word
 \subsection{Word embeddings Evaluation}
 
 
-
 TODO
 
 \subsubsection{script to quantitative evaluate all models against the PT65 dataset}
+
+TODO
+
+\subsubsection{script to download all NILC pre-trained word embeddings and quantitative evaluate all models against the PT65 dataset}
 
 TODO
 
@@ -125,6 +122,3 @@ TODO
 
 TODO
 
-\subsubsection{script to download all NILC pre-trained word embeddings and quantitative evaluate all models against the PT65 dataset}
-
-TODO
