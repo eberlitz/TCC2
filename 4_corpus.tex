@@ -59,7 +59,9 @@ In order to cleanup the sentences for generating the Word embedding models we di
 
 With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.896.520 sentences, 251.193.592 tokens and 3.137.040 unique tokens.
 
-\subsection{PALAVRAS annotated corpus generation}
+% --------------------------------------------------------
+
+\subsection{PALAVRAS annotated corpus generation}\label{chap:methodsandmaterials:palavras}
 
 To annotate all sentences of the corpus with syntactic tags, we used the software PALAVRAS developed by \citetexto{bick2000palavras}, which is an automatic parser for Portuguese.
 
@@ -71,7 +73,9 @@ One more problem that we had is that the PALAVRAS could not parse some of the se
 
 With this solution implemented, we created a docker image and started running in the Semantics machine. The overall process took 38 hours. 24 hours to process 8916000 sentences using batches of 30, and 14 hours to process the remaining ones without sending in batches. Resulting in a 15GB corpus file.
 
-\subsection{Common Word Embeddings generation}
+% --------------------------------------------------------
+
+\subsection{Common Word Embeddings generation}\label{chap:methodsandmaterials:wegeneration}
 
 In order to have a base for comparison, we generated all models that were used by \citetexto{Hartmann2017}. In this case, FastText, Wang2vec, Word2vec and GloVe using different dimensions values as 50, 100, 300, 600 and 1000. \cite{bojanowski2016enriching, Ling:2015:naacl, Mikolov2013DistributedRO, Pennington2014}. Also the CBOW and Skip-gram were used for the models that has this option.
 
@@ -79,7 +83,7 @@ For this, we downloaded all those model generation tools from GitHub, compiled i
 
 % --------------------------------------------------------
 
-\subsection{DEPS Word Embedding generation}
+\subsection{DEPS Word Embedding generation}\label{chap:methodsandmaterials:depsgeneration}
 
 In order to generate the DEPS (dependency-based syntactic contexts) word embedding model proposed by \citetexto{Levy2014}, we got the source code called \textit{word2vecf} from their website. The input required by this model is three files, a word and context vocabulary, and a contexts file. 
 
@@ -100,25 +104,3 @@ In order to generate this file from our corpus we got the annotated output from 
 The generation of this three files was not trivial and the implemented code to do so had to use a map-reduce approach in order to use all computation resources available. It took 14 hours to process all 9896000 parsed sentences with an average speed of 196.2 sentences per second.
 
 After we had the input files, we just run the \textit{word2vecf} tool which took some hours to complete. We generated models with different dimensions values as 50, 100, 300, 600 and 1000.
-
-\subsection{WordNet evaluation}
-
-In order to do a qualitative evaluation of the knowledge-based approach for word similarity. We used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two techniques, Path Distance and Wu-Palmer. With this we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
-
-\subsection{Word embeddings Evaluation}
-
-
-TODO
-
-\subsubsection{script to quantitative evaluate all models against the PT65 dataset}
-
-TODO
-
-\subsubsection{script to download all NILC pre-trained word embeddings and quantitative evaluate all models against the PT65 dataset}
-
-TODO
-
-\subsubsection{script to query the top most similar words to a given set of target words for manual qualitative evaluation.}
-
-TODO
-

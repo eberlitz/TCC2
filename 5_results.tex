@@ -9,6 +9,19 @@ To better visualize the performance of each technique the precision-recall curve
 Another quantitative analysis will be done to see if the recall increase using the ENSEPRO dataset. If it increases it will improve the quality of the ENSEPRO system. 
 
 
+\subsection{WordNet evaluation}
+
+In order to do a quantitative evaluation of the knowledge-based approach for word similarity. We used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two techniques, Path Distance and Wu-Palmer. With this we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
+
+\subsection{Word embeddings Evaluation}
+
+To do a quantitative evaluation of the distributional approach for word similarity we did the same experiement as the WordNet evaluation but with our word embeddings models.
+We loaded the PT65 dataset and for each pair of word we compared the expected result with the Cosine similarity given by the model. With this we calculated the Pearson’s Correlation ($\rho$).
+
+We also repeated the same experiement with the pre-trained models by \citetexto{Hartmann2017} from Núcleo Interinstitucional de Linguística Computacional (NILC).
+
+For evaluating our DEPS model we did a qualitative evaluation were we manually inspect the 5 most similar words (by cosine similarity) to a given set of target words (\autoref{tab:qualitative}) and we compared it with other models, just like \citetexto{Levy2014} did in their experiement.
+
 
 
 \subsection{Quantitative Evaluation}\label{chap:results:quantitative}
@@ -58,10 +71,6 @@ Another quantitative analysis will be done to see if the recall increase using t
 % GloVe, 1000.txt, 0.6548580080251044, 3.2643527148291645e-09, 0.7108119190193269, 3.277369731826533e-11, 0.0
 
 
-% OWM, wup, 0.6224196059044503, 3.9086124786740125e-07, 0.5993354805660435, 1.3336702025718145e-06, 15.384615384615385
-% OWM, path, 0.7629920696961829, 1.2781571648596962e-11, 0.638215045981246, 1.5911706121638655e-07, 15.384615384615385
-% OWM, wup, 0.5130904887818083, 1.2406652833034867e-05, 0.5101121482658979, 1.4203800232966779e-05, 13.333333333333334
-% OWM, path, 0.6755297783884997, 6.699886211511832e-10, 0.537623366025965, 3.8731549459381025e-06, 13.333333333333334
 
 
 \begin{table}[]
@@ -72,11 +81,6 @@ Another quantitative analysis will be done to see if the recall increase using t
 \begin{tabular}{@{}lllll@{}}
 \cmidrule(r){1-4}
 \textbf{Embedding Models} &      & \textbf{Size} & \textbf{$\rho$} \\ \cmidrule(r){1-4}
-GloVe            &               & 50   & 0.63             \\
-                 &               & 100  & 0.69             \\
-                 &               & 300  & 0.69             \\
-                 &               & 600  & 0.67             \\
-                 &               & 1000 & 0.65             \\ \cmidrule(r){1-4}
 FastText         & CBOW          & 50   & 0.67             \\
                  &               & 100  & 0.72             \\
                  &               & 300  & \textbf{0.75}    \\
@@ -112,15 +116,25 @@ DEPS             &               & 50   & 0.47             \\
                  &               & 300  & 0.43             \\
                  &               & 600  & 0.45             \\
                  &               & 1000 & 0.44             \\ \cmidrule(r){1-4}
+GloVe            &               & 50   & 0.63             \\
+                 &               & 100  & 0.69             \\
+                 &               & 300  & 0.69             \\
+                 &               & 600  & 0.67             \\
+                 &               & 1000 & 0.65             \\ \cmidrule(r){1-4}
 \end{tabular}
 \fonte{Made by the author.}
 \end{minipage}
 \end{table}
 
 
+% OWM, path, 0.7629920696961829, 1.2781571648596962e-11, 0.638215045981246, 1.5911706121638655e-07, 15.384615384615385
+% OWM, wup, 0.6224196059044503, 3.9086124786740125e-07, 0.5993354805660435, 1.3336702025718145e-06, 15.384615384615385
+% OWM, path, 0.6755297783884997, 6.699886211511832e-10, 0.537623366025965, 3.8731549459381025e-06, 13.333333333333334
+% OWM, wup, 0.5130904887818083, 1.2406652833034867e-05, 0.5101121482658979, 1.4203800232966779e-05, 13.333333333333334
+
 
 \begin{table}[]
-\caption{WordNet}
+\caption{OMW evaluation on PT65.}
 \label{tab:worneteval}
 \centering%
 \begin{minipage}{.6\textwidth}
