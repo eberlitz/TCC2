@@ -61,15 +61,15 @@ With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.8
 
 \subsection{PALAVRAS annotaded corpus generation}
 
-TODO
+To annotate all sentences of the corpus with syntactic tags, we used the software PALAVRAS developed by \citetexto{bick2000palavras}, which is an automatic parser for Portuguese.
 
-\subsubsection{converted sentences to a sqlite to be able to recover progress of palavras parser in case of errors}
+First, we tried to use the parser with multiple sentence files of 1MB. However, the parser was taking too much time to execute and sometimes errors occurred. So we wrote a Python script that sends sentences in batches to the PALAVRAS parser and saves the results. Also, we have used parallel computing doing this process times the number of cores on the machine. Although, we first run this on a i5 2.4GHz computer with 4 cores, achieving an average speed of 16 sentences per second, which means that for all 9896520 sentences it would take 7 days to complete. We have tried other techniques attempting to increase the speed, but the bottleneck was indeed in the parser tool. 
 
-TODO
+With this problem at hand, \textit{Unisinos Programa de Pós-graduação em Computação Aplicada} (PPGCA) granted us access to the \textit{Semantics} computer (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM). With 32 cores the parsing step should be concluded in 24 hours.
 
-\subsubsection{python code to run the PALAVRAS Parser in multiple cores to reduce from 14 days to 24 hours}
+One more problem that we had is that the PALAVRAS could not parse some of the sentences. Since we were running the parser in batches, this means that if one sentence failed, we lost all the parsed sentences in the batch. Also, as this process would take too long, we had to implement some way to continue the process if some fatal error occurred. With this in mind, we converted the sentences file to an SQLite table with three columns (id, text and parsed text). With this whenever we start the parsing process, we can continue from where it stopped.
 
-TODO
+With this solution implemented, we created a docker image and started running in the Semantics machine. The overall process took 38 hours. 24 hours to process 8916000 sentences using batches of 30, and 14 hours to process the remaining ones without sending in batches. Resulting in a 15GB corpus file.
 
 \subsection{Common Word Embeddings generation}
 
@@ -86,6 +86,23 @@ TODO
 \subsubsection{script to generate word2vecf(DEPS) input files from the palavras anotated sentences}
 
 TODO
+
+% Ontem demanha terminou de rodar o palavras sobre todas as sentenças. O arquivo está com 15GB não zipado (contendo as sentenças e parseadas pelo palavras). Eu escrevi um programa pra gerar os arquivos de entrada pro word2vecf, e mandei rodar ontem, mas não ficou bom, acabou consumindo muita memoria, e ta só usando 1 core da máquina. Aparentemente o multithreading do python n usa todos os cores. Pro PALAVRAS havia funcionado porque era iniciado um processo externo o qual acabava sendo distribuido pelo SO entre os multiplos cores. 
+% Como o corpus é muito grande e o word2vecf recebe como entrada 2 arquivos de vocabularios ( palavras e contexto com sua contagem de ocorrencias) é preciso percorrer todo o corpus pra montar isso e então vai usar muita memoria. Também tem um arquivo que é o dos contextos (palavra + contexto) que é um arquivo de texto que deve ser gerado. Nos exemplos que eu vi eles ignoram palavras que nao aparecem no vocabulario de palavras um numero minimo de vezes (tipo 100). 
+
+% Acho que não vai ser tão trivial rodar esse experiemento quanto eu achava antes. Se alguêm tiver uma ideia de como ajustar o programa pra conseguir rodar. Eu vi que no python daria pra usar Queue e Process e fazer um programa no estilo map-reduce, mas vai tomar um tempo. Daria pra usar outra linguagem tb.
+
+% Eu no fim implementei uma versão map-reduce no python com Queue e Process. Ficou mais eficiente, mas a escrita do arquivo de texto ta sequencial (um arquivo de texto de saída), então vai levar umas horas pra terminar, mas mandei gerar os 3 arquivos necessarios pelo word2vecf de uma vez. Acho que vai dar certo. Está rodando lá no semantics.
+
+% PALAVRAS2WORD2VECF
+% Finished 31-process of 9,896,000 sentences in 50444.5s (196.2 sentences/s) - 14 horas
+
+% WORD2VECF - Alguns minutos
+% Vocab size: 3,771,298
+% Word count: 258,321,572
+% Vocab size: 6,916,434
+% Word count: 258,321,795
+% Alpha: 0.000459  Progress: 98.17%  Words/thread/sec: 81.86k
 
 \subsubsection{deps model generation}
 
