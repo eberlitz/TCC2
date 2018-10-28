@@ -21,14 +21,17 @@
             + Descrever etapa de pre-processamento realizada no SEMANTICS 
             + Descrever a geração dos modelos, especialmente word2vecf
         - resultados
-            - explicar em duas etapas os resultados obtidos ( quantitatico, qualitativo )
-            - Explicar que o coeficiente pearson para WN é em relacao somente as palavras encontradas.
+            + Explicar que o coeficiente pearson para WN é em relacao somente as palavras encontradas.
+            - explicar em duas etapas os resultados obtidos 
+                + quantitatico, 
+                - qualitativo
         - Conclusão, trabalhos futuros
-        - ampliar o conceito de wordembeding
+        - ampliar o conceito de word embeding na fundamentação teorica
             - Falar sobre os vários tipos de word embeddings gerados (GloVe,FastText,word2vec,wang2vec,DEPS)
         - atualizar trabalhos relacionados
-            - Artigo do Dataset PT65
-            - para portugues https://arxiv.org/pdf/1708.06025.pdf
+            - Artigo do Dataset PT65 - Granada
+            - para portugues https://arxiv.org/pdf/1708.06025.pdf - Portuguese Word Embeddings: Evaluating on Word Analogies and
+Natural Language Tasks - NILC
             - Pesquisar coisas novas
                 - https://code.fb.com/ai-research/dynamic-meta-embeddings/
                 - MultiLanguage
