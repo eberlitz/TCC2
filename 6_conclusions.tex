@@ -4,14 +4,10 @@ The study carried out in this work, proves that the detection of similarity betw
 
 It was also found indications that the expansion of terms using WordNet has several problems, where a word may not be present. Since these lexical bases are of manual construction, they are time-consuming and expensive, and for this reason, not all links will be present and their quality varies from language to language.  There is also no WordNet for all languages. \cite{Leeuwenberga2016}. Distributional approaches regarding word similarity have been proven to be more competitive than the thesaurus-based approach, and have been successfully being used to cover out-of-vocabulary items in WordNet.  \cite{Agirre2009}.
 
-% e que cada vez mais está sendo utilizado word embeddings para downstream tasks. Também tem-se uma certa tendência de estudos na área misturando arvores sintaticas no treinamento. \cite{Cotterell2015MorphologicalW, Levy2014}. 
+% Thus, WordNet is proposed to be replaced by Word embeddings, which follows a distributional approach and therefore does not depend on manual construction, and can be applied to different languages since its training is unsupervised. Thus, the hypothesis is that for the formulation of queries in QA and IR systems on which they depend on the expansion of similar terms it would be possible to increase the number of relevant results to be found.
 
-Thus, WordNet is proposed to be replaced by Word embeddings, which follows a distributional approach and therefore does not depend on manual construction, and can be applied to different languages since its training is unsupervised. Thus, the hypothesis is that for the formulation of queries in QA and IR systems on which they depend on the expansion of similar terms it would be possible to increase the number of relevant results to be found.
+Thus, we explored the existing techniques regarding word similarity, using a distributional approach called word embeddings, adapting existing works to Brazilian Portuguese. We also experiement with other  technique  that  are  solely based on a lexical database such as WordNet, and we evaluate all the different techniques over a common dataset caled PT65. Proving that word embeddings can cover words out of vocabulary and have a slight better results in comparison with WordNet. We also adapted the studies of \citetexto{Levy2014} regarding the addition of syntactic context in the training process of word embeddings to a Brazilian Portuguese corpus, finding similar results, but for the task of word similarity against the dataset PT65 it had the worst results.
 
-
-
-
-
-
+As a future work, we intend to evaluate the different techniques against the work of \citetexto{denis2018} to see if we can improve the ENSEPRO results.
  
  
