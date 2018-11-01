@@ -55,63 +55,97 @@ We also repeated the same experiement with the pre-trained models by \citetexto{
 
 
 \begin{table}[]
-    \caption{Word embeddings evaluation on PT65. \textbf{$\rho(ours)$} is the Pearson’s Correlation value from our trained models. \textbf{$\rho(nilc)$} is the Pearson’s Correlation values from the NILC pre-trained models.}
-    \label{tab:evaluation:we}
-    \centering%
-    \begin{minipage}{.65\textwidth}
-    \begin{tabular}{@{}lllll@{}}
-    \cmidrule(r){1-5}
-    \textbf{Embedding Models} &      & \textbf{Size} & \textbf{$\rho(ours)$} & \textbf{$\rho(nilc)$} \\ \cmidrule(r){1-5}
-    FastText            & CBOW          & 50   & 0.67             & 0.63            \\
-                        &               & 100  & 0.72             & 0.67            \\
-                        &               & 300  & \textbf{0.75}    & 0.73            \\
-                        &               & 600  & 0.73             & 0.74            \\
-                        &               & 1000 & 0.71             & 0.74            \\ \cmidrule(lr){2-5}
-                        & Skip-Gram     & 50   & 0.74             & 0.64            \\
-                        &               & 100  & \textbf{0.77}    & 0.73            \\
-                        &               & 300  & \textbf{0.79}    & \textbf{0.78}   \\
-                        &               & 600  & \textbf{0.77}    & \textbf{0.76}   \\
-                        &               & 1000 & 0.72             & 0.74            \\ \cmidrule(r){1-5}
-    Wang2vec            & CBOW          & 50   & 0.57             & 0.59            \\
-                        &               & 100  & 0.61             & 0.69            \\
-                        &               & 300  & 0.69             & 0.74            \\
-                        &               & 600  & 0.69             & 0.66            \\
-                        &               & 1000 & 0.68             & 0.65            \\ \cmidrule(lr){2-5}
-                        & Skip-Gram     & 50   & 0.65             & 0.60            \\
-                        &               & 100  & \textbf{0.74}    & 0.70            \\
-                        &               & 300  & \textbf{0.75}    & \textbf{0.77}   \\
-                        &               & 600  & 0.72             & \textbf{0.76}   \\
-                        &               & 1000 & 0.69             & 0.71            \\ \cmidrule(r){1-5}
-    Word2vec            & CBOW          & 50   & 0.58             & 0.34            \\
-                        &               & 100  & 0.63             & 0.43            \\
-                        &               & 300  & 0.68             & 0.58            \\
-                        &               & 600  & 0.69             & 0.62            \\
-                        &               & 1000 & 0.68             & 0.61            \\ \cmidrule(lr){2-5}
-                        & Skip-Gram     & 50   & 0.65             & 0.48            \\
-                        &               & 100  & \textbf{0.75}    & 0.54            \\
-                        &               & 300  & \textbf{0.76}    & 0.64            \\
-                        &               & 600  & 0.74             & 0.68            \\
-                        &               & 1000 & 0.69             & 0.67            \\ \cmidrule(r){1-5}
-    GloVe               &               & 50   & 0.63             & 0.63            \\
-                        &               & 100  & 0.69             & 0.71            \\
-                        &               & 300  & 0.69             & 0.72            \\
-                        &               & 600  & 0.67             & 0.71            \\
-                        &               & 1000 & 0.65             & 0.68            \\ \cmidrule(r){1-5}
-    DEPS                &               & 50   & 0.47             \\
-                        &               & 100  & 0.44             \\
-                        &               & 300  & 0.43             \\
-                        &               & 600  & 0.45             \\
-                        &               & 1000 & 0.44             \\ \cmidrule(r){1-5}
-    \end{tabular}
-    \fonte{Made by the author.}
-    \end{minipage}
-    \end{table}
+\caption{Word embeddings evaluation on PT65. \textbf{$\rho(ours)$} is the Pearson’s Correlation value from our trained models. \textbf{$\rho(nilc)$} is the Pearson’s Correlation values from the NILC pre-trained models.}
+\label{tab:evaluation:we}
+\centering%
+\begin{minipage}{.65\textwidth}
+\begin{tabular}{@{}lllll@{}}
+\cmidrule(r){1-5}
+\textbf{Embedding Models} &      & \textbf{Size} & \textbf{$\rho(ours)$} & \textbf{$\rho(nilc)$} \\ \cmidrule(r){1-5}
+FastText            & CBOW          & 50   & 0.67             & 0.63            \\
+                    &               & 100  & 0.72             & 0.67            \\
+                    &               & 300  & \textbf{0.75}    & 0.73            \\
+                    &               & 600  & 0.73             & 0.74            \\
+                    &               & 1000 & 0.71             & 0.74            \\ \cmidrule(lr){2-5}
+                    & Skip-Gram     & 50   & 0.74             & 0.64            \\
+                    &               & 100  & \textbf{0.77}    & 0.73            \\
+                    &               & 300  & \textbf{0.79}    & \textbf{0.78}   \\
+                    &               & 600  & \textbf{0.77}    & \textbf{0.76}   \\
+                    &               & 1000 & 0.72             & 0.74            \\ \cmidrule(r){1-5}
+Wang2vec            & CBOW          & 50   & 0.57             & 0.59            \\
+                    &               & 100  & 0.61             & 0.69            \\
+                    &               & 300  & 0.69             & 0.74            \\
+                    &               & 600  & 0.69             & 0.66            \\
+                    &               & 1000 & 0.68             & 0.65            \\ \cmidrule(lr){2-5}
+                    & Skip-Gram     & 50   & 0.65             & 0.60            \\
+                    &               & 100  & \textbf{0.74}    & 0.70            \\
+                    &               & 300  & \textbf{0.75}    & \textbf{0.77}   \\
+                    &               & 600  & 0.72             & \textbf{0.76}   \\
+                    &               & 1000 & 0.69             & 0.71            \\ \cmidrule(r){1-5}
+Word2vec            & CBOW          & 50   & 0.58             & 0.34            \\
+                    &               & 100  & 0.63             & 0.43            \\
+                    &               & 300  & 0.68             & 0.58            \\
+                    &               & 600  & 0.69             & 0.62            \\
+                    &               & 1000 & 0.68             & 0.61            \\ \cmidrule(lr){2-5}
+                    & Skip-Gram     & 50   & 0.65             & 0.48            \\
+                    &               & 100  & \textbf{0.75}    & 0.54            \\
+                    &               & 300  & \textbf{0.76}    & 0.64            \\
+                    &               & 600  & 0.74             & 0.68            \\
+                    &               & 1000 & 0.69             & 0.67            \\ \cmidrule(r){1-5}
+GloVe               &               & 50   & 0.63             & 0.63            \\
+                    &               & 100  & 0.69             & 0.71            \\
+                    &               & 300  & 0.69             & 0.72            \\
+                    &               & 600  & 0.67             & 0.71            \\
+                    &               & 1000 & 0.65             & 0.68            \\ \cmidrule(r){1-5}
+DEPS                &               & 50   & 0.47             \\
+                    &               & 100  & 0.44             \\
+                    &               & 300  & 0.43             \\
+                    &               & 600  & 0.45             \\
+                    &               & 1000 & 0.44             \\ \cmidrule(r){1-5}
+\end{tabular}
+\fonte{Made by the author.}
+\end{minipage}
+\end{table}
 
 
 \subsection{Qualitative Evaluation of DEPS model}\label{chap:results:qualitative}
 
 For evaluating our DEPS model we did a qualitative evaluation were we manually inspect the 5 most similar words (by cosine similarity) to a given set of target words (\autoref{tab:qualitative}) and we compared it with other models, just like \citetexto{Levy2014} did in their experiement.
 
+
+% longe/batman, 
+% guarda-chuva/substantivo, 
+% inglês**, 
+% faculdade** 
+% correr
+
+
+
+
+
+% \begin{landscape}
+\begin{table}[h]
+\caption{Target words and their five most similar words per word embedding models.}
+\label{tab:qualitative}
+\centering%
+% \begin{minipage}{\textwidth}
+% \makebox[\textwidth]{
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{l|l|l|l|l|l}
+\hline
+\textbf{Target word} & \textbf{DEPS} & \textbf{FastText} & \textbf{Wang2vec} & \textbf{Word2vec} & \textbf{GloVe} \\ \hline
+longe & \begin{tabular}[c]{@{}l@{}}perto\\ lá\\ abaixo\\ cá\\ debaixo\end{tabular} & \begin{tabular}[c]{@{}l@{}}próxi­mo\\ distante\\ afastado-se\\ afastada\\ afastados\end{tabular} & \begin{tabular}[c]{@{}l@{}}perto\\ distante\\ afastada\\ fora\\ distantes\end{tabular} & \begin{tabular}[c]{@{}l@{}}distante\\ fora\\ perto\\ afastada\\ tirá-los\end{tabular} & \begin{tabular}[c]{@{}l@{}}perto\\ fora\\ ficar\\ lá\\ tão\end{tabular} \\ \hline
+guarda-chuva & \begin{tabular}[c]{@{}l@{}}caneta\\ tampão\\ espingarda\\ cetro\\ carregador\end{tabular} & \begin{tabular}[c]{@{}l@{}}guarda-chuvas\\ manda-chuva\\ manda-chuvas\\ guarda-chaves\\ guarda-copos\end{tabular} & \begin{tabular}[c]{@{}l@{}}lenço\\ sobre-tudo\\ quepe\\ moletom\\ pulôver\end{tabular} & \begin{tabular}[c]{@{}l@{}}galhardete\\ xale\\ chapeu\\ abajur\\ paletó\end{tabular} & \begin{tabular}[c]{@{}l@{}}égide\\ cinza\\ casaco\\ disfarce\\ crachá\end{tabular} \\ \hline
+correr & \begin{tabular}[c]{@{}l@{}}viajar\\ aceitar\\ ganhar\\ aprender\\ realizar\end{tabular} & \begin{tabular}[c]{@{}l@{}}correndo\\ correrem\\ correu\\ correra\\ correria\end{tabular} & \begin{tabular}[c]{@{}l@{}}correndo\\ caminhar\\ pedalando\\ correu\\ agachar-se\end{tabular} & \begin{tabular}[c]{@{}l@{}}correndo\\ correu\\ caminhar\\ pedalando\\ pular\end{tabular} & \begin{tabular}[c]{@{}l@{}}caminhar\\ nadar\\ correndo\\ saltar\\ pular\end{tabular} \\ \hline
+inglês & \begin{tabular}[c]{@{}l@{}}espanhol\\ francês\\ norueguês\\ sueco\\ italiano\end{tabular} & \begin{tabular}[c]{@{}l@{}}inglêss\\ inglêz\\ inglês-the\\ inglêsa\\ francês-inglês\end{tabular} & \begin{tabular}[c]{@{}l@{}}ingles\\ português\\ espanhol\\ francês\\ galês\end{tabular} & \begin{tabular}[c]{@{}l@{}}ingles\\ espanhol\\ francês\\ português\\ irlandês\end{tabular} & \begin{tabular}[c]{@{}l@{}}português\\ francês\\ inglesa\\ espanhol\\ britânico\end{tabular} \\ \hline
+faculdade & \begin{tabular}[c]{@{}l@{}}universidade\\ escola\\ liceu\\ conservatório\\ colégio\end{tabular} & \begin{tabular}[c]{@{}l@{}}faculda\\ faculdad\\ ex-faculdade\\ universidade\\ faculde\end{tabular} & \begin{tabular}[c]{@{}l@{}}universidade\\ bacharelando-se\\ politécnica\\ pós-graduação\\ puc\end{tabular} & \begin{tabular}[c]{@{}l@{}}universidade\\ histórico-filosóficas\\ bacharelando-se\\ politécnica\\ puc-pr\end{tabular} & \begin{tabular}[c]{@{}l@{}}universidade\\ medicina\\ ciências\\ curso\\ usp\end{tabular} \\ \hline
+\end{tabular}
+}
+
+\fonte{Made by the author.}
+% \end{minipage}
+\end{table}
+% \end{landscape}
 
 
 % wang2vec, s50-m2-sg0, 0.5675826685662275, 8.205893134030749e-07, 0.5635628524347914, 1.0195643908100097e-06, 0.0
