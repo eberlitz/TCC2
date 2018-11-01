@@ -112,6 +112,9 @@ DEPS                &               & 50   & 0.47             \\
 
 For evaluating our DEPS model we did a qualitative evaluation were we manually inspect the 5 most similar words (by cosine similarity) to a given set of target words (\autoref{tab:qualitative}) and we compared it with other models, just like \citetexto{Levy2014} did in their experiement.
 
+The first target word, \textit{longe} (Far), we can see simalar results provided by all the different models. The word \textit{inglês} (English) have the same behaviour. But for some specific words, like \textit{faculdade} (College) we can see that the DEPS model returned other types of languages or colleges while the other models could just bring words related to the same domain. This is similar to the target word \textit{Hogwarts} from the \citetexto{Levy2014} work.
+
+The other two words, \textit{guarda-chuva} (Umbrella) and \textit{correr} (Run), demonstrates that the DEPS model find other words with the same syntactic function (verb and noun) like a classifier, which in terms of semantic similarity or relatedness is not so good, just as we saw in the qualitative experiement (\autoref{tab:evaluation:we}) where the DEPS model had the worst results in that particular task for Portuguese.
 
 % longe/batman, 
 % guarda-chuva/substantivo, 
