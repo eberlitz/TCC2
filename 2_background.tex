@@ -23,6 +23,13 @@ WordNet is one of the lexical resources most used over the last few years when i
 
 When searching for a word in this database, we will get a list of senses, where for each one we have a set of synonyms (also called \textbf{synsets}) and a brief description (gloss) and also sometimes a simple example of use. One of the most important relations of WordNet is the set of near-synonyms for a sense called synset. For example, when searching for 'car' we get the words auto, automobile, machine and motorcar for one specific sense. Also, all these senses are linked with others forming a network. One of the most common links between synsets is the hypernym, hyponymy. With this, each synset is linked with more generic synsets through its hypernym relation and also to more specific synsets through its hyponymy relation. There's also a way to distinguish words between nouns and instances like specific persons, countries and geographic entities.
 
+There are some algorithms that can be used to find similar synsets in WordNet.
+
+\begin{itemize}
+    \item \textbf{Path Distance Similarity}: It's a scaled metric for measuring the similarity between a pair of senses based on the shortest path that connects the senses in the hypernym/hypnoym taxonomy. \cite{meng2014measuring}.
+    \item \textbf{Wu-Palmer Similarity}: Based on the depth of the senses in the taxonomy and of their Least Common Subsumer (most specific ancestor node). \cite{meng2014measuring}.
+\end{itemize}
+
 \input{2_background_word_embedding}
 
 \subsection{Word similarity}
