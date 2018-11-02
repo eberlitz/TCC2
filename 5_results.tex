@@ -20,7 +20,7 @@ In order to do a quantitative evaluation of the knowledge-based approach for wor
     \caption{OMW evaluation on PT65.\textbf{$\rho1$} is the Pearson’s Correlation considering only the words in vocabulary; \textbf{$\rho2$} is the Pearson’s Correlation considering all the words, given a similarity value of zero for words out of vocabulary. }
     \label{tab:worneteval}
     \centering%
-    \begin{minipage}{.8\textwidth}
+    \begin{minipage}{.6\textwidth}
     \begin{tabular}{@{}lllll@{}}
     \cmidrule(r){1-5}
     \textbf{Algorithms} & \textbf{$\rho1$} & \textbf{$\rho2$}         & \textbf{Out of vocabulary ratio} \\ 
@@ -129,14 +129,14 @@ The other two words, \textit{guarda-chuva} (Umbrella) and \textit{correr} (Run),
 
 
 % \begin{landscape}
-\begin{table}[h]
+\begin{board}[h]
 \caption{Target words and their five most similar words per word embedding models.}
 \label{tab:qualitative}
 \centering%
 % \begin{minipage}{\textwidth}
 % \makebox[\textwidth]{
 \resizebox{\columnwidth}{!}{
-\begin{tabular}{l|l|l|l|l|l}
+\begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \textbf{Target word} & \textbf{DEPS} & \textbf{FastText} & \textbf{Wang2vec} & \textbf{Word2vec} & \textbf{GloVe} \\ \hline
 longe & \begin{tabular}[c]{@{}l@{}}perto\\ lá\\ abaixo\\ cá\\ debaixo\end{tabular} & \begin{tabular}[c]{@{}l@{}}próxi­mo\\ distante\\ afastado-se\\ afastada\\ afastados\end{tabular} & \begin{tabular}[c]{@{}l@{}}perto\\ distante\\ afastada\\ fora\\ distantes\end{tabular} & \begin{tabular}[c]{@{}l@{}}distante\\ fora\\ perto\\ afastada\\ tirá-los\end{tabular} & \begin{tabular}[c]{@{}l@{}}perto\\ fora\\ ficar\\ lá\\ tão\end{tabular} \\ \hline
@@ -149,7 +149,7 @@ faculdade & \begin{tabular}[c]{@{}l@{}}universidade\\ escola\\ liceu\\ conservat
 
 \fonte{Made by the author.}
 % \end{minipage}
-\end{table}
+\end{board}
 % \end{landscape}
 
 
