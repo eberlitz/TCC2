@@ -1,0 +1,12 @@
+\subsection{Dependency-Based Word Embeddings}
+% https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/
+% TODO: Add cohyponym to the background chapter
+% TODO: Falta o como foi feito técnicamente
+% TODO: breve descrição do porque é relevante para o meu trabalho
+In this work, \citetexto{Levy2014} presents a generalized skip-gram model with negative sampling introduced by \citetexto{Mikolov2013DistributedRO}, from a linear context of bag-of-words to arbitrary word contexts, specifically syntactic contexts. An interesting fact of this approach in comparison with the original work is that the concept of induced similarity represents a nature of \textit{cohyponym}. They also describe a way of performing an analysis of the representation learned in the vector space by exploring the contexts of specific words or a group of words.
+They used the English Wikipedia as a corpus to train the embeddings. This corpus was tagged with parts-of-speech (POS) using the Stanford tagger. 
+
+For the evaluation they manually inspected the 5 most similar words to a hand picked set of words. One remarkable example is the word "Hogwarts" that in the BoW model the most similar words are from the respective domain of Harry Potter and in the developed model it was a list of famous schools, that is, was able to capture the semantic type of the word.
+The model was evaluated against the WordSim353 dataset from \citetexto{Finkelstein:2001:PSC:371920.372094}, which is a dataset regarding word similarity versus relatedness. They draw a precision-recall curve that describes the embeddings affinity, proving that the results obtained by the developed model were slightly better than the BoW model.
+
+We intent to adapt this work to a Brazilian Portuguese corpus, to check if the results will be, similar or not regarding other word embedding models, but instead of using the WordSim353 which is for English, we intend to use another dataset.

@@ -1,6 +1,5 @@
 + Procurar artigo que descrevia como avialiar qualitativamente
     - Dependency-Based Word Embeddings
-
 + [CONCLUÍDO]Realizar experiementos
     + quantitativo sobre o dataset PT65 (tive que mudar de dataset, antes era o WordSimilarity353): 
         + Sobre os meus modelos gerados: Criar um programa para fazer a avaliação
@@ -32,14 +31,19 @@
     + [Futuro] Vinculo experiemento do Denis
 
 
+
+Title
+    - Portuguese Word Embeddings: Evaluating on word similarity
+    - USING WORD EMBEDDINGS FOR WORD SIMILARITY IN BRAZILIAN PORTUGUESE
 Background
     + Word Embeddings: GloVe,FastText,word2vec,wang2vec
     + WordNet Path Distance and Wu-Palmer similarity measures
     - Pearson’s Correlation ($\rho$)
 Related work
     + DEPS
-    - Artigo do Dataset PT65 - Granada
+    + Artigo do Dataset PT65 - Granada
     - para portugues https://arxiv.org/pdf/1708.06025.pdf - Portuguese Word Embeddings: Evaluating on Word Analogies and
+    - Verificar se "A study on similarity and relatedness using distributional and WordNet-based approaches" tem alguma relação com meu trabalho.
     Natural Language Tasks - NILC
     - BERT and ELMo
     - Pesquisar coisas novas
@@ -47,20 +51,5 @@ Related work
         - MultiLanguage
 Evaluation
     - count the number of uniq words in the models to see if it is related to us having better results
+    - [IMPORTANT]Posso ter errado o tipo de avaliacao We use Pearson (r) and Spearman (ρ) correlation
 
-
-Tools
-+ Open Multilingual Wordnet
-+ Python3.6
-+ NLTK
-+ PALAVRAS Parser
-+ FastText
-+ Wang2vec
-+ Word2vec
-+ GloVe
-+ DEPS - Word2vecf
-+ PT65 dataset
-+ NILC pre-trained word embeddings
-+ semantics.unisinos.br computer with 32 cores
-+ Docker
-- Gensim Word2vec

@@ -1,0 +1,13 @@
+\subsection{A study on similarity and relatedness using distributional and WordNet-based approaches}
+
+% TODO: Describe personalized PageRank algorithm
+% TODO: Falta o como foi feito técnicamente
+% TODO: breve descrição do porque é relevante para o meu trabalho
+
+In this paper, \citetexto{Agirre2009} compares the two main categories of techniques used to measure semantic similarity. Using graph-based algorithms to Word-Net and distributional similarities collected from a 1.6 Terabyte Web corpus. A joint of the two techniques are also explored.
+
+For the graph-based algorithm they represent WordNet version 3.0 as a graph, where the relations among synsets are undirected edges, and for this graph, the PageRank is computed for each of the words in the corpus producing a probability distribution over synsets. Then, this is encoded as vectors by computing the cosine between them. In this word two WordNet versions were used, the WordNet 3.0 and the Multilingual Central Repository (MCR) aiming to link words between multiple WordNet languages. For cross-linguality, they exchange each non-English word in the dataset with its 5 best translations into English and then create the vector with the calculated similarities.
+
+For the distributional approach of calculating similarities between words the explore the use of a vector space model using three variations as bag-of-words, context-window and syntactic-dependency over a corpus of four billion documents crawled from the web in August 2008.
+
+They evaluate all the approaches over two standard datasets (RG65 and WordSim353) and also test a combination of both approaches (WordNet and Distributional) by training an SVM classifier to select the best result of the tree distributional variations for each pair. Thus, achieving state-of-the-art distributional and WordNet-based similarity measures over this datasets.
