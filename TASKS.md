@@ -42,13 +42,15 @@ Background
 Related work
     + DEPS
     + Artigo do Dataset PT65 - Granada
-    - para portugues https://arxiv.org/pdf/1708.06025.pdf - Portuguese Word Embeddings: Evaluating on Word Analogies and
-    - Verificar se "A study on similarity and relatedness using distributional and WordNet-based approaches" tem alguma relação com meu trabalho.
+    + para portugues https://arxiv.org/pdf/1708.06025.pdf - Portuguese Word Embeddings: Evaluating on Word Analogies and
     Natural Language Tasks - NILC
     - BERT and ELMo
+    - Verificar se "A study on similarity and relatedness using distributional and WordNet-based approaches" tem alguma relação com meu trabalho.
     - Pesquisar coisas novas
         - https://code.fb.com/ai-research/dynamic-meta-embeddings/
         - MultiLanguage
+Methods and materials
+    - natureza e abordagem metodologica essas coisas 
 Evaluation
     - count the number of uniq words in the models to see if it is related to us having better results
     - [IMPORTANT]Posso ter errado o tipo de avaliacao We use Pearson (r) and Spearman (ρ) correlation
