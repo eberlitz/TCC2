@@ -22,37 +22,37 @@ This chapter will present a description of what and how this work was done, as w
 
 \subsection{Architecture overview}\label{chap:methodsandmaterials:architecture}
 
-The proposed work basically consists of comparing different word similarity techniques. Therefore, ~\autoref{fig:arq} defines an overview of the architecture with the intention of comparing several techniques using different algorithms and testing them with a common dataset.
+The proposed work consists of comparing different word similarity techniques. Therefore, ~\autoref{fig:arq} defines an overview of the architecture with the intention of comparing several techniques using different algorithms and testing them with a common dataset.
 
 \begin{figure}[h]
-	\caption{Proposed architecture}
-	\label{fig:arq}
-	\centering%
-	\begin{minipage}{.8\textwidth}
-		\includegraphics[width=\textwidth]{arq.png}
-		\fonte{Made by the author.}
-	\end{minipage}
+    \caption{Proposed architecture}
+    \label{fig:arq}
+    \centering%
+    \begin{minipage}{.8\textwidth}
+        \includegraphics[width=\textwidth]{arq.png}
+        \fonte{Made by the author.}
+    \end{minipage}
 \end{figure}
 
 
-In this work we compared techniques based on the two main approaches to word similarity, the knowledge-based and the distributional-based. 
+In this work, we compared techniques based on the two main approaches to word similarity, the knowledge-based and the distributional-based. 
 
 Regarding the knowledge-based approach we utilized a lexical base, in this case, \textbf{Open Multilingual Wordnet} (OMW) wore used with \textbf{Path Distance} and \textbf{Wu-Palmer} similarity techniques. It was decided to use OMW due to its ease of use through the \textbf{Natural Language Toolkit} (NLTK) library available for the \textbf{Python version 3.6} programming language as well as the availability of the Portuguese language for querying the synsets. \cite{Bond2013LinkingAE}.
 
-For the distributional approach we \textbf{generated word embedding models} with a corpus obtained from the \textbf{brazilian portuguese Wikipedia dump} of articles. The word embeddings wore generated using several diferent model implementations for learning word representations. In this case, \textbf{FastText}, \textbf{Wang2vec}, \textbf{Word2vec} and \textbf{GloVe}. Also, we compare our word embedding models with a set of pre-trained models available from \textbf{Núcleo Interinstitucional de Linguística Computacional} (NILC) in all different implementations (FastText, Wang2vec, Word2vec and GloVe). One thing to note is that, the metric used for the comparison of similarity between one word and another for all word embedding models was the \textbf{cosine distance}. The \textbf{CBOW} and \textbf{Skip-gram} were used for the models that has this option. \cite{bojanowski2016enriching,Ling:2015:naacl,Mikolov2013DistributedRO,Pennington2014,Hartmann2017}
+For the distributional approach we \textbf{generated word embedding models} with a corpus obtained from the \textbf{Brazilian Portuguese Wikipedia dump} of articles. The word embeddings wore generated using several different model implementations for learning word representations. In this case, \textbf{FastText}, \textbf{Wang2vec}, \textbf{Word2vec} and \textbf{GloVe}. Also, we compare our word embedding models with a set of pre-trained models available from \textbf{Núcleo Interinstitucional de Linguística Computacional} (NILC) in all different implementations (FastText, Wang2vec, Word2vec, and GloVe). One thing to note is that the metric used for the comparison of similarity between one word and another for all word embedding models was the \textbf{cosine distance}. The \textbf{CBOW} and \textbf{Skip-gram} were used for the models that has this option. \cite{bojanowski2016enriching,Ling:2015:naacl,Mikolov2013DistributedRO,Pennington2014,Hartmann2017}
 
-We also generated one more model in order to take into account the syntactic tree information of the sentences from the Portuguese corpus using the algorithm implementation by \citetext{Levy2014} wich generates the \textbf{DEPS} model. In order to do this, we used the \textbf{PALAVRAS syntactic parser} to annotate the corpus with syntactic information. \cite{bick2000palavras}.
+We also generated one more model in order to take into account the syntactic tree information of the sentences from the Portuguese corpus using the algorithm implementation by \citetext{Levy2014} which generates the \textbf{DEPS} model. In order to do this, we used the \textbf{PALAVRAS syntactic parser} to annotate the corpus with syntactic information. \cite{bick2000palavras}.
 
-In the end we do a quantitative evaluation of all models and techniques using the \textbf{PT65} dataset, which consists in a pair of words and a similarity value given by persons. \cite{GranadaSV14}.
+In the end, we do a quantitative evaluation of all models and techniques using the \textbf{PT65} dataset, which consists of a pair of words and a similarity value given by persons. \cite{GranadaSV14}.
 
 All the experiments were done using the \textit{Semantics} computer (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM) granted by the \textit{UNISINOS Programa de Pós-graduação em Computação Aplicada} (PPGCA) by running \textbf{Docker} containers.
 
 
 \subsection{PT65 Dataset}\label{chap:methodsandmaterials:dataset}
 
-This dataset is composed by 65 word pairs, initialy generated by \citetexto{Rubenstein1965ContextualCO} on the name of \textit{RG65}. This word pairs wore translated to portuguese by \citetexto{GranadaSV14} and evaluated with 50 persons. 
+This dataset is composed of 65 word pairs, initially generated by \citetexto{Rubenstein1965ContextualCO} on the name of \textit{RG65}. This word pairs wore translated to Portuguese by \citetexto{GranadaSV14} and evaluated with 50 persons. 
 
-The initial idea was to use the WordSimilarity-353 Test Collection developed by \citetexto{Finkelstein:2001:PSC:371920.372094} which consists of two sets of English word pairs along with human-assigned similarity judgements. But we would have to translate to portuguese and then the human-assigned similarity judgements would not fit entirelly regarding the semantic changes involved in the translation proccess. So the PT65 dataset was used in the evaluation process.
+The initial idea was to use the WordSimilarity-353 Test Collection developed by \citetexto{Finkelstein:2001:PSC:371920.372094} which consists of two sets of English word pairs along with human-assigned similarity judgments. However, we would have to translate to Portuguese and then the human-assigned similarity judgments would not fit entirely regarding the semantic changes involved in the translation process. So the PT65 dataset was used in the evaluation process.
 
 \input{4_corpus}
 

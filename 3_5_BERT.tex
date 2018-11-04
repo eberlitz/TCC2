@@ -1,8 +1,9 @@
-% Qual o problema abordado? hipotese?
-% O que foi feito? Solução?
-% Como foi realizada a avaliação?
-% Comparar com o o meu trabalho - porque é relevante ao meu trabalho?
+% G
+\subsection{ELMo and BERT}
 
-\subsection{BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding}
+\citetexto{Peters:2018} presents in this work, a general approach for learning context-dependent representations from bidirectional language models (biLMs). They called it Embeddings from Language Models (ELMo), and we can image it as a new kind of word embedding, that, instead of learning a word as a vector representation it has the intent to catch the context of a word as a vector representation, meaning that, it learns embeddings with the different nuances of a single word. Models like GloVe, Word2Vec, Wang2Vec, and FastText would generalize all the different nuances of a single word in a single word vector having the same representation. With the release of ELMo, it brought near state-of-the-art results in many downstream NLP tasks,  including question answering, textual entailment, and sentiment analysis.
 
-TODO: state-of-the-art - 11 Oct 2018
+ELMo induced the current state-of-the-art technique called BERT, which stands for Bidirectional Encoder Representations from Transformers.  
+BERT, a work by \citetexto{devlin2018bert}, is a method of pre-training language representations. It outperforms previous methods because it is the first unsupervised, deeply bidirectional system for pre-training NLP. It uses attention transformers instead of bidirectional RNNs to encode context.
+
+As these works represent the state-of-the-art evolution from the first word embeddings and allow pre-trained models to be used for general purpose NLP tasks, we intend to explore how these language models behave for word-level tasks such as word similarity. 

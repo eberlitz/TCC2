@@ -15,18 +15,18 @@ According to \citetexto[p.~89]{zgusta1971manual}, "[...]synonyms: they are words
 
 \subsection{Hyponyms and hypernyms}
 
-Hyponym can be defined by the lexical relation corresponding to the insertion of one class into another. That is, it shows the relation between a generic term and a specific instance of it, where the most specific term is the Hyponym and the generic class is Hypernym. So if we say that purple is a kind of color, then purple is a hyponym of color and color is hypernym of purple. Because of this Hypernym is normally referred to as the \textit{is-a} and \textit{is-a-kind-of} relation. \cite[p.~88]{cruse1986lexical}.
+Hyponym can be defined by the lexical relation corresponding to the insertion of one class into another. That is, it shows the relation between a generic term and a specific instance of it, where the most specific term is the Hyponym and the generic class is Hypernym. So if we say that purple is a kind of color, then purple is a hyponym of color and color is the hypernym of purple. Because of this Hypernym is normally referred to as the \textit{is-a} and \textit{is-a-kind-of} relation. \cite[p.~88]{cruse1986lexical}.
 
 \subsection{Lexical knowledge base - WordNet}
 
-WordNet is one of the lexical resources most used over the last few years when it comes to word senses. \cite{fellbaum1998}. It is a large lexical database of English which consists of four sub-nets, one each for nouns, verbs, adjectives and adverbs. Each of this has a set of lemmas annotated with a set of synonyms. WordNet can either be downloaded for free or accessed via the web. \cite{wordnetOnline2010}.
+WordNet is one of the lexical resources most used over the last few years when it comes to word senses. \cite{fellbaum1998}. It is a large lexical database of English which consists of four sub-nets, one each for nouns, verbs, adjectives, and adverbs. Each of this has a set of lemmas annotated with a set of synonyms. WordNet can either be downloaded for free or accessed via the web. \cite{wordnetOnline2010}.
 
 When searching for a word in this database, we will get a list of senses, where for each one we have a set of synonyms (also called \textbf{synsets}) and a brief description (gloss) and also sometimes a simple example of use. One of the most important relations of WordNet is the set of near-synonyms for a sense called synset. For example, when searching for 'car' we get the words auto, automobile, machine and motorcar for one specific sense. Also, all these senses are linked with others forming a network. One of the most common links between synsets is the hypernym, hyponymy. With this, each synset is linked with more generic synsets through its hypernym relation and also to more specific synsets through its hyponymy relation. There's also a way to distinguish words between nouns and instances like specific persons, countries and geographic entities.
 
 There are some algorithms that can be used to find similar synsets in WordNet.
 
 \begin{itemize}
-    \item \textbf{Path Distance Similarity}: It's a scaled metric for measuring the similarity between a pair of senses based on the shortest path that connects the senses in the hypernym/hypnoym taxonomy. \cite{meng2014measuring}.
+    \item \textbf{Path Distance Similarity}: It is a scaled metric for measuring the similarity between a pair of senses based on the shortest path that connects the senses in the hypernym/hyponym taxonomy. \cite{meng2014measuring}.
     \item \textbf{Wu-Palmer Similarity}: Based on the depth of the senses in the taxonomy and of their Least Common Subsumer (most specific ancestor node). \cite{meng2014measuring}.
 \end{itemize}
 
@@ -47,6 +47,6 @@ Two words are more similar if they share more features of meaning, or are near-s
 
 The ability to identify the semantic similarity between words has been a subject of research very explored in the last years, because it is related to a series of activities of the area of natural language processing like information retrieval, text summarization, categorization and generation, database schema matching, question answering, machine translation, and others. \cite{Islam2007ApplicationsOC, Jurafsky:2009:SLP:1214993}. 
 
-In short, the techniques for identifying similarity can be classified into two main approaches, knowledge-based and distributional-based. \textbf{Knowledge-based} similarity models are those that rely on pre-existing knowledge resources, such as thesauri, semantic networks, taxonomies, or encyclopedias. \cite{Agirre2009}. And almost all techniques concerning the \textbf{distributional-based} approach come from the basis of statistical semantics in which we have the Distribution Hypothesis which is defined by the fact that words occurring in the same contexts tend to have similar meanings. \cite{Harris1954}. Here the techniques are formed mainly by inducing distributional properties of words from corpora. \cite{Agirre2009}.
+In short, the techniques for identifying similarity can be classified into two main approaches, knowledge-based and distributional-based. \textbf{Knowledge-based} similarity models are those that rely on pre-existing knowledge resources, such as thesauri, semantic networks, taxonomies, or encyclopedias. \cite{Agirre2009}. Moreover, almost all techniques concerning the \textbf{distributional-based} approach come from the basis of statistical semantics in which we have the Distribution Hypothesis which is defined by the fact that words occurring in the same contexts tend to have similar meanings. \cite{Harris1954}. Here the techniques are formed mainly by inducing distributional properties of words from corpora. \cite{Agirre2009}.
 
 

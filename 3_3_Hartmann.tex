@@ -1,21 +1,17 @@
-% Qual o problema abordado? hipotese?
-% O que foi feito? Solução?
-% Como foi realizada a avaliação?
-% Comparar com o o meu trabalho - porque é relevante ao meu trabalho?
-
+% G
 \subsection{Portuguese Word Embeddings: Evaluating on Word Analogies and Natural
 Language Tasks}
 
 \citetexto{Hartmann2017} present in this paper, an evaluation of different word embedding models trained on a large Portuguese corpus (Brazilian and European variants together) on syntactic and semantic analogies, POS tagging and sentence semantic similarity tasks.
 
-They collected a large corpus from various sources, either in Brazilian or European Portuguese. With that they applied some preprocessing (Tokenization and normalization) in order to reduce the vocabulary size. Using the corpus as input, they trained some word embedding models using four different algorithms (Word2Vec, Wang2Vec, FastText and GloVe) with varying dimensions (50, 100, 300, 600 and 1000).
+They collected a large corpus from various sources, either in Brazilian or European Portuguese. With that they applied some preprocessing (Tokenization and normalization) in order to reduce the vocabulary size. Using the corpus as input, they trained some word embedding models using four different algorithms (Word2Vec, Wang2Vec, FastText, and GloVe) with varying dimensions (50, 100, 300, 600 and 1000).
 
-For the evaluation, first, they use the syntactic and semantic analogies provided by \citetexto{Rodrigues2016LXDSemVectorsDS}. Where the FastText model performed better for syntactic analogies while for semantic analogies GloVe had the best performance. Also, all CBOW models, except Wang2Vec, had very low results in semantic analogies.
+For the evaluation, first, they use the syntactic and semantic analogies provided by \citetexto{Rodrigues2016LXDSemVectorsDS}, where the FastText model performed better for syntactic analogies. For semantic analogies, GloVe had the best performance. Also, all CBOW models, except Wang2Vec, had poor results in semantic analogies.
 
-For the POS tagging task evaluation, the Wang2Vec had the best results, and as seen, higher dimensions had better performance. The worst models in this task was GloVe and FastText. 
+For the POS tagging task evaluation, the Wang2Vec had the best results, and as seen, higher dimensions had better performance. The worst models in this task were GloVe and FastText. 
 
-For the sentence semantic similarity task evaluation, they used the ASSIN dataset. With this they had Word2Vec CBOW model with 1000 dimensions as the best one for European Portuguese. And for Brazilian Portuguese the Wang2Vec Skip-Gram model with 1000 dimensions had the best scores.
-In the end, they suggest that word analogies are not very suitable for evaluating word embeddings and task specific is probably a better approach.
+For the sentence semantic similarity task evaluation, they used the ASSIN dataset. With this, they had Word2Vec CBOW model with 1000 dimensions as the best one for European Portuguese. Moreover, for Brazilian Portuguese, the Wang2Vec Skip-Gram model with 1000 dimensions had the best scores.
+In the end, they suggest that word analogies are not very suitable for evaluating word embeddings and task-specific is probably a better approach.
 
 We used they pre-trained word embedding models for comparison while evaluating our models under our specific task - word similarity on PT65.
 

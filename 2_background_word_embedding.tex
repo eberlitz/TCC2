@@ -11,7 +11,7 @@ These feature vectors or embeddings can be generated using neural networks. \cit
 
 \begin{itemize}
     \item \textbf{Continuous bag-of-words} (CBOW): Learns the embedding by predicting the current word based on their surrounding words (context).
-    \item \textbf{Skip-gram} (SG): It is the oposite of CBOW, it learns by predicting the surrounding words (context) given a current word.
+    \item \textbf{Skip-gram} (SG): It is the opposite of CBOW, it learns by predicting the surrounding words (context) given a current word.
 \end{itemize}
 
 \begin{figure}[h]
@@ -28,7 +28,7 @@ After word2vec other algorithms emerged, such as \textbf{Global Vectors} (GloVe)
 
 \citetexto{Ling:2015:naacl} presents \textbf{Wang2vec} an extensions of the original word2vec models to improve the embeddings obtained for syntactically motivated tasks, by introducing changes that made the network aware of the relative positioning of context words.
 
-Later on, \citetexto{bojanowski2016enriching} introduces \textbf{FastText}, which is another way to learn word representations by taking into account subword information. They incorporate character $n$-grams into the skipgram model. By their evaluation the model outperforms baselines that do not take into account subword information.
+Later on, \citetexto{bojanowski2016enriching} introduces \textbf{FastText}, which is another way to learn word representations by taking into account subword information. They incorporate character $n$-grams into the Skip-Gram model. By their evaluation the model outperforms baselines that do not take into account subword information.
 
 % --------------------------
 

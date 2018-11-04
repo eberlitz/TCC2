@@ -1,57 +1,36 @@
 \subsection{Corpus generation}\label{chap:methodsandmaterials:corpus}
 
-In this section, we will present the process involved in generating a corpus that can be used on NLP tasks from a Wikipedia dump. We’ve used this process to generate the Word Embeddings for evaluation in this thesis. While we focus on the Portuguese language, you could easily do the same thing for the other available languages in Wikipedia.
+In this section, we will present the process involved in generating a corpus that can be used on NLP tasks from a Wikipedia dump. We have used this process to generate the Word Embeddings for evaluation in this thesis. While we focus on the Portuguese language, you could easily do the same thing for the other available languages in Wikipedia.
 
 \subsubsection{Getting the Wikipedia PT-BR dump}
 
 First, we downloaded the latest Portuguese Wikipedia articles dump\footnote{\url{https://dumps.wikimedia.org/ptwiki/latest/ptwiki-latest-pages-articles-multistream.xml.bz2}}. The file is a big, compressed XML file that contains all articles in the wiki text format, just like markdown but with some special tokens that deal with some specific Wikipedia features. For example: "\textit{[[Imagem:Starsinthesky.jpg|thumb|[[Estrela|Formação estrelar]] na [[Grande Nuvem de Magalhães]], uma [[galáxia irregular]].]]}"
 
-% \begin{lstlisting}
-%     @[[Imagem:Starsinthesky.jpg|thumb|[[Estrela|Formação estrelar]] na [[Grande Nuvem de Magalhães]], uma [[galáxia irregular]].]]@
-% \end{lstlisting}
-
-You can find more detailed information about the dump formats and different languages in their website\footnote{\url{https://en.wikipedia.org/wiki/Wikipedia:Database_download}}.
+More detailed information about the dump formats and different languages can be found in their website\footnote{\url{https://en.wikipedia.org/wiki/Wikipedia:Database_download}}.
 
 \subsubsection{Preprocessing with Wikiextractor}
 
-As described in the previous step, the format of the dump is not suitable for most of NLP tasks. That’s why we need to parse the wiki text format to raw text. In order to do this, we have a few options. We could use the python \textbf{gensim.corpora.WikiCorpus} class but its tokenizer is not so good for Portuguese (In our case we need to have words separated by ‘-’ like ‘guarda-chuva’ which is very common in Portuguese). So, we ended up using the \textbf{wikiextractor} project that just reads the XML file and outputs all the documents in parsed text. We chose to cleanup and tokenize the corpus in a later stage. So, we just cloned the repository and executed the \textbf{wikiextractor}.
+As described in the previous step, the format of the dump is not suitable for most of NLP tasks. That’s why we need to parse the wiki text format to raw text. In order to do this, we have a few options. We could use the python \textbf{gensim.corpora.WikiCorpus} class but its tokenizer is not so good for Portuguese (In our case we need to have words separated by ‘-’, like \textit{guarda-chuva}, which is very common in Portuguese). So, we ended up using the \textbf{wikiextractor} project that just reads the XML file and outputs all the documents in parsed text. We chose to cleanup and tokenize the corpus at a later stage. So, we just cloned the repository and executed the \textbf{wikiextractor}.
 
-% \begin{lstlisting}[language=sh]
-% git clone https://github.com/attardi/wikiextractor.git
-% cd ./wikiextractor
-% python ./WikiExtractor.py --no-templates -o ../data/ptwiki-articles-text/ -b 10M -c ../data/ptwiki-latest-pages-articles-multistream.xml.bz2
-% cd ..
-% \end{lstlisting}
-
-Wikipedia has a concept of Templates, which consists of using other documents inside of a given one. For the objective of this corpus, it is not desired that the tool expands these templates, because it will just add duplicated sentences to the content. So, it is really important to use the \textit{–no-templates} flag.
+Wikipedia has a concept of Templates, which consists of using other documents inside of a given one. For the objective of this corpus, it is not desired that the tool expand these templates because it will just add duplicated sentences to the content. So, it is really important to use the \textit{–no-templates} flag.
 This tool generated multiple compressed 10MB files of wiki articles sentences as seen in ~\autoref{fig:wikiextractor}.
 
 \begin{figure}[h]
-	\caption{WikiExtractor output sample.}
-	\label{fig:wikiextractor}
-	\centering%
-	\begin{minipage}{.9\textwidth}
-		\includegraphics[width=\textwidth]{wikiextractor.png}
-		\fonte{Made by the author.}
-	\end{minipage}
+    \caption{WikiExtractor output sample.}
+    \label{fig:wikiextractor}
+    \centering%
+    \begin{minipage}{.9\textwidth}
+        \includegraphics[width=\textwidth]{wikiextractor.png}
+        \fonte{Made by the author.}
+    \end{minipage}
 \end{figure}
-
-
-
-% \begin{lstlisting}[language=XML]
-% <doc id="220" url="https://pt.wikipedia.org/wiki?curid=220" title="Astronomia">
-% Astronomia 
-% @Astronomia é uma ciência natural que estuda corpos celestes (como estrelas, planetas, cometas, nebulosas, aglomerados de estrelas, galáxias) e fenômenos que se originam fora da atmosfera da Terra (como a radiação cósmica de fundo em micro-ondas). Preocupada com a evolução, a física, a química e o movimento de objetos celestes, bem como a formação e o desenvolvimento do universo.@
-% ...
-% </doc>
-% \end{lstlisting}
 
 It is also possible to save this as only one text file just by changing the tool arguments.
 At the time of writing, there were 1,000,400 documents in the ptwiki-dump.
 
 \subsubsection{Custom preprocessing}
 
-In order to cleanup the sentences for generating the Word embedding models we did some custom pre-processing\footnote{\url{https://github.com/eberlitz/pt-br-word-embeddings/blob/master/scripts/preprocess.py}} based on \citetexto{Hartmann2017} preprocessing scripts. Some changes were made to do the some cleaning as follows:
+In order to cleanup the sentences for generating the Word embedding models we did some custom pre-processing\footnote{\url{https://github.com/eberlitz/pt-br-word-embeddings/blob/master/scripts/preprocess.py}} based on \citetexto{Hartmann2017} preprocessing scripts. Some changes were made to do some cleaning as follows:
 
 \begin{itemize}
     \item Breaks an entire document into multiple sentences using the 
@@ -69,7 +48,7 @@ In order to cleanup the sentences for generating the Word embedding models we di
     \item All text between brackets is removed.
 \end{itemize}
 
-With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.896.520 sentences, 251.193.592 tokens and 3.137.040 unique tokens.
+With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.896.520 sentences, 251.193.592 tokens, and 3.137.040 unique tokens.
 
 % --------------------------------------------------------
 
@@ -89,7 +68,7 @@ With this solution implemented, we created a docker image and started running in
 
 \subsection{Common Word Embeddings generation}\label{chap:methodsandmaterials:wegeneration}
 
-In order to have a base for comparison, we generated all models that were used by \citetexto{Hartmann2017}. In this case, FastText, Wang2vec, Word2vec and GloVe using different dimensions values as 50, 100, 300, 600 and 1000. \cite{bojanowski2016enriching, Ling:2015:naacl, Mikolov2013DistributedRO, Pennington2014}. Also the CBOW and Skip-gram were used for the models that has this option.
+In order to have a base for comparison, we generated all models that were used by \citetexto{Hartmann2017}. In this case, FastText, Wang2vec, Word2vec and GloVe using different dimensions values like 50, 100, 300, 600 and 1000. \cite{bojanowski2016enriching, Ling:2015:naacl, Mikolov2013DistributedRO, Pennington2014}. Also, the CBOW and Skip-gram were used for the models that have this option.
 
 For this, we downloaded all those model generation tools from GitHub, compiled into a docker image, and use as input our corpus text file. We only created some script to run this several times with different dimension sizes as it took several hours to complete.
 
@@ -104,13 +83,13 @@ The vocabulary files are just a list of words or contexts with the total number 
 In order to generate this file from our corpus we got the annotated output from the PALAVRAS parser and extracted the syntactic tags. This process is shown by in ~\autoref{fig:deps-context}.
 
 \begin{figure}[h]
-	\caption{DEPS contexts generation for a single parsed sentence. Left: Sample output from the PALAVRAS parser for the sentence "A astronomia é uma das mais antigas ciências.". Right: Sample of our generated contexts file for an annotated sentence.}
-	\label{fig:deps-context}
-	\centering%
-	\begin{minipage}{.95\textwidth}
-		\includegraphics[width=\textwidth]{deps-context.png}
-		\fonte{Made by the author.}
-	\end{minipage}
+    \caption{DEPS contexts generation for a single parsed sentence. Left: Sample output from the PALAVRAS parser for the sentence "A astronomia é uma das mais antigas ciências.". Right: Sample of our generated contexts file for an annotated sentence.}
+    \label{fig:deps-context}
+    \centering%
+    \begin{minipage}{.95\textwidth}
+        \includegraphics[width=\textwidth]{deps-context.png}
+        \fonte{Made by the author.}
+    \end{minipage}
 \end{figure}
 
 The generation of this three files was not trivial and the implemented code to do so had to use a map-reduce approach in order to use all computation resources available. It took 14 hours to process all 9896000 parsed sentences with an average speed of 196.2 sentences per second.

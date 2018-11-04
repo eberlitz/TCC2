@@ -1,6 +1,5 @@
+% G
 \section{Introduction}\label{chap:intro}
-
-% \epigrafecap{You shall know a word by the company it keeps.}{John Rupert Firth}
 
 Natural Language Processing or NLP is a field whose purpose is to make computers perform tasks using human languages. In these systems, a series of components must be studied as speech recognition, natural language understanding, and speech synthesis. According to \citetexto[p.~29]{Jurafsky:2009:SLP:1214993}, "What distinguishes language processing applications from other data processing systems is their use of \textit{knowledge of language}.". That is, for several NLP activities you need knowledge about phonetics, phonology, morphology, lexical semantics, compositional semantics. \cite{Jurafsky:2009:SLP:1214993}.
 
@@ -9,38 +8,23 @@ The ability to identify the semantic similarity between words has been a subject
 % --------------------------------------------------------------
 \subsection{Motivation} 
 
-% Aqui você deve apresentar o contexto do trabalho (área de que ele se trata) e uma motivação para trabalhar nesse assunto.
-% 
-% Descrever o uso de linguagem natural em IR/IE/QA
-% introduzindo o problema de identificação de palavras similares. 
-% e o trabalho do denis como exemplo, 
-% Seguir a linha dos artigos relacionados, falar por que é importante
-
 The motivation for this work comes from \citetexto{denis2018} where they describe the ENSEPRO, which is a question answering system for short sentence questions that have it's answers based on ontologies, in their case DBPedia. In short, the system receives a user question that is processed in three main tasks, the first one is to do a natural language understanding, the second is the search engine that consumes an ontology database and finally the third task that generates the response for the use in natural language. The main focus of ENSEPRO is to tackle the Brazilian Portuguese language. 
 
 In their search engine, they currently use WordNet for term expansion which is a necessary and important step to make the system work as a whole. \citetexto[our translation]{denis2018} says that 
-"[...] it is necessary to consider that the relevant terms may not be represented in the ontology with the same words of the question, being necessary to search for synonyms of the relevant term.",
+"[...] it is necessary to consider that the relevant terms may not be represented in the ontology with the same words of the question, being necessary to search for synonyms of the relevant term.", 
 % "[...] é necessário considerar que os termos relevantes podem não estar representados na ontologia com as mesmas palavras da pergunta, sendo necessário buscar sinônimos do termo relevante.", 
-and for this reason, having other alternatives besides the WordNet could improve the system results.
+so for this reason, having other alternatives besides the WordNet could improve the system results.
 
 % --------------------------------------------------------------
 \subsection{Research problem} 
 
-% Aqui você vai apresentar um problema, uma lacuna, observada na área e que você pretende tratar. Você deve se perguntar aqui: ``Que respostas estou disposto a responder?''.
-
-% Sistemas de extração da informação e de baseados em linguagem natural utilizam de bases de conhecimentos estruturadas e necessitam de técnicas para a realização desta tarefa (Information Extraction). Técnicas que não são triviais devido a diferença de palavras utilizadas na busca com as quais se encontram na base de dados. As quais podem ser aprimoradas se as queries realizadas fossem refinadas com informações de sinônimos.
-
-% A capacidade de identificar a similaridade de textos é muito importante para os segmentos de processamento de linguagem natural como sumarização, recuperação de informações e question answering. 
-% Na realização de busca de informações através de textos, muitas vezes não encontramos os resultados devido ao fato que os textos podem não conter exatamente as mesmas palavras utilizadas na definição da busca, mas sim palavras semelhantes como sinônimos. Fato que torna a tarefa de identificação de similaridade/sinônimos entre palavras ou sentenças algo muito importante dentro da área de processamento de linguagem natural. 
-% Técnicas mais precisas na identificação de similaridade entre palavras podem ajudar em uma série de tarefas de NLP (citar exemplos). Citar também o uso da técnica transfer learning, o qual pode-se utilizar de modelos específicos em outras tarefas, além das quais foram previamente treinadas. (citar exemplos de uso desta técnica).
-
-Most of question answering (QA) and information extraction (IE) systems uses WordNet to search for synonyms in their search engine. As we can see according to \citetexto[our translation]{denis2018}, 
+Most of question answering (QA) and information extraction (IE) systems use WordNet to search for synonyms in their search engine. As we can see according to \citetexto[our translation]{denis2018}, 
 \begin{quote}
     % [...] Ainda em se tratando do uso de tecnologias semânticas, considerando-se a Wordnet como uma ontologia linguística, percebe-se o uso ainda bastante intenso deste recurso como fonte para expansão semântica de termos [5, 8, 15, 24]. Um fato que chama a atenção em relação a Wordnet na construção dos agentes conversacionais nos trabalhos analisados é que todos a utilizam somente para encontrar sinônimos de termos, sendo que esta é somente uma das possibilidades que este recurso linguístico disponibiliza.
     [...] In the case of the use of semantic technologies, using Wordnet as a linguistic ontology, the use of this resource as a source for the semantic expansion of terms is still noticeable. One fact that draws attention to Wordnet in the construction of the conversational agents in the analyzed works is that all use it only to find synonyms of terms, and this is only one of the possibilities that this linguistic resource makes available.
 \end{quote}
 
-However, the expansion of terms using WordNet that is a lexical base has several problems, where a word may not be present. Since these lexical bases are of manual construction, they are time consuming and expensive, and for this reason, not all links will be present and their quality varies from language to language. There is also no WordNet for all languages. \cite{Leeuwenberga2016}. \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} tell a litle bit about the WordNet in the following statement,
+However, the expansion of terms using WordNet that is a lexical base has several problems, where a word may not be present. Since these lexical bases are of manual construction, they are time-consuming and expensive, and for this reason, not all links will be present, and their quality varies from language to language. There is also no WordNet for all languages. \cite{Leeuwenberga2016}. \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} tell a little bit about the WordNet in the following statement,
 \begin{quote}
     [...]
     The previous section showed how to compute similarity between any two senses in a thesaurus, and by extension between any two words in the thesaurus hierarchy. But of course we don't have such thesauri for every language. Even for languages where we do have such resources, thesaurus-based methods have a number of limitations. The obvious limitation is that thesauri often lack words, especially new or domain-specific words. In addition, thesaurus-based methods only work if rich hyponymy knowledge is present in the thesaurus. While we have this for nouns, hyponym information for verbs tends to be much sparser, and doesn't exist at all for adjectives and adverbs. Finally, it is more difficult with thesaurus-based methods to compare words in different hierarchies, such as nouns with verbs.
@@ -49,7 +33,7 @@ However, the expansion of terms using WordNet that is a lexical base has several
 So, we intend to change the thesaurus-based approach by a distributional-based one. They have proven to be more competitive than the previous approach, and have been successfully being used to cover out-of-vocabulary items in WordNet. \cite{Agirre2009}.
 In order to do so, WordNet is proposed to be replaced by Word embeddings, which follows a distributional approach and therefore does not depend on manual construction, and can be applied to different languages since its training is unsupervised. Thus, the hypothesis is that for the formulation of queries in QA and IR systems on which they depend on the expansion of similar terms it would be possible to increase the number of relevant results to be found.
 
-The ability to identify text similarity is very important for natural language processing segments such as summarization, retrieval of information and question answering. In the search of information through texts, we often do not find the results due to the fact that the texts may not contain exactly the same words used in the search definition, but rather similar words as synonyms. This fact makes the task of identifying similarity/synonyms between words or sentences something very important within the natural language processing area. More precise techniques for identifying word similarity can help in a number of NLP tasks such as dialogue systems, question answering, and information retrieval systems. \cite{Islam2007ApplicationsOC, Pilehvar2013, Agirre2009}
+The ability to identify text similarity is essential for natural language processing segments such as summarization, retrieval of information and question answering. In the search of information through texts, we often do not find the results due to the fact that the texts may not contain the same words used in the search definition, but rather similar words as synonyms. This fact makes the task of identifying similarity/synonyms between words or sentences something very important within the natural language processing area. More precise techniques for identifying word similarity can help in a number of NLP tasks such as dialogue systems, question answering, and information retrieval systems. \cite{Islam2007ApplicationsOC, Pilehvar2013, Agirre2009}
 
 % Also mention the use of the transfer learning technique, which can be used of specific models in other tasks, besides which were previously trained. (cite examples of the use of this technique).
 
@@ -70,7 +54,7 @@ With the possibility of access to pre-trained word embeddings including in the P
 \subsection{Structure of the thesis}
 
 This thesis is structured as follows. The \autoref{chap:background} presents the general concepts and techniques used in this work. In \autoref{chap:relatedwork} are described and analyzed the works related to the research area of this work. The \autoref{chap:methodsandmaterials} presents the proposed model, as well as the form of the experiment and the necessary tools. 
-% The \autoref{chap:results} presents the preliminary results obtained in the case study experiment. 
+The \autoref{chap:results} presents the preliminary results obtained in the case study experiment. 
 Finally, \autoref{chap:conclusions} summarizes the thesis findings, contributions, and discusses.
 
 
