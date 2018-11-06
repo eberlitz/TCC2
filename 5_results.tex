@@ -1,7 +1,7 @@
 \section{Results}\label{chap:results}
 
 
-We separate the evaluation in three steps. In \autoref{chap:results:wn} we do a quantitative evaluating of the Open Multilingual WordNet. In \autoref{chap:results:we} we do the same evaluation but with the word embeddings models. At last, we do a qualitative evaluation regarding the DEPS model in \autoref{chap:results:qualitative}
+We separated the evaluation in three steps. In \autoref{chap:results:wn} we present a quantitative evaluating of the Open Multilingual WordNet. In \autoref{chap:results:we} we present the same evaluation but with the word embeddings models. At last, we present a qualitative evaluation regarding the DEPS model in \autoref{chap:results:qualitative}
 
 % For the evaluation, we propose to do qualitative measure based on a manual inspection of the most similar words to a hand picked set of words and see if they are in fact similar or not to the other words regarding similarity, relatedness and also the syntactic similarity.
 % Also a quantitative analyses is proposed by using the WordSim353 dataset from \citetexto{Finkelstein:2001:PSC:371920.372094}, which is a dataset regarding word similarity versus relatedness. As all the pairs in this dataset are in English, they will be manually translated to Portuguese to be able to compare the results with all the techniques.
@@ -11,9 +11,9 @@ We separate the evaluation in three steps. In \autoref{chap:results:wn} we do a 
 
 \subsection{Open Multilingual WordNet evaluation}\label{chap:results:wn}
 
-In order to do a quantitative evaluation of the knowledge-based approach for word similarity. We used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two algorithms, Path Distance and Wu-Palmer. With this, we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
+In order to do a quantitative evaluation of the knowledge-based approach for word similarity, we used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two algorithms, Path Distance and Wu-Palmer. With this, we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
 
-\autoref{tab:worneteval} shows the results, and as we can see, the Path Distance algorithm gave a relatively high score, but as stated by \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} we indeed have out of vocabulary words, in this case, 15.38\% of the words.
+\autoref{tab:worneteval} shows the results, and as we can see, the Path Distance algorithm gave a relatively high score, but as stated by \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} we indeed have the occurrence of some out of vocabulary words, in this case, 15.38\% of the words.
 
 
 \begin{table}[h]
@@ -49,7 +49,7 @@ In order to do a quantitative evaluation of the knowledge-based approach for wor
 To do a quantitative evaluation of the distributional approach for word similarity we did the same experiment as the WordNet evaluation but with our word embeddings models.
 We loaded the PT65 dataset, and for each word pair, we compared the expected result with the Cosine similarity given by the model. With this, we calculated the Pearson’s Correlation ($\rho$).
 
-\autoref{tab:evaluation:we} shows the results for all the 40 generated models. There was no out of vocabulary words in this approach which in comparison with the WordNet approach is better, just like mentioned by \citetexto{Agirre2009} we can use word embeddings to cover out-of-vocabulary words. In comparison with the WordNet, we can also see, that it has slightly better results, which is a good thing considering that it has no manual construction as WordNet.
+\autoref{tab:evaluation:we} shows the results for all the 40 generated models. There was no out of vocabulary words in this approach which in comparison with the WordNet approach is better. Just like mentioned by \citetexto{Agirre2009} we can use word embeddings to cover out-of-vocabulary words. In comparison with the WordNet, we can also see, that it has slightly better results, which is a good thing considering that it has no manual construction as WordNet.
 
 Also, we can see that the better word embedding model for this task is the FastText Skip-Gram. In all of them, Skip-gram was slightly better than the others. Moreover, in overall the models with 300-600 dimensions got higher values. We can also note that the DEPS model has an inferior performance in this particular task, maybe because the dataset does not differentiate between relatedness and similarity.
 

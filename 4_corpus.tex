@@ -1,6 +1,6 @@
 \subsection{Corpus generation}\label{chap:methodsandmaterials:corpus}
 
-In this section, we will present the process involved in generating a corpus that can be used on NLP tasks from a Wikipedia dump. We have used this process to generate the Word Embeddings for evaluation in this thesis. While we focus on the Portuguese language, you could easily do the same thing for the other available languages in Wikipedia.
+In this subsection, we will present the process involved in generating a corpus that can be used on NLP tasks from a Wikipedia dump. We have used this process to generate the Word Embedding for evaluation in this thesis. While we focus on the Portuguese language, this could easily be done for the other available languages in Wikipedia.
 
 \subsubsection{Getting the Wikipedia PT-BR dump}
 
@@ -26,7 +26,7 @@ This tool generated multiple compressed 10MB files of wiki articles sentences as
 \end{figure}
 
 It is also possible to save this as only one text file just by changing the tool arguments.
-At the time of writing, there were 1,000,400 documents in the ptwiki-dump.
+At the time of writing, there were 1.000.400 documents in the ptwiki-dump.
 
 \subsubsection{Custom preprocessing}
 
@@ -58,11 +58,11 @@ To annotate all sentences of the corpus with syntactic tags, we used the softwar
 
 First, we tried to use the parser with multiple sentence files of 1MB. However, the parser was taking too much time to execute and sometimes errors occurred. So we wrote a Python script that sends sentences in batches to the PALAVRAS parser and saves the results. Also, we have used parallel computing doing this process times the number of cores on the machine. Although, we first run this on a i5 2.4GHz computer with 4 cores, achieving an average speed of 16 sentences per second, which means that for all 9896520 sentences it would take 7 days to complete. We have tried other techniques attempting to increase the speed, but the bottleneck was indeed in the parser tool. 
 
-With this problem at hand, \textit{UNISINOS Programa de Pós-graduação em Computação Aplicada} (PPGCA) granted us access to the \textit{Semantics} computer (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM). With 32 cores the parsing step should be concluded in 24 hours.
+With this problem at hand, \textit{UNISINOS Programa de Pós-graduação em Computação Aplicada} (PPGCA) granted us access to the \textit{Semantics} server (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM). With 32 cores the parsing step should be concluded in 24 hours.
 
 One more problem that we had is that the PALAVRAS could not parse some of the sentences. Since we were running the parser in batches, this means that if one sentence failed, we lost all the parsed sentences in the batch. Also, as this process would take too long, we had to implement some way to continue the process if some fatal error occurred. With this in mind, we converted the sentences file to an SQLite table with three columns (id, text and parsed text). With this whenever we start the parsing process, we can continue from where it stopped.
 
-With this solution implemented, we created a docker image and started running in the Semantics machine. The overall process took 38 hours. 24 hours to process 8916000 sentences using batches of 30, and 14 hours to process the remaining ones without sending in batches. Resulting in a 15GB corpus file.
+With this solution implemented, we created a docker image and started running in the Semantics machine. The overall process took 38 hours. 24 hours to process 8.916.000 sentences using batches of 30, and 14 hours to process the remaining ones without sending in batches. Resulting in a 15GB corpus file.
 
 % --------------------------------------------------------
 
@@ -76,14 +76,14 @@ For this, we downloaded all those model generation tools from GitHub, compiled i
 
 \subsection{DEPS Word Embedding generation}\label{chap:methodsandmaterials:depsgeneration}
 
-In order to generate the DEPS (dependency-based syntactic contexts) word embedding model proposed by \citetexto{Levy2014}, we got the source code called \textit{word2vecf} from their website. The input required by this model is three files, a word and context vocabulary, and a contexts file. 
+In order to generate the DEPS (dependency-based syntactic contexts) word embedding model proposed by \citetexto{Levy2014}, we got the source code called \textit{word2vecf} from their website\footnote{\url{https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/}}. The input required by this model is three files, a word, context vocabulary, and a contexts file. 
 
 The vocabulary files are just a list of words or contexts with the total number of occurrences. The contexts file is a multiline context per word, where one word can have multiple contexts. In the form of "<\textit{word}> <\textit{dependency-relation}>\_<\textit{referred-word}>".
 
 In order to generate this file from our corpus we got the annotated output from the PALAVRAS parser and extracted the syntactic tags. This process is shown by in ~\autoref{fig:deps-context}.
 
 \begin{figure}[h]
-    \caption{DEPS contexts generation for a single parsed sentence. Left: Sample output from the PALAVRAS parser for the sentence "A astronomia é uma das mais antigas ciências.". Right: Sample of our generated contexts file for an annotated sentence.}
+    \caption{DEPS contexts generation for a single parsed sentence. Left: Sample output from the PALAVRAS parser for the sentence \textit{"A astronomia é uma das mais antigas ciências."} (Astronomy is one of the oldest sciences). Right: Sample of our generated contexts file for an annotated sentence.}
     \label{fig:deps-context}
     \centering%
     \begin{minipage}{.95\textwidth}
@@ -92,6 +92,6 @@ In order to generate this file from our corpus we got the annotated output from 
     \end{minipage}
 \end{figure}
 
-The generation of this three files was not trivial and the implemented code to do so had to use a map-reduce approach in order to use all computation resources available. It took 14 hours to process all 9896000 parsed sentences with an average speed of 196.2 sentences per second.
+The generation of this three files was not trivial and the implemented code to do so had to use a map-reduce approach in order to use all computation resources available. It took 14 hours to process all 9.896.000 parsed sentences with an average speed of 196,2 sentences per second.
 
 After we had the input files, we just run the \textit{word2vecf} tool which took some hours to complete. We generated models with different dimensions values as 50, 100, 300, 600 and 1000.

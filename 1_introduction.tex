@@ -1,19 +1,19 @@
 % G
 \section{Introduction}\label{chap:intro}
 
-Natural Language Processing or NLP is a field whose purpose is to make computers perform tasks using human languages. In these systems, a series of components must be studied as speech recognition, natural language understanding, and speech synthesis. According to \citetexto[p.~29]{Jurafsky:2009:SLP:1214993}, "What distinguishes language processing applications from other data processing systems is their use of \textit{knowledge of language}.". That is, for several NLP activities you need knowledge about phonetics, phonology, morphology, lexical semantics, compositional semantics. \cite{Jurafsky:2009:SLP:1214993}.
+Natural Language Processing (NLP) is a field whose purpose is to make computers perform tasks using human languages. In these systems, a series of components must be studied as speech recognition, natural language understanding, and speech synthesis. According to \citetexto[p.~29]{Jurafsky:2009:SLP:1214993}, "What distinguishes language processing applications from other data processing systems is their use of \textit{knowledge of language}.". That is, for several NLP activities you need knowledge about phonetics, phonology, morphology, lexical semantics, compositional semantics. \cite{Jurafsky:2009:SLP:1214993}.
 
-The ability to identify the semantic similarity between words has been a subject of research very explored in the last years, because it is related to a series of activities of the area of natural language processing like information retrieval, text summarization, categorization and generation, database schema matching, question answering, machine translation, and others. \cite{Islam2007ApplicationsOC, Jurafsky:2009:SLP:1214993}. 
+The ability to identify the semantic similarity between words has been a subject of research explored in the last years, because it is related to a series of activities of the area of natural language processing like information retrieval, text summarization, categorization and generation, database schema matching, question answering, machine translation, and others. \cite{Islam2007ApplicationsOC, Jurafsky:2009:SLP:1214993}. 
 
 % --------------------------------------------------------------
 \subsection{Motivation} 
 
-The motivation for this work comes from \citetexto{denis2018} where they describe the ENSEPRO, which is a question answering system for short sentence questions that have it's answers based on ontologies, in their case DBPedia. In short, the system receives a user question that is processed in three main tasks, the first one is to do a natural language understanding, the second is the search engine that consumes an ontology database and finally the third task that generates the response for the use in natural language. The main focus of ENSEPRO is to tackle the Brazilian Portuguese language. 
+The motivation for this work comes from \citetexto{denis2018} where they describe the ENSEPRO, which is a question answering system for short sentence questions that have it's answers based on ontologies, in their case, using the DBpedia\footnote{\url{https://wiki.dbpedia.org/}}. In short, the system receives a user question that is processed in three main tasks. The first one is to do natural language understanding, the second is to generate a query for the search engine that consumes an ontology database and finally the third task generates the response for the use in natural language. The main focus of ENSEPRO is to tackle the Brazilian Portuguese language. 
 
-In their search engine, they currently use WordNet for term expansion which is a necessary and important step to make the system work as a whole. \citetexto[our translation]{denis2018} says that 
-"[...] it is necessary to consider that the relevant terms may not be represented in the ontology with the same words of the question, being necessary to search for synonyms of the relevant term.", 
+In their work, they currently use WordNet for term expansion which is a necessary and important step to make the system work as a whole. \citetexto[our translation]{denis2018} says that 
+"[...] it is necessary to consider that the relevant terms may not be represented in the ontology with the same words of the question, being necessary to search for synonyms of the relevant term.". 
 % "[...] é necessário considerar que os termos relevantes podem não estar representados na ontologia com as mesmas palavras da pergunta, sendo necessário buscar sinônimos do termo relevante.", 
-so for this reason, having other alternatives besides the WordNet could improve the system results.
+So for this reason, having other alternatives besides the WordNet could improve the system results.
 
 % --------------------------------------------------------------
 \subsection{Research problem} 
@@ -24,14 +24,14 @@ Most of question answering (QA) and information extraction (IE) systems use Word
     [...] In the case of the use of semantic technologies, using Wordnet as a linguistic ontology, the use of this resource as a source for the semantic expansion of terms is still noticeable. One fact that draws attention to Wordnet in the construction of the conversational agents in the analyzed works is that all use it only to find synonyms of terms, and this is only one of the possibilities that this linguistic resource makes available.
 \end{quote}
 
-However, the expansion of terms using WordNet that is a lexical base has several problems, where a word may not be present. Since these lexical bases are of manual construction, they are time-consuming and expensive, and for this reason, not all links will be present, and their quality varies from language to language. There is also no WordNet for all languages. \cite{Leeuwenberga2016}. \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} tell a little bit about the WordNet in the following statement,
+However, the expansion of terms using WordNet that is a lexical base has several problems, where a word may not be present. Since these lexical bases are manually constructed, they are time-consuming and expensive, and for this reason, not all links will be present, and their quality varies from language to language. There is also no WordNet for all languages. \cite{Leeuwenberga2016}. In the following statement, \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} tell a little bit about WordNet aspects:
 \begin{quote}
     [...]
     The previous section showed how to compute similarity between any two senses in a thesaurus, and by extension between any two words in the thesaurus hierarchy. But of course we don't have such thesauri for every language. Even for languages where we do have such resources, thesaurus-based methods have a number of limitations. The obvious limitation is that thesauri often lack words, especially new or domain-specific words. In addition, thesaurus-based methods only work if rich hyponymy knowledge is present in the thesaurus. While we have this for nouns, hyponym information for verbs tends to be much sparser, and doesn't exist at all for adjectives and adverbs. Finally, it is more difficult with thesaurus-based methods to compare words in different hierarchies, such as nouns with verbs.
 \end{quote}
 
 So, we intend to change the thesaurus-based approach by a distributional-based one. They have proven to be more competitive than the previous approach, and have been successfully being used to cover out-of-vocabulary items in WordNet. \cite{Agirre2009}.
-In order to do so, WordNet is proposed to be replaced by Word embeddings, which follows a distributional approach and therefore does not depend on manual construction, and can be applied to different languages since its training is unsupervised. Thus, the hypothesis is that for the formulation of queries in QA and IR systems on which they depend on the expansion of similar terms it would be possible to increase the number of relevant results to be found.
+In order to do so, WordNet is proposed to be replaced by Word embeddings, which follows a distributional approach and therefore does not depend on manual construction, and can be applied to different languages since its training is unsupervised. Thus, the hypothesis is that for the formulation of queries in QA and IR systems on which they depend on the expansion of similar terms it would be possible to increase the number of relevant results found.
 
 The ability to identify text similarity is essential for natural language processing segments such as summarization, retrieval of information and question answering. In the search of information through texts, we often do not find the results due to the fact that the texts may not contain the same words used in the search definition, but rather similar words as synonyms. This fact makes the task of identifying similarity/synonyms between words or sentences something very important within the natural language processing area. More precise techniques for identifying word similarity can help in a number of NLP tasks such as dialogue systems, question answering, and information retrieval systems. \cite{Islam2007ApplicationsOC, Pilehvar2013, Agirre2009}
 
@@ -40,12 +40,12 @@ The ability to identify text similarity is essential for natural language proces
 % --------------------------------------------------------------
 \subsection{Research focus}
 
-With the possibility of access to pre-trained word embeddings including in the Portuguese language and the need to improve the way of expanding related terms of query systems to ontological bases used by systems of questions answering and information retrieval, the present work aims to improve the accuracy and recall of these related terms expansion through the use of word embeddings. For this, the following specific objectives are highlighted:
+With the possibility of access to pre-trained word embeddings including in the Portuguese language and the need to improve the way of expanding related terms of query systems to ontological bases used by systems of questions answering and information retrieval, the present work aims to improve the accuracy and recall of these terms expansion through the use of word embeddings. For this, the following specific objectives are highlighted:
 
 \begin{itemize}
     \item Explore the existing techniques regarding word similarity, using a distributional approach called word embeddings, adapting existing works to Brazilian Portuguese.
     \item Compare the word embeddings approach to other techniques that are solely based on a lexical database such as WordNet.
-    \item Adapt existing studies regarding the addition of syntactic context in the training process of word embeddings to a Brazilian Portuguese corpus, to check if the results will be, similar or not regarding other word embedding models. 
+    \item Adapt existing studies regarding the addition of syntactic context in the training process of word embeddings to a Brazilian Portuguese corpus, to check if the results will be similar or not regarding other word embedding models. 
     \item Evaluate the different techniques over a common \textit{dataset}.
     % \item Evaluate the different techniques over a common \textit{dataset} related to \citetexto{denis2018} work.
 \end{itemize}
@@ -55,7 +55,7 @@ With the possibility of access to pre-trained word embeddings including in the P
 
 This thesis is structured as follows. The \autoref{chap:background} presents the general concepts and techniques used in this work. In \autoref{chap:relatedwork} are described and analyzed the works related to the research area of this work. The \autoref{chap:methodsandmaterials} presents the proposed model, as well as the form of the experiment and the necessary tools. 
 The \autoref{chap:results} presents the preliminary results obtained in the case study experiment. 
-Finally, \autoref{chap:conclusions} summarizes the thesis findings, contributions, and discusses.
+Finally, \autoref{chap:conclusions} summarizes the thesis findings, contributions, and discussions.
 
 
 % NAO TEM According to \citetexto[p.~749]{jurafsky2014speech}, "In information retrieval or question answering we might want to retrieve documents whose words have similar meanings to the query words." which is exactly the subject of this work.

@@ -18,14 +18,14 @@
 
 \section{Methods and materials}\label{chap:methodsandmaterials}
 
-This chapter will present a description of what and how this work was done, as well as the tools and methods used. First ~\autoref{chap:methodsandmaterials:architecture} presents an overview of the architecture and how the proposed experiment was realized. Then, the ~\autoref{chap:methodsandmaterials:dataset} presents the dataset used in the evaluation process. After that we start with a detailed explanation of the Corpus generation in ~\autoref{chap:methodsandmaterials:corpus}, of the syntactic parsing in ~\autoref{chap:methodsandmaterials:palavras}. Then we explain how we generate the most common word embedding models in ~\autoref{chap:methodsandmaterials:wegeneration} and at last we explain how we reproduced the work of \citetexto{Levy2014} for Portuguese in ~\autoref{chap:methodsandmaterials:depsgeneration}.
+This section presents a description of what and how this work was done, as well as the tools and methods used. First ~\autoref{chap:methodsandmaterials:architecture} presents an overview of the methodology and how the proposed experiment was realized. Then, the ~\autoref{chap:methodsandmaterials:dataset} presents the dataset used in the evaluation process. After that we start with a detailed explanation of the Corpus generation in ~\autoref{chap:methodsandmaterials:corpus}, of the syntactic parsing in ~\autoref{chap:methodsandmaterials:palavras}. Then we explain how we generate the most common word embedding models in ~\autoref{chap:methodsandmaterials:wegeneration} and at last we explain how we reproduced the work of \citetexto{Levy2014} for Portuguese in ~\autoref{chap:methodsandmaterials:depsgeneration}.
 
-\subsection{Architecture overview}\label{chap:methodsandmaterials:architecture}
+\subsection{Methodology overview}\label{chap:methodsandmaterials:architecture}
 
-The proposed work consists of comparing different word similarity techniques. Therefore, ~\autoref{fig:arq} defines an overview of the architecture with the intention of comparing several techniques using different algorithms and testing them with a common dataset.
+This work consists of a methodology to compare different word similarity techniques. Therefore, ~\autoref{fig:arq} defines an overview of the methodology with the intention of comparing several techniques using different algorithms and testing them with a common dataset.
 
 \begin{figure}[h]
-    \caption{Proposed architecture}
+    \caption{Proposed methodology}
     \label{fig:arq}
     \centering%
     \begin{minipage}{.8\textwidth}
@@ -35,7 +35,7 @@ The proposed work consists of comparing different word similarity techniques. Th
 \end{figure}
 
 
-In this work, we compared techniques based on the two main approaches to word similarity, the knowledge-based and the distributional-based. 
+In our methodology, we compared techniques based on the two main approaches to word similarity, the knowledge-based and the distributional-based. 
 
 Regarding the knowledge-based approach we utilized a lexical base, in this case, \textbf{Open Multilingual Wordnet} (OMW) wore used with \textbf{Path Distance} and \textbf{Wu-Palmer} similarity techniques. It was decided to use OMW due to its ease of use through the \textbf{Natural Language Toolkit} (NLTK) library available for the \textbf{Python version 3.6} programming language as well as the availability of the Portuguese language for querying the synsets. \cite{Bond2013LinkingAE}.
 
@@ -45,7 +45,7 @@ We also generated one more model in order to take into account the syntactic tre
 
 In the end, we do a quantitative evaluation of all models and techniques using the \textbf{PT65} dataset, which consists of a pair of words and a similarity value given by persons. \cite{GranadaSV14}.
 
-All the experiments were done using the \textit{Semantics} computer (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM) granted by the \textit{UNISINOS Programa de Pós-graduação em Computação Aplicada} (PPGCA) by running \textbf{Docker} containers.
+All the experiments were done using the \textit{Semantics} server (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM) granted by the \textit{UNISINOS Programa de Pós-graduação em Computação Aplicada} (PPGCA) by running \textbf{Docker} containers.
 
 
 \subsection{PT65 Dataset}\label{chap:methodsandmaterials:dataset}
