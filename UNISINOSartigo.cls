@@ -416,17 +416,22 @@
 \def\@coadvisorinfo{#1}
 }
 
+\newcommand{\othertitle}[1]{%
+\def\@othertitle{#1}
+}
+
 % Comandos para Formatação ---------------------------------------------
 \newcommand{\@formattitle}[1]{%
-	\clearpage\thispagestyle{empty}%
+	% \clearpage
+	\thispagestyle{empty}%
 	{\noindent\centering\textbf{\MakeUppercase{#1}}\par}%
 	\vspace{3ex}%
 }
 
 % Comandos para Processamento ------------------------------------------
-\newcommand{\othertitle}[1]{%
-	\@formattitle{#1}
-}
+% \newcommand{\othertitle}[1]{%
+% 	\@formattitle{#1}
+% }
 
 % Redefinições ---------------------------------------------------------
 \renewcommand{\maketitle}{%
@@ -459,7 +464,9 @@
 	{\noindent\centering\@date\par}%
 	\cleardoublepage%
 	\pagestyle{UNISINOSartigo}\pagenumbering{arabic}\setcounter{page}{1}%
+	\clearpage%
 	\@formattitle{\@title}%
+	\@formattitle{\@othertitle}%
 	\renewcommand{\thefootnote}{\fnsymbol{footnote}}%
 	{\raggedleft\@author\footnote[1]\@authorinfo\par}%
 	{\raggedleft\@advisor\footnote[7]\@advisorinfo\par}%
