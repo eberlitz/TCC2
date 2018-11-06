@@ -1,14 +1,13 @@
 - Resumo max 250 words
-- natureza e abordagem metodologica essas coisas no resumo e methods and materials
+- natureza e tipo de pesquisa ? no resumo e methods and materials
 - validar referencia ao texto do denis
 - Topico discussoes em trabalhos relacionados
+- Imagem feature vector vs one-hot vectors
 
 
 Referencias:
-    - distributional-based one. They have proven to be more competitive than the previous approach, and have been successfully being used to cover out-of-vocabulary items in WordNet / Uma ou mais referencias alem de Agirre 2009
-    - o que é NLP quais areas o que é question answering alen de jurafsky 2009
+    - distributional-based have proven to be more competitive than the previous approach, and have been successfully being used to cover out-of-vocabulary items in WordNet / Uma ou mais referencias alem de Agirre 2009
     - o q é word embeddings e importancia
-- Imagem feature vector vs one-hot vectors
 
 
 //-----------------------------------------------------------------
