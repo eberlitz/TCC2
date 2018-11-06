@@ -1,10 +1,8 @@
 \section{Background}\label{chap:background}
 
-% In this section, will be presented the general concepts and techniques used in this work. The section is structured in a topic for Natural Language Processing, another for linguistic elements, one third for Wordnet and finally a topic for wordembedings.
+In this section, will be presented the general concepts and techniques used in this work. The section is structured in a \autoref{chap:background:nlp} for Natural Language Processing, \autoref{chap:background:linguistic} for linguistic elements, \autoref{chap:background:we} for Wordnet and finally \autoref{chap:background:we} for word embedding.
 
-In this section, will be presented the general concepts and techniques used in this work. In order to guide the reader in a way that he clearly understands what will be addressed in the following chapters.
-
-\subsection{Natural Language Processing}
+\subsection{Natural Language Processing}\label{chap:background:nlp}
 
 Natural Language Processing (NLP) is a field whose purpose is to make computers perform tasks using human languages, such as allowing human-machine communication or performing useful processing over text or speech. Within this area, we have an example, \textbf{dialogue systems} or \textbf{conversational agents} used by chatbots these days. They try to imitate a natural conversation with humans. In these systems, a series of components must be studied as \textbf{speech recognition}, \textbf{natural language understanding}, and \textbf{speech synthesis}. \cite{Jurafsky:2009:SLP:1214993}.
 
@@ -12,31 +10,19 @@ Another important task in NLP is \textbf{question answering} that tries to give 
 
 According to \citetexto[p.~29]{Jurafsky:2009:SLP:1214993}, "What distinguishes language processing applications from other data processing systems is their use of \textit{\textbf{knowledge of language}}.". That is, for several NLP activities you need knowledge about phonetics, phonology, morphology, lexical semantics, compositional semantics.
 
+\subsection{Linguistic elements}\label{chap:background:linguistic}
 
-\subsection{Synonym}
+Here, we describe the most relevant linguistic elements used in this work.
+
+\subsubsection{Synonym}
 
 According to \citetexto[p.~89]{zgusta1971manual}, "[...]synonyms: they are words which have different forms but identical meaning.". So we can say that synonyms can be defined as expressions with the same meaning. The definition we find in dictionaries like synonyms usually refers generally to any of the different types of synonyms, being near-synonyms and absolute-synonyms. \textbf{Near-synonyms} can be defined as expressions that are more or less similar, but not identical in meaning. Common examples in English are ’mist’ and ’fog’ or ’buy’ and ’purchase’. \textbf{Absolute synonyms} are one or more words whose meaning is identical and can be used with the same connotation in all different contexts and are equivalently semantic.  Therefore, they are extremely rare. \cite{lyons1995linguistic}.
 
-\subsection{Hyponyms and hypernyms}
+\subsubsection{Hyponyms and hypernyms}
 
 Hyponym can be defined by the lexical relation corresponding to the insertion of one class into another. That is, it shows the relation between a generic term and a specific instance of it, where the most specific term is the Hyponym and the generic class is Hypernym. So if we say that purple is a kind of color, then purple is a hyponym of color and color is the hypernym of purple. Because of this Hypernym is normally referred to as the \textit{is-a} and \textit{is-a-kind-of} relation. \cite[p.~88]{cruse1986lexical}.
 
-\subsection{Lexical knowledge base - WordNet}
-
-WordNet is one of the lexical resources most used over the last few years when it comes to word senses. \cite{fellbaum1998}. It is a large lexical database of English which consists of four sub-nets, one each for nouns, verbs, adjectives, and adverbs. Each of this has a set of lemmas annotated with a set of synonyms. WordNet can either be downloaded for free or accessed via the web. \cite{wordnetOnline2010}.
-
-When searching for a word in this database, we will get a list of senses, where for each one we have a set of synonyms (also called \textbf{synsets}) and a brief description (gloss) and also sometimes a simple example of use. One of the most important relations of WordNet is the set of near-synonyms for a sense called synset. For example, when searching for 'car' we get the words auto, automobile, machine and motorcar for one specific sense. Also, all these senses are linked with others forming a network. One of the most common links between synsets is the hypernym, hyponymy. With this, each synset is linked with more generic synsets through its hypernym relation and also to more specific synsets through its hyponymy relation. There's also a way to distinguish words between nouns and instances like specific persons, countries and geographic entities.
-
-There are some algorithms that can be used to find similar synsets in WordNet.
-
-\begin{itemize}
-    \item \textbf{Path Distance Similarity}: It is a scaled metric for measuring the similarity between a pair of senses based on the shortest path that connects the senses in the hypernym/hyponym taxonomy. \cite{meng2014measuring}.
-    \item \textbf{Wu-Palmer Similarity}: Based on the depth of the senses in the taxonomy and of their Least Common Subsumer (most specific ancestor node). \cite{meng2014measuring}.
-\end{itemize}
-
-\input{2_background_word_embedding}
-
-\subsection{Word similarity}
+\subsubsection{Word similarity}
 
 We can think of synonyms as a way to determine if two words are similar or not. In other words, they are similar if they have the same meaning, or are near-synonyms. According to \citetexto[p.~749]{Jurafsky:2009:SLP:1214993},
 
@@ -53,4 +39,17 @@ The ability to identify the semantic similarity between words has been a subject
 
 In short, the techniques for identifying similarity can be classified into two main approaches, knowledge-based and distributional-based. \textbf{Knowledge-based} similarity models are those that rely on pre-existing knowledge resources, such as thesauri, semantic networks, taxonomies, or encyclopedias. \cite{Agirre2009}. Moreover, almost all techniques concerning the \textbf{distributional-based} approach come from the basis of statistical semantics in which we have the Distribution Hypothesis which is defined by the fact that words occurring in the same contexts tend to have similar meanings. \cite{Harris1954}. Here the techniques are formed mainly by inducing distributional properties of words from corpora. \cite{Agirre2009}.
 
+\subsection{Lexical knowledge base - WordNet}\label{chap:background:wordnet}
 
+WordNet is one of the lexical resources most used over the last few years when it comes to word senses. \cite{fellbaum1998}. It is a large lexical database of English which consists of four sub-nets, one each for nouns, verbs, adjectives, and adverbs. Each of this has a set of lemmas annotated with a set of synonyms. WordNet can either be downloaded for free or accessed via the web. \cite{wordnetOnline2010}.
+
+When searching for a word in this database, we will get a list of senses, where for each one we have a set of synonyms (also called \textbf{synsets}) and a brief description (gloss) and also sometimes a simple example of use. One of the most important relations of WordNet is the set of near-synonyms for a sense called synset. For example, when searching for 'car' we get the words auto, automobile, machine and motorcar for one specific sense. Also, all these senses are linked with others forming a network. One of the most common links between synsets is the hypernym, hyponymy. With this, each synset is linked with more generic synsets through its hypernym relation and also to more specific synsets through its hyponymy relation. There's also a way to distinguish words between nouns and instances like specific persons, countries and geographic entities.
+
+There are some algorithms that can be used to find similar synsets in WordNet.
+
+\begin{itemize}
+    \item \textbf{Path Distance Similarity}: It is a scaled metric for measuring the similarity between a pair of senses based on the shortest path that connects the senses in the hypernym/hyponym taxonomy. \cite{meng2014measuring}.
+    \item \textbf{Wu-Palmer Similarity}: Based on the depth of the senses in the taxonomy and of their Least Common Subsumer (most specific ancestor node). \cite{meng2014measuring}.
+\end{itemize}
+
+\input{2_background_word_embedding}

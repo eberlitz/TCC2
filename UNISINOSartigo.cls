@@ -68,14 +68,14 @@
 %=======================================================================
 \renewenvironment{abstract}{%
 	\singlespacing%
-	\noindent\abstractname:
+	\noindent\textbf{\abstractname}:
 }{%
 	\onehalfspacing%
 }
 \DeclareRobustCommand{\palavraschave}[1]{%
 	\par
 	\vspace{2ex}
-	\noindent\palavraschavename: #1\par
+	\noindent\textbf{\palavraschavename}: #1\par
 }
 
 %=======================================================================

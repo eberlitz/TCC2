@@ -1,3 +1,48 @@
+- Resumo max 250 words
+- natureza e abordagem metodologica essas coisas no resumo e methods and materials
+- validar referencia ao texto do denis
+- Topico discussoes em trabalhos relacionados
+
+
+Referencias:
+    - distributional-based one. They have proven to be more competitive than the previous approach, and have been successfully being used to cover out-of-vocabulary items in WordNet / Uma ou mais referencias alem de Agirre 2009
+    - o que é NLP quais areas o que é question answering alen de jurafsky 2009
+    - o q é word embeddings e importancia
+- Imagem feature vector vs one-hot vectors
+
+
+//-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+Title
+    - Portuguese Word Embeddings: Evaluating on word similarity
+Background
+    + Word Embeddings: GloVe,FastText,word2vec,wang2vec
+    + WordNet Path Distance and Wu-Palmer similarity measures
+    - Pearson’s Correlation ($\rho$)
+Related work
+    + DEPS
+    + Artigo do Dataset PT65 - Granada
+    + para portugues https://arxiv.org/pdf/1708.06025.pdf - Portuguese Word Embeddings: Evaluating on Word Analogies and
+    Natural Language Tasks - NILC
+    + BERT and ELMo
+    - Verificar se "A study on similarity and relatedness using distributional and WordNet-based approaches" tem alguma relação com meu trabalho.
+    - Pesquisar coisas novas
+        - https://code.fb.com/ai-research/dynamic-meta-embeddings/
+        - MultiLanguage
+Methods and materials
+    - natureza e abordagem metodologica essas coisas 
+Evaluation
+    + count the number of uniq words in the models to see if it is related to us having better results
+    + [IMPORTANT]Posso ter errado o tipo de avaliacao We use Pearson (r) and Spearman (ρ) correlation
+
+//---------
 + Procurar artigo que descrevia como avialiar qualitativamente
     - Dependency-Based Word Embeddings
 + [CONCLUÍDO]Realizar experiementos
@@ -31,27 +76,4 @@
     + [Futuro] Vinculo experiemento do Denis
 
 
-
-Title
-    - Portuguese Word Embeddings: Evaluating on word similarity
-    - USING WORD EMBEDDINGS FOR WORD SIMILARITY IN BRAZILIAN PORTUGUESE
-Background
-    + Word Embeddings: GloVe,FastText,word2vec,wang2vec
-    + WordNet Path Distance and Wu-Palmer similarity measures
-    - Pearson’s Correlation ($\rho$)
-Related work
-    + DEPS
-    + Artigo do Dataset PT65 - Granada
-    + para portugues https://arxiv.org/pdf/1708.06025.pdf - Portuguese Word Embeddings: Evaluating on Word Analogies and
-    Natural Language Tasks - NILC
-    - BERT and ELMo
-    - Verificar se "A study on similarity and relatedness using distributional and WordNet-based approaches" tem alguma relação com meu trabalho.
-    - Pesquisar coisas novas
-        - https://code.fb.com/ai-research/dynamic-meta-embeddings/
-        - MultiLanguage
-Methods and materials
-    - natureza e abordagem metodologica essas coisas 
-Evaluation
-    - count the number of uniq words in the models to see if it is related to us having better results
-    - [IMPORTANT]Posso ter errado o tipo de avaliacao We use Pearson (r) and Spearman (ρ) correlation
 
