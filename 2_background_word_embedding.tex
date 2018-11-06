@@ -1,6 +1,8 @@
 \subsection{Word embedding}
 
-Word embeddings or vector space models of word semantics can be seen as a way of representing words, allowing the creation of NLP applications capable of understanding textual analogies even with few data for training. The use of word embeddings has been exceptionally successful in many NLP tasks over the past few years. In many cases it has completely replaced the traditional models in the distributional field like Brown clusters and LSA.
+Word embeddings or vector space models of word semantics can be seen as a way of representing words, allowing the creation of NLP applications capable of understanding textual analogies even with few data for training. They are widely used for NLP in the last years.
+
+% https://arxiv.org/abs/1708.02709
 
 In many traditional NLP applications, \textbf{one-hot vectors} were used to represent words of a vocabulary. In this case, we have a vector for each word of the vocabulary with the same size, filled with zeros beside the position of the word where we have the value one. 
 One problem of using the one-hot representation is that you can't generalize crosswords because of the inner product of any 1-hot vector is always zero. And for this reason, we cannot apply any distance-like metrics to evaluate the similarity. For this reason, a \textbf{feature vector} is preferable to word representation. In this case, we have for each word an vector of size $d$ filled with real values between 0 and 1 that represents multiple features. There are several ways to learn these high dimensional feature vectors values. 
