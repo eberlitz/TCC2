@@ -1,13 +1,14 @@
-+ Resumo max 250 words
 - Resumo nao tem todos os resultados
 -? natureza e tipo de pesquisa ? no resumo e methods and materials
 -? validar referencia ao texto do denis
+
+
++ Resumo max 250 words
+- Adicionar uma ou mais referências alem de Agirre2009 sobre o uso de abordagens distribucionais para cobrir out-of-vocabulary terms in WordNet (Não achei até agora)
 - Imagem demonstrando one-hot and feature vectors
 - Subsection 3.5 discussions com as conclusões de cada trabalho relacionado
 
 
-Referencias:
-    - distributional-based have proven to be more competitive than the previous approach, and have been successfully being used to cover out-of-vocabulary items in WordNet / Uma ou mais referencias alem de Agirre 2009
 
 
 //-----------------------------------------------------------------
