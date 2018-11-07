@@ -1,13 +1,13 @@
-- Resumo max 250 words
-- natureza e tipo de pesquisa ? no resumo e methods and materials
-- validar referencia ao texto do denis
-- Topico discussoes em trabalhos relacionados
-- Imagem feature vector vs one-hot vectors
++ Resumo max 250 words
+- Resumo nao tem todos os resultados
+-? natureza e tipo de pesquisa ? no resumo e methods and materials
+-? validar referencia ao texto do denis
+- Imagem demonstrando one-hot and feature vectors
+- Subsection 3.5 discussions com as conclusões de cada trabalho relacionado
 
 
 Referencias:
     - distributional-based have proven to be more competitive than the previous approach, and have been successfully being used to cover out-of-vocabulary items in WordNet / Uma ou mais referencias alem de Agirre 2009
-    - o q é word embeddings e importancia
 
 
 //-----------------------------------------------------------------
