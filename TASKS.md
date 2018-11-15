@@ -9,7 +9,7 @@ Todo
 
 aims to improve the accuracy and recall of these terms ex-pansion through the use of word embeddings
 
-- 2 No abstract e resumo, reforçar a contribuição do teu sistema.- Checar resumo para deixar mais claro as contribuições do trabalho e resultados obtidos
+- 2 No abstract e resumo, reforçar a contribuição do teu sistema.
 - 10 Reforçe as contribuições na conclusão.
 
 Questions
