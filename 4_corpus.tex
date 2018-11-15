@@ -56,7 +56,7 @@ With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.8
 
 To annotate all sentences of the corpus with syntactic tags, we used the software PALAVRAS developed by \citetexto{bick2000palavras}, which is an automatic parser for Portuguese.
 
-First, we tried to use the parser with multiple sentence files of 1MB. However, the parser was taking too much time to execute and sometimes errors occurred. So we wrote a Python script that sends sentences in batches to the PALAVRAS parser and saves the results. Also, we have used parallel computing doing this process times the number of cores on the machine. Although, we first run this on a i5 2.4GHz computer with 4 cores, achieving an average speed of 16 sentences per second, which means that for all 9896520 sentences it would take 7 days to complete. We have tried other techniques attempting to increase the speed, but the bottleneck was indeed in the parser tool. 
+First, we tried to use the parser with multiple sentence files of 1MB. However, the parser was taking too much time to execute and sometimes errors occurred. So we wrote a Python script that sends sentences in batches to the PALAVRAS parser and saves the results. Also, we have used parallel computing doing this process times the number of cores on the machine. Although, we first run this on a i5 2.4GHz computer with 4 cores, achieving an average speed of 16 sentences per second, which means that for all 9.896.520 sentences it would take 7 days to complete. We have tried other techniques attempting to increase the speed, but the bottleneck was indeed in the parser tool. 
 
 With this problem at hand, \textit{UNISINOS Programa de Pós-graduação em Computação Aplicada} (PPGCA) granted us access to the \textit{Semantics} server (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM). With 32 cores the parsing step should be concluded in 24 hours.
 
@@ -93,5 +93,4 @@ In order to generate this file from our corpus we got the annotated output from 
 \end{figure}
 
 The generation of this three files was not trivial and the implemented code to do so had to use a map-reduce approach in order to use all computation resources available. It took 14 hours to process all 9.896.000 parsed sentences with an average speed of 196,2 sentences per second.
-
 After we had the input files, we just run the \textit{word2vecf} tool which took some hours to complete. We generated models with different dimensions values as 50, 100, 300, 600 and 1000.

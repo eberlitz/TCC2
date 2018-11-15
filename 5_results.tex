@@ -17,7 +17,8 @@ In order to do a quantitative evaluation of the knowledge-based approach for wor
 
 
 \begin{table}[h]
-    \caption{OMW evaluation on PT65. \textbf{$r$} is the Pearson’s Correlation considering only the words in vocabulary; \textbf{$\rho$} is the Pearson’s Correlation considering all the words, given a similarity value of zero for words out of vocabulary. }
+    \caption{OMW evaluation on PT65. \textbf{$r$} is the Pearson’s Correlation considering only the words in vocabulary; \textbf{$\rho$} is the Pearson’s Correlation considering all the words, given a similarity value of zero for words out of vocabulary. The higher value is in bold for better readability.
+    }
     \label{tab:worneteval}
     \centering%
     \begin{minipage}{.6\textwidth}
@@ -32,18 +33,6 @@ In order to do a quantitative evaluation of the knowledge-based approach for wor
     \end{minipage}
 \end{table}
 
-
-
-
-
-% OWM, path, 0.7629920696961829, 1.2781571648596962e-11, 0.638215045981246, 1.5911706121638655e-07, 15.384615384615385
-% OWM, wup, 0.6224196059044503, 3.9086124786740125e-07, 0.5993354805660435, 1.3336702025718145e-06, 15.384615384615385
-% OWM, path, 0.6755297783884997, 6.699886211511832e-10, 0.537623366025965, 3.8731549459381025e-06, 13.333333333333334
-% OWM, wup, 0.5130904887818083, 1.2406652833034867e-05, 0.5101121482658979, 1.4203800232966779e-05, 13.333333333333334
-
-
-
-
 \subsection{Word embeddings Evaluation}\label{chap:results:we}
 
 To do a quantitative evaluation of the distributional approach for word similarity we did the same experiment as the WordNet evaluation but with our word embeddings models.
@@ -51,13 +40,9 @@ We loaded the PT65 dataset, and for each word pair, we compared the expected res
 
 \autoref{tab:evaluation:we} shows the results for all the 40 generated models. There was no out of vocabulary words in this approach which in comparison with the WordNet approach is better. Just like mentioned by \citetexto{Agirre2009} we can use word embeddings to cover out-of-vocabulary words. In comparison with the WordNet, we can also see, that it has slightly better results, which is a good thing considering that it has no manual construction as WordNet.
 
-Also, we can see that the better word embedding model for this task is the FastText Skip-Gram. In all of them, Skip-gram was slightly better than the others. Moreover, in overall the models with 300-600 dimensions got higher values. We can also note that the DEPS model has an inferior performance in this particular task, maybe because the dataset does not differentiate between relatedness and similarity.
-
-We also repeated the same experiment with the pre-trained models by \citetexto{Hartmann2017} from Núcleo Interinstitucional de Linguística Computacional (NILC).
-
 
 \begin{table}[]
-\caption{Word embeddings evaluation on PT65. \textbf{$\rho(ours)$} is the Pearson’s Correlation value from our trained models. \textbf{$\rho(nilc)$} is the Pearson’s Correlation values from the NILC pre-trained models.}
+\caption{Word embeddings evaluation on PT65. \textbf{$\rho(ours)$} is the Pearson’s Correlation value from our trained models. \textbf{$\rho(nilc)$} is the Pearson’s Correlation values from the NILC pre-trained models. All values equals or greater than 0.75 are in bold for better readability.}
 \label{tab:evaluation:we}
 \centering%
 \begin{minipage}{.65\textwidth}
@@ -109,23 +94,13 @@ DEPS                &               & 50   & 0.47             \\
 \end{minipage}
 \end{table}
 
+Also, we can see that the better word embedding model for this task is the FastText Skip-Gram. In all of them, Skip-gram was slightly better than the others. Moreover, in overall the models with 300-600 dimensions got higher values. We can also note that the DEPS model has an inferior performance in this particular task, maybe because the dataset does not differentiate between relatedness and similarity.
+We also repeated the same experiment with the pre-trained models by \citetexto{Hartmann2017} from Núcleo Interinstitucional de Linguística Computacional (NILC).
+
 
 \subsection{Qualitative Evaluation of DEPS model}\label{chap:results:qualitative}
 
 For evaluating our DEPS model we did a qualitative evaluation were we manually inspect the five most similar words (by cosine similarity) to a given set of target words (\autoref{tab:qualitative}), and we compared it with other models, just like \citetexto{Levy2014} did in their experiment.
-
-The first target word, \textit{longe} (Far), we can see similar results provided by all the different models. The word \textit{inglês} (English) have the same behavior. However, for some specific words, like \textit{faculdade} (College) we can see that the DEPS model returned other types of languages or colleges while the other models could just bring words related to the same domain. This is similar to the target word \textit{Hogwarts} from the \citetexto{Levy2014} work.
-
-The other two words, \textit{guarda-chuva} (Umbrella) and \textit{correr} (Run), demonstrates that the DEPS model find other words with the same syntactic function (verb and noun) like a classifier, which in terms of semantic similarity or relatedness is not so good, just as we saw in the qualitative experiment (\autoref{tab:evaluation:we}) where the DEPS model had the worst results in that particular task for Portuguese.
-
-% longe/batman, 
-% guarda-chuva/substantivo, 
-% inglês**, 
-% faculdade** 
-% correr
-
-
-
 
 
 % \begin{landscape}
@@ -152,86 +127,6 @@ faculdade & \begin{tabular}[c]{@{}l@{}}universidade\\ escola\\ liceu\\ conservat
 \end{board}
 % \end{landscape}
 
+The first target word, \textit{longe} (Far), we can see similar results provided by all the different models. The word \textit{inglês} (English) have the same behavior. However, for some specific words, like \textit{faculdade} (College) we can see that the DEPS model returned other types of languages or colleges while the other models could just bring words related to the same domain. This is similar to the target word \textit{Hogwarts} from the \citetexto{Levy2014} work.
 
-% wang2vec, s50-m2-sg0, 0.5675826685662275, 8.205893134030749e-07, 0.5635628524347914, 1.0195643908100097e-06, 0.0
-% wang2vec, s100-m2-sg0, 0.6131396734513458, 5.651106360321298e-08, 0.5921967327702674, 2.0349725697447497e-07, 0.0
-% wang2vec, s300-m2-sg0, 0.6888797495139529, 2.2484749974574857e-10, 0.6432787009717997, 7.523225919215496e-09, 0.0
-% wang2vec, s600-m2-sg0, 0.6853053668701915, 3.029007857846718e-10, 0.6696174992956536, 1.0673762628380258e-09, 0.0
-% wang2vec, s1000-m2-sg0, 0.6766001068757364, 6.151160064691805e-10, 0.6735519256012915, 7.838630653736625e-10, 0.0
-% wang2vec, s50-m2-sg1, 0.645149430139591, 6.589637891664643e-09, 0.6351256953495611, 1.3263902162497147e-08, 0.0
-% wang2vec, s100-m2-sg1, 0.7413591760234222, 1.6335829856029777e-12, 0.6885607956010713, 2.3094619628306546e-10, 0.0
-% wang2vec, s300-m2-sg1, 0.745012387876388, 1.1096392933572878e-12, 0.6870164067361413, 2.62772837988064e-10, 0.0
-% wang2vec, s600-m2-sg1, 0.7210383344592625, 1.2550799293267612e-11, 0.7171069323242951, 1.824221491301501e-11, 0.0
-% wang2vec, s1000-m2-sg1, 0.6930506286220262, 1.5795313521680925e-10, 0.7388634022748809, 2.119741903465055e-12, 0.0
-% word2vec, s50-w5-m2-sg0.bin, 0.581229529126566, 3.84174388531859e-07, 0.5851520874559164, 3.0689482111089004e-07, 0.0
-% word2vec, s100-w5-m2-sg0.bin, 0.6298983570863325, 1.8914944333339274e-08, 0.6253483703303488, 2.5624014854855167e-08, 0.0
-% word2vec, s300-w5-m2-sg0.bin, 0.6822389764635896, 3.8982651681588046e-10, 0.6601093023903619, 2.2087825850474964e-09, 0.0
-% word2vec, s600-w5-m2-sg0.bin, 0.6855398167573925, 2.9707638417289337e-10, 0.6631912696631116, 1.7499347892691779e-09, 0.0
-% word2vec, s1000-w5-m2-sg0.bin, 0.6847454215614132, 3.1725458043279284e-10, 0.6623971465522971, 1.8586283009033272e-09, 0.0
-% word2vec, s50-w5-m2-sg1.bin, 0.6506441236317141, 4.441702023816473e-09, 0.6316284275223274, 1.6831037829706216e-08, 0.0
-% word2vec, s100-w5-m2-sg1.bin, 0.7469612603916977, 9.003604443872392e-13, 0.7080359930133167, 4.222830325088272e-11, 0.0
-% word2vec, s300-w5-m2-sg1.bin, 0.7609954038361787, 1.8863142825679156e-13, 0.702637144796903, 6.85621738847557e-11, 0.0
-% word2vec, s600-w5-m2-sg1.bin, 0.7386199892517825, 2.173948064170437e-12, 0.7357515377032462, 2.9212784100274446e-12, 0.0
-% word2vec, s1000-w5-m2-sg1.bin, 0.6929945042335994, 1.5871171197284068e-10, 0.6918394483640755, 1.7511639382309394e-10, 0.0
-% fastText, s50-m2-sg0.vec, 0.6654838350095832, 1.4690168762210383e-09, 0.6658360784574572, 1.4298543411901056e-09, 0.0
-% fastText, s100-m2-sg0.vec, 0.7173075319568939, 1.7900157895594544e-11, 0.6960874451630287, 1.2168519646113534e-10, 0.0
-% fastText, s300-m2-sg0.vec, 0.7475432934016183, 8.455700537736788e-13, 0.719562855453335, 1.4452565532162868e-11, 0.0
-% fastText, s600-m2-sg0.vec, 0.7298204921535301, 5.3177888108039625e-12, 0.7179890849310797, 1.678315747953346e-11, 0.0
-% fastText, s1000-m2-sg0.vec, 0.7108943560290044, 3.252646104105637e-11, 0.7115628552985378, 3.0586270484872453e-11, 0.0
-% fastText, s50-m2-sg1.vec, 0.7416054449362045, 1.5918680250004441e-12, 0.7120437296247825, 2.9259465642871006e-11, 0.0
-% fastText, s100-m2-sg1.vec, 0.7679139432721014, 8.388218575396365e-14, 0.7157954712190935, 2.063712394991865e-11, 0.0
-% fastText, s300-m2-sg1.vec, 0.7916024795244279, 4.172248335671122e-15, 0.7834012911922416, 1.2301453367822823e-14, 0.0
-% fastText, s600-m2-sg1.vec, 0.7658587738270587, 1.0702167361155195e-13, 0.8137397580925745, 1.7402483297508791e-16, 0.0
-% fastText, s1000-m2-sg1.vec, 0.7197230224601823, 1.423352120292654e-11, 0.8060021375718844, 5.532294075730079e-16, 0.0
-% word2vecf, n15-s50, 0.47043675193651774, 7.673603880188538e-05, 0.42880406603078586, 0.00036542081239773175, 0.0
-% word2vecf, n15-s100, 0.4420071264561769, 0.00022760919709419663, 0.40069946130530176, 0.0009408999372156398, 0.0
-% word2vecf, n15-s300, 0.4339133409759349, 0.00030494411522489926, 0.39361749395515355, 0.0011790717533701595, 0.0
-% word2vecf, n15-s600, 0.4458088040797816, 0.00019788851587704653, 0.3783565288506934, 0.0018859593744119357, 0.0
-% word2vecf, n15-s1000, 0.44290775661265125, 0.00022022046602220827, 0.37925683793957515, 0.0018355446216130676, 0.0
-% GloVe, 50.txt, 0.6329096982357285, 1.5429960795806175e-08, 0.6426377992339247, 7.870960989317901e-09, 0.0
-% GloVe, 100.txt, 0.6939245763779542, 1.4657747313783288e-10, 0.6977486473809646, 1.053594741063381e-10, 0.0
-% GloVe, 300.txt, 0.6920006623855645, 1.7273345787536298e-10, 0.7133552050599951, 2.5914321071641535e-11, 0.0
-% GloVe, 600.txt, 0.6677168932041986, 1.236988802854876e-09, 0.7051147677420757, 5.496365284083455e-11, 0.0
-% GloVe, 1000.txt, 0.6548580080251044, 3.2643527148291645e-09, 0.7108119190193269, 3.277369731826533e-11, 0.0
-
-
-
-
-
-% NILC
-
-
-% fasttext cbow_s50  & 0.63 0.6338761672226488, 1.4447009094932253e-08, 0.6587906285129924, 2.4381863256307673e-09
-% fasttext cbow_s100  & 0.67 0.6754933593788378, 6.719352719821255e-10, 0.6881454995844241, 2.3912345552169664e-10
-% fasttext cbow_s300  & 0.73 0.7300855475033413, 5.179055598431222e-12, 0.7082185929387456, 4.15338223243581e-11
-% fasttext cbow_s600  & 0.74 0.7397309269890123, 1.93687150946956e-12, 0.7267024560773543, 7.240733424238181e-12
-% fasttext cbow_s1000  & 0.74 0.7438158749107852, 1.2603857138794636e-12, 0.7418360799280296, 1.553726657864514e-12
-% fasttext skip_s50  & 0.64 0.6487813553667635, 5.081762925159795e-09, 0.6361242090780895, 1.2385082155239607e-08
-% fasttext skip_s100  & 0.73 0.7324984748175022, 4.065513959517724e-12, 0.714680729279672, 2.2906069726112865e-11
-% fasttext skip_s300  & 0.78 0.7796458092835843, 1.9873132291448965e-14, 0.7801748784840791, 1.8585171609698677e-14
-% fasttext skip_s600  & 0.76 0.7605087812755228, 1.9949050610824965e-13, 0.769267774447894, 7.134765733781644e-14
-% fasttext skip_s1000  & 0.74 0.7367259204837948, 2.643436121127919e-12, 0.7670080273772202, 9.342006420547932e-14
-% wang2vec cbow_s50  & 0.59 0.5894721463959935, 2.388202061648693e-07, 0.5677970854970804, 8.110757619545197e-07
-% wang2vec cbow_s100  & 0.69 0.6933731491226184, 1.5366047864128663e-10, 0.654725099086867, 3.296459461630978e-09
-% wang2vec cbow_s300  & 0.74 0.7449075984678443, 1.122119358314948e-12, 0.726287160060707, 7.542215808305927e-12
-% wang2vec cbow_s600  & 0.66 0.6640590372923889, 1.6380767605990016e-09, 0.6402553115594749, 9.302014050390408e-09
-
-% wang2vec skip_s50  & 0.60 0.5995317846192033, 1.3127989479350132e-07, 0.5981574100825, 1.4263582012097752e-07
-% wang2vec skip_s100  & 0.70 0.7053678530943365, 5.3729519180846535e-11, 0.6889836198889602, 2.2289473626926627e-10
-% wang2vec skip_s300  & 0.77 0.7664794654147072, 9.945613535590525e-14, 0.744153019863572, 1.2160353560060093e-12
-% wang2vec skip_s600  & 0.76 0.7582438112742316, 2.5841193929960106e-13, 0.7644506782220769, 1.2628246595652982e-13
-
-% word2vec cbow_s50  & 0.34 0.3412499140241518, 0.005404207648538719, 0.32535519755233566, 0.008179374816760999
-% word2vec cbow_s100  & 0.43 0.43271925006309137, 0.0003181958630936426, 0.3803715920595059, 0.001774797692132821
-% word2vec cbow_s300  & 0.58 0.5831426423590182, 3.444423852844756e-07, 0.5354258538836848, 4.314988182876463e-06
-% word2vec cbow_s600  & 0.62 0.6221965235212725, 3.153104602947503e-08, 0.6019825049726717, 1.1311740779773308e-07
-% word2vec cbow_s1000  & 0.61 0.6149899680407978, 5.023602602000029e-08, 0.6307253608616759, 1.7890044824313225e-08
-% word2vec skip_s50  & 0.48 0.4823291113764084, 4.729631604162891e-05, 0.4726120310027949, 7.03287078648823e-05
-% word2vec skip_s100  & 0.54 0.5450693802469123, 2.6706587265282607e-06, 0.5165845293389537, 1.056879740672958e-05
-% word2vec skip_s300  & 0.64 0.6456079299581727, 6.378201801116051e-09, 0.6022010818235386, 1.1161828301678457e-07
-% word2vec skip_s600  & 0.68 0.6822171515630556, 3.9052290590770745e-10, 0.6664626759784225, 1.3626297110861136e-09
-% word2vec skip_s1000  & 0.67 0.6750103355277071, 6.982679946550078e-10, 0.6706885375677438, 9.817912038766733e-10
-% glove glove_s50  & 0.63 0.6323097346166009, 1.6071677971731602e-08, 0.6304630686406355, 1.8209264535759638e-08
-% glove glove_s100  & 0.71 0.7152689276050334, 2.1680726703222204e-11, 0.717544086026029, 1.750465938132881e-11
-% glove glove_s300  & 0.72 0.7221916204992048, 1.123325497577738e-11, 0.7364291259409337, 2.7252715238742018e-12
-% glove glove_s600  & 0.71 0.7118409361799463, 2.981216354824047e-11, 0.754833296783931, 3.7953445278146003e-13
+The other two words, \textit{guarda-chuva} (Umbrella) and \textit{correr} (Run), demonstrates that the DEPS model find other words with the same syntactic function (verb and noun) like a classifier, which in terms of semantic similarity or relatedness is not so good, just as we saw in the qualitative experiment (\autoref{tab:evaluation:we}) where the DEPS model had the worst results in that particular task for Portuguese.
