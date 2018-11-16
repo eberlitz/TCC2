@@ -1,7 +1,7 @@
 Todo
 
-- [sexta] Atualizar o abstract de acordo com o resumo
-- [sexta] Incluir na conclusao, algo como "Destaca-se neste trabalho como contribuição .... os itens do objetivo"
++ [sexta] Atualizar o abstract de acordo com o resumo
++ [sexta] Incluir na conclusao, algo como "Destaca-se neste trabalho como contribuição .... os itens do objetivo"
 - [sexta] Incluir natureza e tipo de pesquisa
 - [Domingo] Incluir o trabalho relacionado que é bem parecido, destacar as diferenças apesar deles terem feito uma explanação muito mais elaborada, o que o meu trabalho tem que não tem nele.
 
