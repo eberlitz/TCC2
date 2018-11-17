@@ -12,7 +12,6 @@ We separated the evaluation in three steps. In \autoref{chap:results:wn} we pres
 \subsection{Open Multilingual WordNet evaluation}\label{chap:results:wn}
 
 In order to do a quantitative evaluation of the knowledge-based approach for word similarity, we used the Open Multilingual Wordnet (OMW) from \citetexto{Bond2013LinkingAE} and loaded it with the Natural Language Toolkit (NLTK) library. We then calculated the similarity between the pair of words from the PT65 dataset using two algorithms, Path Distance and Wu-Palmer. With this, we calculated the Pearson’s Correlation ($\rho$) for each of the techniques.
-
 \autoref{tab:worneteval} shows the results, and as we can see, the Path Distance algorithm gave a relatively high score, but as stated by \citetexto[p.~297]{Jurafsky:2009:SLP:1214993} we indeed have the occurrence of some out of vocabulary words, in this case, 15.38\% of the words.
 
 
@@ -37,7 +36,6 @@ In order to do a quantitative evaluation of the knowledge-based approach for wor
 
 To do a quantitative evaluation of the distributional approach for word similarity we did the same experiment as the WordNet evaluation but with our word embeddings models.
 We loaded the PT65 dataset, and for each word pair, we compared the expected result with the Cosine similarity given by the model. With this, we calculated the Pearson’s Correlation ($\rho$).
-
 \autoref{tab:evaluation:we} shows the results for all the 40 generated models. There was no out of vocabulary words in this approach which in comparison with the WordNet approach is better. Just like mentioned by \citetexto{Agirre2009} we can use word embeddings to cover out-of-vocabulary words. In comparison with the WordNet, we can also see, that it has slightly better results, which is a good thing considering that it has no manual construction as WordNet.
 
 
@@ -95,7 +93,7 @@ DEPS                &               & 50   & 0.47             \\
 \end{table}
 
 Also, we can see that the better word embedding model for this task is the FastText Skip-Gram. In all of them, Skip-gram was slightly better than the others. Moreover, in overall the models with 300-600 dimensions got higher values. We can also note that the DEPS model has an inferior performance in this particular task, maybe because the dataset does not differentiate between relatedness and similarity.
-We also repeated the same experiment with the pre-trained models by \citetexto{Hartmann2017} from Núcleo Interinstitucional de Linguística Computacional (NILC).
+We also repeated the same experiment with the pre-trained models by \citetexto{Hartmann2017} from NILC.
 
 
 \subsection{Qualitative Evaluation of DEPS model}\label{chap:results:qualitative}
@@ -128,5 +126,4 @@ faculdade & \begin{tabular}[c]{@{}l@{}}universidade\\ escola\\ liceu\\ conservat
 % \end{landscape}
 
 The first target word, \textit{longe} (Far), we can see similar results provided by all the different models. The word \textit{inglês} (English) have the same behavior. However, for some specific words, like \textit{faculdade} (College) we can see that the DEPS model returned other types of languages or colleges while the other models could just bring words related to the same domain. This is similar to the target word \textit{Hogwarts} from the \citetexto{Levy2014} work.
-
 The other two words, \textit{guarda-chuva} (Umbrella) and \textit{correr} (Run), demonstrates that the DEPS model find other words with the same syntactic function (verb and noun) like a classifier, which in terms of semantic similarity or relatedness is not so good, just as we saw in the qualitative experiment (\autoref{tab:evaluation:we}) where the DEPS model had the worst results in that particular task for Portuguese.

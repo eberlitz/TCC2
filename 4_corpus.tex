@@ -57,7 +57,6 @@ With this, we ended up with the final 1.6GB PT-BR corpus file which contains 9.8
 To annotate all sentences of the corpus with syntactic tags, we used the software PALAVRAS developed by \citetexto{bick2000palavras}, which is an automatic parser for Portuguese.
 
 First, we tried to use the parser with multiple sentence files of 1MB. However, the parser was taking too much time to execute and sometimes errors occurred. So we wrote a Python script that sends sentences in batches to the PALAVRAS parser and saves the results. Also, we have used parallel computing doing this process times the number of cores on the machine. Although, we first run this on a i5 2.4GHz computer with 4 cores, achieving an average speed of 16 sentences per second, which means that for all 9.896.520 sentences it would take 7 days to complete. We have tried other techniques attempting to increase the speed, but the bottleneck was indeed in the parser tool. 
-
 With this problem at hand, \textit{UNISINOS Programa de Pós-graduação em Computação Aplicada} (PPGCA) granted us access to the \textit{Semantics} server (Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz with 32 cores and 128GB of RAM). With 32 cores the parsing step should be concluded in 24 hours.
 
 One more problem that we had is that the PALAVRAS could not parse some of the sentences. Since we were running the parser in batches, this means that if one sentence failed, we lost all the parsed sentences in the batch. Also, as this process would take too long, we had to implement some way to continue the process if some fatal error occurred. With this in mind, we converted the sentences file to an SQLite table with three columns (id, text and parsed text). With this whenever we start the parsing process, we can continue from where it stopped.
@@ -69,7 +68,6 @@ With this solution implemented, we created a docker image and started running in
 \subsection{Common Word Embeddings generation}\label{chap:methodsandmaterials:wegeneration}
 
 In order to have a base for comparison, we generated all models that were used by \citetexto{Hartmann2017}. In this case, FastText, Wang2vec, Word2vec and GloVe using different dimensions values like 50, 100, 300, 600 and 1000. \cite{bojanowski2016enriching, Ling:2015:naacl, Mikolov2013DistributedRO, Pennington2014}. Also, the CBOW and Skip-gram were used for the models that have this option.
-
 For this, we downloaded all those model generation tools from GitHub, compiled into a docker image, and use as input our corpus text file. We only created some script to run this several times with different dimension sizes as it took several hours to complete.
 
 % --------------------------------------------------------
@@ -77,7 +75,6 @@ For this, we downloaded all those model generation tools from GitHub, compiled i
 \subsection{DEPS Word Embedding generation}\label{chap:methodsandmaterials:depsgeneration}
 
 In order to generate the DEPS (dependency-based syntactic contexts) word embedding model proposed by \citetexto{Levy2014}, we got the source code called \textit{word2vecf} from their website\footnote{\url{https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/}}. The input required by this model is three files, a word, context vocabulary, and a contexts file. 
-
 The vocabulary files are just a list of words or contexts with the total number of occurrences. The contexts file is a multiline context per word, where one word can have multiple contexts. In the form of "<\textit{word}> <\textit{dependency-relation}>\_<\textit{referred-word}>".
 
 In order to generate this file from our corpus we got the annotated output from the PALAVRAS parser and extracted the syntactic tags. This process is shown by in ~\autoref{fig:deps-context}.
