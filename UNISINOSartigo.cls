@@ -42,7 +42,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass[a4paper,12pt]{article}
-\RequirePackage{babel}
+\RequirePackage[english]{babel}
 \RequirePackage{helvet}
 \RequirePackage{indentfirst}
 \RequirePackage{setspace}
