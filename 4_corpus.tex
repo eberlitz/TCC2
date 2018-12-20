@@ -67,7 +67,7 @@ With this solution implemented, we created a docker image and started running in
 
 \subsection{Common Word Embeddings generation}\label{chap:methodsandmaterials:wegeneration}
 
-In order to have a base for comparison, we generated all models that were used by \citetexto{Hartmann2017}. In this case, FastText, Wang2vec, Word2vec and GloVe using different dimensions values like 50, 100, 300, 600 and 1000. \cite{bojanowski2016enriching, Ling:2015:naacl, Mikolov2013DistributedRO, Pennington2014}. Also, the CBOW and Skip-gram were used for the models that have this option.
+In order to have a base for comparison, we generated all models that were used by \citetexto{Hartmann2017}. In this case, FastText, Wang2vec, Word2vec and GloVe using different dimensions values like 50, 100, 300, 600 and 1000 \cite{bojanowski2016enriching, Ling:2015:naacl, Mikolov2013DistributedRO, Pennington2014}. Also, the CBOW and Skip-gram were used for the models that have this option.
 For this, we downloaded all those model generation tools from GitHub, compiled into a docker image, and use as input our corpus text file. We only created some script to run this several times with different dimension sizes as it took several hours to complete.
 
 % --------------------------------------------------------
