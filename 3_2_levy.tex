@@ -1,7 +1,7 @@
 % G
 \subsection{Dependency-Based Word Embeddings}
 
-In this work, \citetexto{Levy2014} presents a generalized skip-gram model with negative sampling introduced by \citetexto{Mikolov2013DistributedRO}, from a linear context of bag-of-words to arbitrary word contexts, specifically syntactic contexts. An interesting fact of this approach in comparison with the original work is that the concept of induced similarity represents a nature of \textit{cohyponym}. They also describe a way of performing an analysis of the representation learned in the vector space by exploring the contexts of specific words or a group of words.
+In this work \citetexto{Levy2014} presents a generalized skip-gram model with negative sampling introduced by \citetexto{Mikolov2013DistributedRO}, from a linear context of bag-of-words to arbitrary word contexts, specifically syntactic contexts. An interesting fact of this approach in comparison with the original work is that the concept of induced similarity represents a nature of \textit{cohyponym}. They also describe a way of performing an analysis of the representation learned in the vector space by exploring the contexts of specific words or a group of words.
 They used the English Wikipedia as a corpus to train the embeddings. This corpus was tagged with parts-of-speech (POS) using the Stanford tagger. 
 
 For the evaluation, they manually inspected the five most similar words to a hand-picked set of words. One remarkable example is the word "Hogwarts" that in the BoW model the most similar words are from the respective domain of Harry Potter and in the developed model it was a list of famous schools, that is, was able to capture the semantic type of the word.
