@@ -33,9 +33,9 @@ At the time of writing, there were 1.000.400 documents in the ptwiki-dump.
 In order to cleanup the sentences for generating the Word embedding models we did some custom pre-processing\footnote{\url{https://github.com/eberlitz/pt-br-word-embeddings/blob/master/scripts/preprocess.py}} based on \citetexto{Hartmann2017} preprocessing scripts. Some changes were made to do some cleaning as follows:
 
 \begin{itemize}
-    \item Breaks an entire document into multiple sentences using the 
+    \item Break an entire document into multiple sentences using the 
     \textbf{nltk.data.load ('tokenizers/punkt/portuguese.pickle')}. (Natural Language Toolkit - NLTK is a leading platform for building Python programs to work with human language data, and it has a sentence segmentation tool called \textbf{punkt}.)
-    \item Does not change the current letter case. (Later we'll use a Syntactic parser that has better accuracy if we maintain this)
+    \item Do not change the current letter case. (Later we'll use a Syntactic parser that has better accuracy if we maintain this)
     \item Remove sentences with less than 4 tokens (as it does not add meaningful value to the corpus we can remove very short sentences).
     \item Allow abbreviations, like 'Dr.'.
     \item Keep words with '-', like 'guarda-chuva' (which means umbrella in English).
